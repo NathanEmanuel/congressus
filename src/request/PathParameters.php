@@ -20,8 +20,8 @@ class PathParameters
         return $this->path;
     }
 
-    function obj_id(string $argument): void
+    function obj_id(int|string $argument): void
     {
-        $this->path = str_replace("{obj_id}", "{$argument}", $this->path);
+        $this->path = str_replace("{obj_id}", $argument, $this->path);
     }
 }
