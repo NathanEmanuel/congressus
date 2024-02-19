@@ -1,14 +1,19 @@
 <?php
+
+use GuzzleHttp\Psr7\Request as Psr7Request;
+
 require_once("PathParameters.php");
 require_once("QueryParameters.php");
-class Parameters
+class Request extends Psr7Request
 {
+    private string $method;
     private PathParameters $path_parameters;
     private QueryParameters $query_parameters;
     private array $allowed = array();
 
-    public function __construct(string $path)
+    public function __construct(string $method, string $path)
     {
+        $this->method = $method;
         $this->path_parameters = new PathParameters($path);
         $this->query_parameters = new QueryParameters();
     }
@@ -40,6 +45,13 @@ class Parameters
                 QueryParameter::term->value => $this->query_parameters->term($value),
             };
         }
+
+        // the parent constructor can only be called now the path arguments are handled
+        parent::__construct($this->get_method(), $this->path_parameters->as_path());
+    }
+
+    private function get_method(): string {
+        return $this->method;
     }
 
     public function get_path(): string
