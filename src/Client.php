@@ -20,6 +20,8 @@ class Client extends GuzzleHttp\Client
         return $this->send($request, $request->get_options());
     }
 
+    // Members - raw
+
     public function retrieve_member(Arguments $arguments)
     {
         $request = new Request("GET", "/v30/members/{obj_id}");
@@ -40,6 +42,30 @@ class Client extends GuzzleHttp\Client
         $request->handle_arguments($arguments);
         return $this->submit($request);
     }
+
+    // Members - custom
+
+    public function retrieve_member_by_id(int|string $id) {
+        $arguments = new Arguments();
+        $arguments->add(PathParameter::obj_id, $id);
+        $response = $this->retrieve_member($arguments);
+        return json_decode($response->getBody());
+    }
+
+    public function retrieve_member_by_username(string $username) {
+        $arguments = new Arguments();
+        $arguments->add(QueryParameter::term, $username);
+        $response = $this->search_members($arguments);
+        $data = json_decode($response->getBody())->data;
+        foreach ($data as $member) {
+            if ($member->username === $username) {
+                return $this->retrieve_member_by_id($member->id);
+            }
+        }
+        return null;
+    }
+
+    // Events - raw
 
     public function list_events(Arguments $arguments)
     {
