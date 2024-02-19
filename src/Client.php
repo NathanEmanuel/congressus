@@ -13,14 +13,14 @@ class Client extends GuzzleHttp\Client
         ]);
     }
 
-    public function search_member(string $term)
+    public function search_members(string $term)
     {
         $parameters = new Parameters("/v30/members/search");
         $parameters->allow(QueryParameter::term, $term);
         return $this->request("GET", $parameters->get_path(), $parameters->get_options());
     }
 
-    public function get_events(?array $category_id = null, ?int $period_start = null, ?int $period_end = null, bool $published = false, string $order = "start:asc")
+    public function list_events(?array $category_id = null, ?int $period_start = null, ?int $period_end = null, bool $published = false, string $order = "start:asc")
     {
         $parameters = new Parameters("/v30/events");
         $parameters->allow(QueryParameter::category_id, $category_id);
