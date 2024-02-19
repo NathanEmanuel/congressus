@@ -1,0 +1,14 @@
+{
+    "name": "compucie/congressus",
+    "description": "Library for the Congressus API.",
+    "license": "MIT",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Compucie\\Congressus\\": "src/"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7.8"
+    }
+}
