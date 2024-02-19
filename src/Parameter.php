@@ -1,5 +1,5 @@
 <?php
 interface Parameter
 {
-    // marker interface
+    public function get_value(): int;
 }
