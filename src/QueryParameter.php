@@ -1,5 +1,6 @@
 <?php
-enum QueryParameter
+require_once("Parameter.php");
+enum QueryParameter implements Parameter
 {
     case category_id;
     case period_filter;
