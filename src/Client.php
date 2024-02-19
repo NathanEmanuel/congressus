@@ -20,6 +20,17 @@ class Client extends GuzzleHttp\Client
         return $this->send($request, $request->get_options());
     }
 
+    public function retrieve_member(Arguments $arguments)
+    {
+        $request = new Request("GET", "/v30/members/{obj_id}");
+        $request->allow([
+            PathParameter::obj_id,
+            QueryParameter::context,
+        ]);
+        $request->handle_arguments($arguments);
+        return $this->submit($request);
+    }
+
     public function search_members(Arguments $arguments)
     {
         $request = new Request("GET", "/v30/members/search");
