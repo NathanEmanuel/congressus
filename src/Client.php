@@ -1,7 +1,9 @@
 <?php
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once '../vendor/autoload.php';
 require_once 'Options.php';
+require_once 'QueryParameter.php';
+require_once 'QueryParameters.php';
 
 class Client extends GuzzleHttp\Client
 {
@@ -15,36 +17,26 @@ class Client extends GuzzleHttp\Client
 
     public function search_member(string $term)
     {
-        // default options
-        $options = new Options();
-
-        // argument handling
-        $options->add_query("term", $term);
+        $query_parameters = new QueryParameters();
+        $query_parameters->allow(QueryParameter::term, $term);
 
         // request
         $method = "GET";
         $path = "/v30/members/search";
-        return $this->request($method, $path, $options->as_array());
+        return $this->request($method, $path, $query_parameters->as_option());
     }
 
-    public function get_events(?int $time_span = null, bool $published = true)
+    public function get_events(?array $category_id = null, ?int $period_start = null, ?int $period_end = null, bool $published = false, string $order = "start:asc")
     {
-        // default options
-        $options = new Options();
-        $options->add_query("order", "start:asc");
-
-        // argument handling
-        if (!is_null($time_span)) {
-            $options->add_query("period_filter", date("Ymd") . ".." . date("Ymd", time() + $time_span));
-        }
-
-        if ($published) {
-            $options->add_query("published", "1");
-        }
+        $query_parameters = new QueryParameters();
+        $query_parameters->allow(QueryParameter::category_id, $category_id);
+        $query_parameters->allow(QueryParameter::period_filter, [$period_start, $period_end]);
+        $query_parameters->allow(QueryParameter::published, $published);
+        $query_parameters->allow(QueryParameter::order, $order);
 
         // request
         $method = "GET";
         $path = "/v30/events";
-        return $this->request($method, $path, $options->as_array());
+        return $this->request($method, $path, $query_parameters->as_option());
     }
 }
