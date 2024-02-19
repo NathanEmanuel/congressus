@@ -5,23 +5,41 @@ class Parameters
 {
     private PathParameters $path_parameters;
     private QueryParameters $query_parameters;
+    private array $allowed = array();
 
     public function __construct(string $path)
     {
         $this->path_parameters = new PathParameters($path);
         $this->query_parameters = new QueryParameters();
     }
-    public function allow(Parameter $parameter, mixed $argument): void
-    {
-        match ($parameter) {
-            PathParameter::obj_id => $this->path_parameters->obj_id($argument),
 
-            QueryParameter::category_id => $this->query_parameters->category_id($argument),
-            QueryParameter::period_filter => $this->query_parameters->period_filter($argument[0], $argument[1]),
-            QueryParameter::published => $this->query_parameters->published($argument),
-            QueryParameter::order => $this->query_parameters->order($argument),
-            QueryParameter::term => $this->query_parameters->term($argument),
-        };
+    public function allow(array $allowed): void
+    {
+        foreach ($allowed as $enum => $value) {
+            array_push($this->allowed, $value->value);
+        }
+    }
+
+    public function handle_arguments(Arguments $arguments): void
+    {
+        // check if all arguments are allowed
+        $invalid_arguments = array_diff($arguments->get_keys(), $this->allowed);
+        if (!empty($invalid_arguments)) {
+            throw new InvalidArgumentException("Invalid argument(s): " . print_r($invalid_arguments));
+        }
+        
+        // route each argument value to its handler method
+        foreach ($arguments->as_array() as $key => $value) {
+            match ($key) {
+                PathParameter::obj_id->value => $this->path_parameters->obj_id($value),
+
+                QueryParameter::category_id->value => $this->query_parameters->category_id($value),
+                QueryParameter::period_filter->value => $this->query_parameters->period_filter($value[0], $value[1]),
+                QueryParameter::published->value => $this->query_parameters->published($value),
+                QueryParameter::order->value => $this->query_parameters->order($value),
+                QueryParameter::term->value => $this->query_parameters->term($value),
+            };
+        }
     }
 
     public function get_path(): string
