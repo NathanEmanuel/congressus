@@ -1,7 +1,9 @@
 <?php
 
+use Psr\Http\Message\ResponseInterface;
+
 require_once '../vendor/autoload.php';
-require_once 'Parameters.php';
+require_once 'Request.php';
 
 class Client extends GuzzleHttp\Client
 {
@@ -13,26 +15,31 @@ class Client extends GuzzleHttp\Client
         ]);
     }
 
+    private function submit(Request $request): ResponseInterface
+    {
+        return $this->send($request, $request->get_options());
+    }
+
     public function search_members(Arguments $arguments)
     {
-        $parameters = new Parameters("/v30/members/search");
-        $parameters->allow([
+        $request = new Request("GET", "/v30/members/search");
+        $request->allow([
             QueryParameter::term
         ]);
-        $parameters->handle_arguments($arguments);
-        return $this->request("GET", $parameters->get_path(), $parameters->get_options());
+        $request->handle_arguments($arguments);
+        return $this->submit($request);
     }
 
     public function list_events(Arguments $arguments)
     {
-        $parameters = new Parameters("/v30/events");
-        $parameters->allow([
+        $request = new Request("GET", "/v30/events");
+        $request->allow([
             QueryParameter::category_id,
             QueryParameter::period_filter,
             QueryParameter::published,
             QueryParameter::order,
         ]);
-        $parameters->handle_arguments($arguments);
-        return $this->request("GET", $parameters->get_path(), $parameters->get_options());
+        $request->handle_arguments($arguments);
+        return $this->submit($request);
     }
 }
