@@ -26,6 +26,13 @@ class QueryParameters
         }
     }
 
+    function context(?string $argument)
+    {
+        if (!is_null($argument)) {
+            $this->append("context", $argument);
+        }
+    }
+
     function period_filter(?int $period_start, ?int $period_end): void
     {
         if (!is_null($period_start) && !is_null($period_end)) {

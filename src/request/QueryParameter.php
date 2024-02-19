@@ -3,6 +3,7 @@ require_once("Parameter.php");
 enum QueryParameter: int implements Parameter
 {
     case category_id = 200;
+    case context = 205;
     case period_filter = 201;
     case published = 202;
     case order = 203;
