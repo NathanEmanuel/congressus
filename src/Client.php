@@ -3,7 +3,7 @@
 use Psr\Http\Message\ResponseInterface;
 
 require_once '../vendor/autoload.php';
-require_once 'Request.php';
+require_once 'request/Request.php';
 
 class Client extends GuzzleHttp\Client
 {

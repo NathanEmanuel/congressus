@@ -1,6 +1,6 @@
 <?php
-require_once "../src/Client.php";
-require_once "../src/Arguments.php";
+require_once("../src/Client.php");
+require_once("../src/request/Arguments.php");
 
 $client = new Client(getenv("congressus"));
 
