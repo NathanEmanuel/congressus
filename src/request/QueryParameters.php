@@ -69,18 +69,9 @@ class QueryParameters extends Parameters
         $this->add(Query::parent_id, $parameter);
     }
 
-    function period_filter(?int $period_start, ?int $period_end): void
+    function period_filter(string $parameter): void
     {
-        if (!is_null($period_start) && !is_null($period_end)) {
-            $value = date("Ymd", $period_start) . ".." . date("Ymd", $period_end);
-        } elseif (is_null($period_start) && !is_null($period_end)) {
-            $value = date("Ymd", time()) . ".." . date("Ymd", $period_end);
-        } elseif (!is_null($period_start) && is_null($period_end)) {
-            $value = date("Ymd", time()) . ".." . date("Ymd", 2147483647);
-        } else {
-            return;
-        }
-        $this->add(Query::period_filter, $value);
+        $this->add(Query::period_filter, $parameter);
     }
 
     function published(bool $parameter): void

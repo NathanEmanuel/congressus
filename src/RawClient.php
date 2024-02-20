@@ -104,8 +104,36 @@ class RawClient extends GuzzleHttpClient
 
     // Events
 
-    public function list_events(?Parameters $parameters = new Parameters()): EventPagination
+    /**
+     * @param   array   period_filter   Array containing the start and end of the period
+     */
+    public function list_events(Parameters $parameters = new Parameters()): EventPagination
     {
+        // hook into the given parameters to format the period_filter correctly
+        $period_filter_hook = function (Parameters $parameters) {
+            $period = $parameters->get(Query::period_filter);
+            if (is_null($period)) {
+                return $parameters; // filter_period parameter not set
+            }
+
+            $period_start = $period[0] ?? null;
+            $period_end = $period[1] ?? null;
+            if (!is_null($period_start) && !is_null($period_end)) {
+                $value = date("Ymd", $period_start) . ".." . date("Ymd", $period_end);
+            } elseif (is_null($period_start) && !is_null($period_end)) {
+                $value = date("Ymd", 0) . ".." . date("Ymd", $period_end);
+            } elseif (!is_null($period_start) && is_null($period_end)) {
+                $value = date("Ymd", time()) . ".." . date("Ymd", 2147483647);
+            } else {
+                throw new \InvalidArgumentException("period_filter needs to be a (partially null) array containing the start and end of the period");
+            }
+            $parameters->add(Query::period_filter, $value);
+            return $parameters;
+        };
+
+        $parameters = $period_filter_hook($parameters);
+
+        // submit request
         $request = new Request("GET", "/v30/events", $parameters);
         $request->allow_parameters([
             Query::category_id,

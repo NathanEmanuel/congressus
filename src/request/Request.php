@@ -60,7 +60,7 @@ class Request extends Psr7Request
                 Query::page         ->value => $this->query_parameters->page            ($value),
                 Query::page_size    ->value => $this->query_parameters->page_size       ($value),
                 Query::parent_id    ->value => $this->query_parameters->parent_id       ($value),
-                Query::period_filter->value => $this->query_parameters->period_filter   ($value[0], $value[1]),
+                Query::period_filter->value => $this->query_parameters->period_filter   ($value),
                 Query::published    ->value => $this->query_parameters->published       ($value),
                 Query::status       ->value => $this->query_parameters->status          ($value),
                 Query::status_id    ->value => $this->query_parameters->status_id       ($value),
