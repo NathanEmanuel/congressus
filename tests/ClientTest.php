@@ -1,6 +1,11 @@
 <?php
-require_once("../src/Client.php");
-require_once("../src/request/Arguments.php");
+
+use Compucie\Congressus\Client;
+use Compucie\Congressus\request\Arguments;
+use Compucie\Congressus\request\PathParameter;
+use Compucie\Congressus\request\QueryParameter;
+
+require_once '../vendor/autoload.php';
 
 $client = new Client(getenv("congressus"));
 

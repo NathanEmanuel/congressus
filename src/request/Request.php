@@ -1,5 +1,7 @@
 <?php
 
+namespace Compucie\Congressus\request;
+
 use GuzzleHttp\Psr7\Request as Psr7Request;
 
 require_once("PathParameters.php");
@@ -41,7 +43,7 @@ class Request extends Psr7Request
         // check if all arguments are allowed
         $invalid_arguments = array_diff($arguments->get_keys(), $this->allowed);
         if (!empty($invalid_arguments)) {
-            throw new InvalidArgumentException("Invalid argument(s): " . print_r($invalid_arguments));
+            throw new \InvalidArgumentException("Invalid argument(s): " . print_r($invalid_arguments));
         }
 
         // route each argument value to its handler method

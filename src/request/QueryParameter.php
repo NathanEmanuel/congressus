@@ -1,5 +1,7 @@
 <?php
-require_once("Parameter.php");
+
+namespace Compucie\Congressus\request;
+
 enum QueryParameter: int implements Parameter
 {
     case category_id = 200;

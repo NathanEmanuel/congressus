@@ -1,5 +1,7 @@
 <?php
-require_once("PathParameter.php");
+
+namespace Compucie\Congressus\request;
+
 class PathParameters
 {
     private string $path;

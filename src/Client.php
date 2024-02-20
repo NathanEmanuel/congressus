@@ -1,14 +1,17 @@
 <?php
 
+namespace Compucie\Congressus;
+
 use Compucie\Congressus\models\ElasticMemberPagination;
 use Compucie\Congressus\models\EventPagination;
 use Compucie\Congressus\models\Member;
-use Psr\Http\Message\ResponseInterface;
+use Compucie\Congressus\request\Arguments;
+use Compucie\Congressus\request\PathParameter;
+use Compucie\Congressus\request\QueryParameter;
+use Compucie\Congressus\request\Request;
+use GuzzleHttp\Client as GuzzleHttpClient;
 
-require_once '../vendor/autoload.php';
-require_once 'request/Request.php';
-
-class Client extends GuzzleHttp\Client
+class Client extends GuzzleHttpClient
 {
     public function __construct(string $token)
     {
@@ -48,14 +51,14 @@ class Client extends GuzzleHttp\Client
 
     // Members - custom
 
-    public function retrieve_member_by_id(int|string $id)
+    public function retrieve_member_by_id(int|string $id): ?Member
     {
         $arguments = new Arguments();
         $arguments->add(PathParameter::obj_id, $id);
         return $this->retrieve_member($arguments);
     }
 
-    public function retrieve_member_by_username(string $username)
+    public function retrieve_member_by_username(string $username): ?Member
     {
         $arguments = new Arguments();
         $arguments->add(QueryParameter::term, $username);

@@ -1,5 +1,7 @@
 <?php
-require_once("QueryParameter.php");
+
+namespace Compucie\Congressus\request;
+
 class QueryParameters
 {
     private array $query_parameters = array();
