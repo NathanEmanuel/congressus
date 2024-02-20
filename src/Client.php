@@ -2,9 +2,9 @@
 
 namespace Compucie\Congressus;
 
-use Compucie\Congressus\models\ElasticMemberPagination;
-use Compucie\Congressus\models\EventPagination;
-use Compucie\Congressus\models\Member;
+use Compucie\Congressus\Model\ElasticMemberPagination;
+use Compucie\Congressus\Model\EventPagination;
+use Compucie\Congressus\Model\Member;
 use Compucie\Congressus\request\Arguments;
 use Compucie\Congressus\request\PathParameter;
 use Compucie\Congressus\request\QueryParameter;

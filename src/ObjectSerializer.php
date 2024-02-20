@@ -30,7 +30,7 @@
 namespace Compucie\Congressus;
 
 use GuzzleHttp\Psr7\Utils;
-use Compucie\Congressus\models\ModelInterface;
+use Compucie\Congressus\Model\ModelInterface;
 
 /**
  * ObjectSerializer Class Doc Comment
