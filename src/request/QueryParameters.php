@@ -30,6 +30,11 @@ class QueryParameters extends Parameters
         }
     }
 
+    function folder_id(array $parameter): void
+    {
+        $this->add(Query::folder_id, $this->serialize_array($parameter));
+    }
+
     function group_id(array $parameter): void
     {
         $this->add(Query::group_id, $this->serialize_array($parameter));
@@ -72,9 +77,7 @@ class QueryParameters extends Parameters
 
     function published(bool $parameter): void
     {
-        if ($parameter) {
-            $this->add(Query::published, "1");
-        }
+        $this->add(Query::published, (int) $parameter);
     }
 
     function status_id(string $parameter): void
