@@ -1,5 +1,6 @@
 <?php
 
+use Compucie\Congressus\models\EventPagination;
 use Psr\Http\Message\ResponseInterface;
 
 require_once '../vendor/autoload.php';
@@ -45,14 +46,16 @@ class Client extends GuzzleHttp\Client
 
     // Members - custom
 
-    public function retrieve_member_by_id(int|string $id) {
+    public function retrieve_member_by_id(int|string $id)
+    {
         $arguments = new Arguments();
         $arguments->add(PathParameter::obj_id, $id);
         $response = $this->retrieve_member($arguments);
         return json_decode($response->getBody());
     }
 
-    public function retrieve_member_by_username(string $username) {
+    public function retrieve_member_by_username(string $username)
+    {
         $arguments = new Arguments();
         $arguments->add(QueryParameter::term, $username);
         $response = $this->search_members($arguments);
@@ -67,7 +70,7 @@ class Client extends GuzzleHttp\Client
 
     // Events - raw
 
-    public function list_events(Arguments $arguments)
+    public function list_events(?Arguments $arguments = new Arguments())
     {
         $request = new Request("GET", "/v30/events");
         $request->allow([
@@ -77,6 +80,8 @@ class Client extends GuzzleHttp\Client
             QueryParameter::order,
         ]);
         $request->handle_arguments($arguments);
-        return $this->submit($request);
+        $response = $this->submit($request);
+        $data = json_decode($response->getBody());
+        return new EventPagination($data);
     }
 }
