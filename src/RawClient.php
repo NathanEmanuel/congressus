@@ -8,6 +8,7 @@ use Compucie\Congressus\Model\GroupMembershipPagination;
 use Compucie\Congressus\Model\GroupPagination;
 use Compucie\Congressus\Model\Member;
 use Compucie\Congressus\Model\MemberPagination;
+use Compucie\Congressus\Model\ProductFolderPagination;
 use Compucie\Congressus\Model\ProductPagination;
 use Compucie\Congressus\Request\Request;
 use Compucie\Congressus\Request\Parameters;
@@ -129,5 +130,18 @@ class RawClient extends GuzzleHttpClient
             Query::order,
         ]);
         return $this->submit($request, new ProductPagination);
+    }
+
+    public function list_products_folders(Parameters $parameters = new Parameters()): ProductFolderPagination
+    {
+        $request = new Request("GET", "/v30/product-folders", $parameters);
+        $request->allow_parameters([
+            Query::published,
+            Query::parent_id,
+            Query::page,
+            Query::page_size,
+            Query::order,
+        ]);
+        return $this->submit($request, new ProductFolderPagination);
     }
 }

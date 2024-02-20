@@ -34,4 +34,6 @@ $data = $client->list_group_memberships();
 $data = $client->list_events();
 
 $data = $client->list_products();
+
+$data = $client->list_products_folders();
 print_r($data);
