@@ -4,9 +4,9 @@ namespace Compucie\Congressus;
 
 use Compucie\Congressus\RawClient;
 use Compucie\Congressus\Model\Member;
-use Compucie\Congressus\Request\Arguments;
-use Compucie\Congressus\Request\PathParameter;
-use Compucie\Congressus\Request\QueryParameter;
+use Compucie\Congressus\Request\Parameters;
+use Compucie\Congressus\Request\ParameterType\Path;
+use Compucie\Congressus\Request\ParameterType\Query;
 use GuzzleHttp\Client as GuzzleHttpClient;
 
 class Client extends RawClient
@@ -24,16 +24,16 @@ class Client extends RawClient
 
     public function retrieve_member_by_id(int|string $id): ?Member
     {
-        $arguments = new Arguments();
-        $arguments->add(PathParameter::obj_id, $id);
-        return $this->retrieve_member($arguments);
+        $parameters = new Parameters();
+        $parameters->add(Path::obj_id, $id);
+        return $this->retrieve_member($parameters);
     }
 
     public function retrieve_member_by_username(string $username): ?Member
     {
-        $arguments = new Arguments();
-        $arguments->add(QueryParameter::term, $username);
-        $member_page = $this->search_members($arguments);
+        $parameters = new Parameters();
+        $parameters->add(Query::term, $username);
+        $member_page = $this->search_members($parameters);
         foreach ($member_page as $member) {
             if ($member->username === $username) {
                 return $this->retrieve_member_by_id($member->id);

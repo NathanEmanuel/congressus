@@ -1,8 +1,10 @@
 <?php
 
-namespace Compucie\Congressus\Request;
+namespace Compucie\Congressus\Request\ParameterType;
 
-enum QueryParameter: int implements Parameter
+use Compucie\Congressus\Request\ParameterType\ParameterTypeInterface;
+
+enum Query: int implements ParameterTypeInterface
 {
     case category_id = 200;
     case context = 205;

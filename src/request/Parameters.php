@@ -2,13 +2,15 @@
 
 namespace Compucie\Congressus\Request;
 
-class Arguments
+use Compucie\Congressus\Request\ParameterType\ParameterTypeInterface;
+
+class Parameters
 {
     private array $arguments = array();
 
-    public function add(Parameter $parameter, mixed $value): void
+    public function add(ParameterTypeInterface $type, mixed $value): void
     {
-        $this->arguments[$parameter->get_value()] = $value;
+        $this->arguments[$type->get_value()] = $value;
     }
 
     public function get_keys(): array
