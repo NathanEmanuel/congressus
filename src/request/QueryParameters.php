@@ -25,6 +25,21 @@ class QueryParameters extends Parameters
         }
     }
 
+    function order(string $parameter): void
+    {
+        $this->add(Query::order, $parameter);
+    }
+
+    function page(string $parameter): void
+    {
+        $this->add(Query::page, $parameter);
+    }
+
+    function page_size(string $parameter): void
+    {
+        $this->add(Query::page, $parameter);
+    }
+
     function period_filter(?int $period_start, ?int $period_end): void
     {
         if (!is_null($period_start) && !is_null($period_end)) {
@@ -46,9 +61,14 @@ class QueryParameters extends Parameters
         }
     }
 
-    function order(string $parameter): void
+    function status_id(string $parameter): void
     {
-        $this->add(Query::order, $parameter);
+        $this->add(Query::status_id, $parameter);
+    }
+
+    function socie_app_id(string $parameter): void
+    {
+        $this->add(Query::status_id, $parameter);
     }
 
     function term(string $parameter): void

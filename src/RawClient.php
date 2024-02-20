@@ -5,6 +5,7 @@ namespace Compucie\Congressus;
 use Compucie\Congressus\Model\ElasticMemberPagination;
 use Compucie\Congressus\Model\EventPagination;
 use Compucie\Congressus\Model\Member;
+use Compucie\Congressus\Model\MemberPagination;
 use Compucie\Congressus\Request\Request;
 use Compucie\Congressus\Request\Parameters;
 use Compucie\Congressus\Request\ParameterType\Path;
@@ -30,6 +31,20 @@ class RawClient extends GuzzleHttpClient
 
 
     // Members
+
+    public function list_members(Parameters $parameters = new Parameters()): MemberPagination
+    {
+        $request = new Request("GET", "/v30/members", $parameters);
+        $request->allow_parameter([
+            Query::status_id,
+            Query::socie_app_id,
+            Query::page,
+            Query::page_size,
+            Query::order,
+            Query::context,
+        ]);
+        return $this->submit($request, new MemberPagination); 
+    }
 
     public function retrieve_member(Parameters $parameters): Member
     {
