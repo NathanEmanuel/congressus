@@ -26,6 +26,8 @@ $parameters->add(Path::obj_id, "282676");
 $data = $client->retrieve_member($parameters);
 
 $data = $client->list_members();
+
+$data = $client->list_group_memberships();
 print_r($data);
 
 $data = $client->list_events();

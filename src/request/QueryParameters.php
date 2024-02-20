@@ -30,6 +30,17 @@ class QueryParameters extends Parameters
         }
     }
 
+    function group_id(array $parameter): void
+    {
+        $this->add(Query::group_id, $this->serialize_array($parameter));
+    }
+
+    function member_id(array $parameter): void
+    {
+        $this->add(Query::member_id, $this->serialize_array($parameter));
+    }
+
+
     function order(string $parameter): void
     {
         $this->add(Query::order, $parameter);
