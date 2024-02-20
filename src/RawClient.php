@@ -139,6 +139,12 @@ class RawClient extends GuzzleHttpClient
             Query::category_id,
             Query::period_filter,
             Query::published,
+            Query::participation_billing_enabled,
+            Query::participating_member_id,
+            Query::socie_app_id,
+            Query::member_id,
+            Query::page,
+            Query::page_size,
             Query::order,
         ]);
         return $this->submit($request, new EventPagination);
