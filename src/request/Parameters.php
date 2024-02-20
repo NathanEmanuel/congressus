@@ -22,4 +22,9 @@ class Parameters
     {
         return array_keys($this->as_array());
     }
+
+    public function get(ParameterTypeInterface $type): mixed
+    {
+        return $this->parameters[$type->value] ?? null;
+    }
 }
