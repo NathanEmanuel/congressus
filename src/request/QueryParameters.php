@@ -11,9 +11,13 @@ class QueryParameters extends Parameters
         return ["query" => $this->as_array()];
     }
 
-    private function serialize_array(array $array): string
+    private function serialize_array(int|string|array $array): string
     {
-        return implode(",", $array);
+        try {
+            return implode(",", $array);
+        } catch (\TypeError) {
+            return (string) $array;
+        }
     }
 
     function category_id(?string $parameter)
@@ -30,17 +34,17 @@ class QueryParameters extends Parameters
         }
     }
 
-    function folder_id(array $parameter): void
+    function folder_id(int|string|array $parameter): void
     {
         $this->add(Query::folder_id, $this->serialize_array($parameter));
     }
 
-    function group_id(array $parameter): void
+    function group_id(int|string|array $parameter): void
     {
         $this->add(Query::group_id, $this->serialize_array($parameter));
     }
 
-    function member_id(array $parameter): void
+    function member_id(int|string|array $parameter): void
     {
         $this->add(Query::member_id, $this->serialize_array($parameter));
     }
