@@ -53,6 +53,7 @@ class Request extends Psr7Request
 
                 Query::category_id  ->value => $this->query_parameters->category_id     ($value),
                 Query::context      ->value => $this->query_parameters->context         ($value),
+                Query::folder_id    ->value => $this->query_parameters->folder_id       ($value),
                 Query::group_id     ->value => $this->query_parameters->group_id        ($value),
                 Query::member_id    ->value => $this->query_parameters->member_id       ($value),
                 Query::order        ->value => $this->query_parameters->order           ($value),
