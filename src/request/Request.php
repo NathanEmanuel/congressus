@@ -51,24 +51,27 @@ class Request extends Psr7Request
             match ($parameter_type) {
                 Path::obj_id->value => $this->path_parameters->obj_id($value),
 
-                Query::category_id  ->value => $this->query_parameters->category_id     ($value),
-                Query::context      ->value => $this->query_parameters->context         ($value),
-                Query::folder_id    ->value => $this->query_parameters->folder_id       ($value),
-                Query::group_id     ->value => $this->query_parameters->group_id        ($value),
-                Query::member_id    ->value => $this->query_parameters->member_id       ($value),
-                Query::order        ->value => $this->query_parameters->order           ($value),
-                Query::page         ->value => $this->query_parameters->page            ($value),
-                Query::page_size    ->value => $this->query_parameters->page_size       ($value),
-                Query::parent_id    ->value => $this->query_parameters->parent_id       ($value),
-                Query::period_filter->value => $this->query_parameters->period_filter   ($value),
-                Query::published    ->value => $this->query_parameters->published       ($value),
-                Query::status       ->value => $this->query_parameters->status          ($value),
-                Query::status_id    ->value => $this->query_parameters->status_id       ($value),
-                Query::socie_app_id ->value => $this->query_parameters->socie_app_id    ($value),
-                Query::term         ->value => $this->query_parameters->term            ($value),
+                Query::category_id                  ->value => $this->query_parameters->category_id                     ($value),
+                Query::context                      ->value => $this->query_parameters->context                         ($value),
+                Query::folder_id                    ->value => $this->query_parameters->folder_id                       ($value),
+                Query::group_id                     ->value => $this->query_parameters->group_id                        ($value),
+                Query::member_id                    ->value => $this->query_parameters->member_id                       ($value),
+                Query::order                        ->value => $this->query_parameters->order                           ($value),
+                Query::page                         ->value => $this->query_parameters->page                            ($value),
+                Query::page_size                    ->value => $this->query_parameters->page_size                       ($value),
+                Query::parent_id                    ->value => $this->query_parameters->parent_id                       ($value),
+                Query::participation_billing_enabled->value => $this->query_parameters->participation_billing_enabled   ($value),
+                Query::participating_member_id      ->value => $this->query_parameters->participating_member_id         ($value),
+                Query::period_filter                ->value => $this->query_parameters->period_filter                   ($value),
+                Query::published                    ->value => $this->query_parameters->published                       ($value),
+                Query::status                       ->value => $this->query_parameters->status                          ($value),
+                Query::status_id                    ->value => $this->query_parameters->status_id                       ($value),
+                Query::socie_app_id                 ->value => $this->query_parameters->socie_app_id                    ($value),
+                Query::term                         ->value => $this->query_parameters->term                            ($value),
             };
         }
-
+        
+        
         // the parent constructor can only be called now the path parameters are handled
         parent::__construct($this->get_method(), $this->path_parameters->as_path());
     }

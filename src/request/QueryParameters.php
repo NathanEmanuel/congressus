@@ -20,18 +20,14 @@ class QueryParameters extends Parameters
         }
     }
 
-    function category_id(?string $parameter)
+    function category_id(int|string|array $parameter): void
     {
-        if (!is_null($parameter)) {
-            $this->add(Query::category_id, $parameter);
-        }
+        $this->add(Query::category_id, $this->serialize_array($parameter));
     }
 
-    function context(?string $parameter)
+    function context(string|array $parameter): void
     {
-        if (!is_null($parameter)) {
-            $this->add(Query::context, $parameter);
-        }
+        $this->add(Query::context, $this->serialize_array($parameter));
     }
 
     function folder_id(int|string|array $parameter): void
@@ -54,19 +50,29 @@ class QueryParameters extends Parameters
         $this->add(Query::order, $parameter);
     }
 
-    function page(string $parameter): void
+    function page(int|string $parameter): void
     {
         $this->add(Query::page, $parameter);
     }
 
-    function page_size(string $parameter): void
+    function page_size(int|string $parameter): void
     {
         $this->add(Query::page, $parameter);
     }
 
-    function parent_id(string $parameter): void
+    function parent_id(int|string $parameter): void
     {
         $this->add(Query::parent_id, $parameter);
+    }
+
+    function participation_billing_enabled(string|array $parameter): void
+    {
+        $this->add(Query::participation_billing_enabled, $this->serialize_array($parameter));
+    }
+
+    function participating_member_id(int|string|array $parameter): void
+    {
+        $this->add(Query::participating_member_id, $this->serialize_array($parameter));
     }
 
     function period_filter(string $parameter): void
@@ -84,14 +90,14 @@ class QueryParameters extends Parameters
         $this->add(Query::status, $parameter);
     }
 
-    function status_id(string $parameter): void
+    function status_id(int|string|array $parameter): void
     {
-        $this->add(Query::status_id, $parameter);
+        $this->add(Query::status_id, $this->serialize_array($parameter));
     }
 
-    function socie_app_id(string $parameter): void
+    function socie_app_id(int|string|array $parameter): void
     {
-        $this->add(Query::socie_app_id, $parameter);
+        $this->add(Query::socie_app_id, $this->serialize_array($parameter));
     }
 
     function term(string $parameter): void
