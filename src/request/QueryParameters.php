@@ -11,6 +11,11 @@ class QueryParameters extends Parameters
         return ["query" => $this->as_array()];
     }
 
+    private function serialize_array(array $array): string
+    {
+        return implode(",", $array);
+    }
+
     function category_id(?string $parameter)
     {
         if (!is_null($parameter)) {
