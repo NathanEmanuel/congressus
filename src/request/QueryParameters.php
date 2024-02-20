@@ -60,6 +60,11 @@ class QueryParameters extends Parameters
         $this->add(Query::page, $parameter);
     }
 
+    function parent_id(string $parameter): void
+    {
+        $this->add(Query::parent_id, $parameter);
+    }
+
     function period_filter(?int $period_start, ?int $period_end): void
     {
         if (!is_null($period_start) && !is_null($period_end)) {
