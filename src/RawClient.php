@@ -31,9 +31,9 @@ class RawClient extends GuzzleHttpClient
 
     // Members
 
-    public function retrieve_member(Parameters $arguments): Member
+    public function retrieve_member(Parameters $parameters): Member
     {
-        $request = new Request("GET", "/v30/members/{obj_id}", $arguments);
+        $request = new Request("GET", "/v30/members/{obj_id}", $parameters);
         $request->allow_parameter([
             Path::obj_id,
             Query::context,
@@ -41,9 +41,9 @@ class RawClient extends GuzzleHttpClient
         return $this->submit($request, new Member);
     }
 
-    public function search_members(Parameters $arguments): ElasticMemberPagination
+    public function search_members(Parameters $parameters): ElasticMemberPagination
     {
-        $request = new Request("GET", "/v30/members/search", $arguments);
+        $request = new Request("GET", "/v30/members/search", $parameters);
         $request->allow_parameter([
             Query::term
         ]);
@@ -53,9 +53,9 @@ class RawClient extends GuzzleHttpClient
 
     // Events
 
-    public function list_events(?Parameters $arguments = new Parameters()): EventPagination
+    public function list_events(?Parameters $parameters = new Parameters()): EventPagination
     {
-        $request = new Request("GET", "/v30/events", $arguments);
+        $request = new Request("GET", "/v30/events", $parameters);
         $request->allow_parameter([
             Query::category_id,
             Query::period_filter,
