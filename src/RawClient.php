@@ -167,7 +167,10 @@ class RawClient extends GuzzleHttpClient
         return $this->submit($request, new ProductPagination);
     }
 
-    public function list_products_folders_recursive(Parameters $parameters = new Parameters()): ProductFolderListRecursivePagination
+
+    // Product folders
+
+    public function list_product_folders_recursive(Parameters $parameters = new Parameters()): ProductFolderListRecursivePagination
     {
         $request = new Request("GET", "/v30/product-folders/recursive", $parameters);
         $request->allow_parameters([
@@ -180,7 +183,7 @@ class RawClient extends GuzzleHttpClient
         return $this->submit($request, new ProductFolderListRecursivePagination);
     }
 
-    public function list_products_folders(Parameters $parameters = new Parameters()): ProductFolderPagination
+    public function list_product_folders(Parameters $parameters = new Parameters()): ProductFolderPagination
     {
         $request = new Request("GET", "/v30/product-folders", $parameters);
         $request->allow_parameters([
