@@ -68,7 +68,7 @@ class QueryParameters extends Parameters
 
     function socie_app_id(string $parameter): void
     {
-        $this->add(Query::status_id, $parameter);
+        $this->add(Query::socie_app_id, $parameter);
     }
 
     function term(string $parameter): void
