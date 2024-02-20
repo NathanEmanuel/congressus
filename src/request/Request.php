@@ -61,6 +61,7 @@ class Request extends Psr7Request
                 Query::page_size    ->value => $this->query_parameters->page_size       ($value),
                 Query::period_filter->value => $this->query_parameters->period_filter   ($value[0], $value[1]),
                 Query::published    ->value => $this->query_parameters->published       ($value),
+                Query::status       ->value => $this->query_parameters->status          ($value),
                 Query::status_id    ->value => $this->query_parameters->status_id       ($value),
                 Query::socie_app_id ->value => $this->query_parameters->socie_app_id    ($value),
                 Query::term         ->value => $this->query_parameters->term            ($value),

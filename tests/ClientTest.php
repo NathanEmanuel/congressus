@@ -28,8 +28,10 @@ $data = $client->retrieve_member($parameters);
 $data = $client->list_members();
 
 $data = $client->list_groups();
-print_r($data);
 
 $data = $client->list_group_memberships();
 
 $data = $client->list_events();
+
+$data = $client->list_products();
+print_r($data);

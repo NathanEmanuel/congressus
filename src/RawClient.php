@@ -8,6 +8,7 @@ use Compucie\Congressus\Model\GroupMembershipPagination;
 use Compucie\Congressus\Model\GroupPagination;
 use Compucie\Congressus\Model\Member;
 use Compucie\Congressus\Model\MemberPagination;
+use Compucie\Congressus\Model\ProductPagination;
 use Compucie\Congressus\Request\Request;
 use Compucie\Congressus\Request\Parameters;
 use Compucie\Congressus\Request\ParameterType\Path;
@@ -45,7 +46,7 @@ class RawClient extends GuzzleHttpClient
             Query::order,
             Query::context,
         ]);
-        return $this->submit($request, new MemberPagination); 
+        return $this->submit($request, new MemberPagination);
     }
 
     public function retrieve_member(Parameters $parameters): Member
@@ -83,7 +84,7 @@ class RawClient extends GuzzleHttpClient
             Query::order,
         ]);
         return $this->submit($request, new GroupPagination);
-    }    
+    }
 
     public function list_group_memberships(Parameters $parameters = new Parameters()): GroupMembershipPagination
     {
@@ -111,5 +112,22 @@ class RawClient extends GuzzleHttpClient
             Query::order,
         ]);
         return $this->submit($request, new EventPagination);
+    }
+
+
+    // Products
+
+    public function list_products(Parameters $parameters = new Parameters()): ProductPagination
+    {
+        $request = new Request("GET", "/v30/products", $parameters);
+        $request->allow_parameters([
+            Query::published,
+            Query::status,
+            Query::folder_id,
+            Query::page,
+            Query::page_size,
+            Query::order,
+        ]);
+        return $this->submit($request, new ProductPagination);
     }
 }

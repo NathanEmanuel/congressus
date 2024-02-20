@@ -45,7 +45,6 @@ class QueryParameters extends Parameters
         $this->add(Query::member_id, $this->serialize_array($parameter));
     }
 
-
     function order(string $parameter): void
     {
         $this->add(Query::order, $parameter);
@@ -78,6 +77,11 @@ class QueryParameters extends Parameters
     function published(bool $parameter): void
     {
         $this->add(Query::published, (int) $parameter);
+    }
+
+    function status(string $parameter): void
+    {
+        $this->add(Query::status, $parameter);
     }
 
     function status_id(string $parameter): void
