@@ -28,5 +28,5 @@ $client = new Client(getenv("congressus"));
 // $data = json_decode($response->getBody());
 // print_r($data);
 
-$member = $client->retrieve_member_by_username("s2191229");
-print_r($member);
+$data = $client->list_events();
+print_r($data);

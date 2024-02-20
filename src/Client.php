@@ -81,7 +81,7 @@ class Client extends GuzzleHttp\Client
         ]);
         $request->handle_arguments($arguments);
         $response = $this->submit($request);
-        $data = json_decode($response->getBody());
+        $data = json_decode($response->getBody(), associative: true);
         return new EventPagination($data);
     }
 }
