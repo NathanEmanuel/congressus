@@ -5,6 +5,7 @@ namespace Compucie\Congressus;
 use Compucie\Congressus\Model\ElasticMemberPagination;
 use Compucie\Congressus\Model\EventPagination;
 use Compucie\Congressus\Model\GroupMembershipPagination;
+use Compucie\Congressus\Model\GroupPagination;
 use Compucie\Congressus\Model\Member;
 use Compucie\Congressus\Model\MemberPagination;
 use Compucie\Congressus\Request\Request;
@@ -68,6 +69,21 @@ class RawClient extends GuzzleHttpClient
 
 
     // Groups
+
+    public function list_groups(Parameters $parameters = new Parameters()): GroupPagination
+    {
+        $request = new Request("GET", "/v30/groups", $parameters);
+        $request->allow_parameters([
+            Query::published,
+            Query::folder_id,
+            Query::member_id,
+            Query::socie_app_id,
+            Query::page,
+            Query::page_size,
+            Query::order,
+        ]);
+        return $this->submit($request, new GroupPagination);
+    }    
 
     public function list_group_memberships(Parameters $parameters = new Parameters()): GroupMembershipPagination
     {
