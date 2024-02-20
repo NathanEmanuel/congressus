@@ -7,26 +7,37 @@ require_once("QueryParameters.php");
 class Request extends Psr7Request
 {
     private string $method;
+    private Arguments $arguments;
     private PathParameters $path_parameters;
     private QueryParameters $query_parameters;
     private array $allowed = array();
 
-    public function __construct(string $method, string $path)
+    public function __construct(string $method, string $path, $arguments)
     {
         $this->method = $method;
+        $this->arguments = $arguments;
         $this->path_parameters = new PathParameters($path);
         $this->query_parameters = new QueryParameters();
     }
 
     public function allow(array $allowed): void
     {
-        foreach ($allowed as $enum => $value) {
-            array_push($this->allowed, $value->value);
+        foreach ($allowed as $enum) {
+            array_push($this->allowed, $enum->value);
         }
+
+        $this->apply_arguments();
     }
 
-    public function handle_arguments(Arguments $arguments): void
+    public function get_options(): array
     {
+        return $this->query_parameters->as_option();
+    }
+
+    private function apply_arguments(): void
+    {
+        $arguments = $this->get_arguments(); // shorthand
+
         // check if all arguments are allowed
         $invalid_arguments = array_diff($arguments->get_keys(), $this->allowed);
         if (!empty($invalid_arguments)) {
@@ -56,13 +67,8 @@ class Request extends Psr7Request
         return $this->method;
     }
 
-    public function get_path(): string
+    private function get_arguments(): Arguments
     {
-        return $this->path_parameters->as_path();
-    }
-
-    public function get_options(): array
-    {
-        return $this->query_parameters->as_option();
+        return $this->arguments;
     }
 }

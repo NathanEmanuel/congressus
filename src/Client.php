@@ -29,22 +29,20 @@ class Client extends GuzzleHttp\Client
 
     public function retrieve_member(Arguments $arguments): Member
     {
-        $request = new Request("GET", "/v30/members/{obj_id}");
+        $request = new Request("GET", "/v30/members/{obj_id}", $arguments);
         $request->allow([
             PathParameter::obj_id,
             QueryParameter::context,
         ]);
-        $request->handle_arguments($arguments);
         return $this->submit($request, new Member);
     }
 
     public function search_members(Arguments $arguments): ElasticMemberPagination
     {
-        $request = new Request("GET", "/v30/members/search");
+        $request = new Request("GET", "/v30/members/search", $arguments);
         $request->allow([
             QueryParameter::term
         ]);
-        $request->handle_arguments($arguments);
         return $this->submit($request, new ElasticMemberPagination);
     }
 
@@ -74,14 +72,13 @@ class Client extends GuzzleHttp\Client
 
     public function list_events(?Arguments $arguments = new Arguments()): EventPagination
     {
-        $request = new Request("GET", "/v30/events");
+        $request = new Request("GET", "/v30/events", $arguments);
         $request->allow([
             QueryParameter::category_id,
             QueryParameter::period_filter,
             QueryParameter::published,
             QueryParameter::order,
         ]);
-        $request->handle_arguments($arguments);
         return $this->submit($request, new EventPagination);
     }
 }
