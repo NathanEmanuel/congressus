@@ -35,5 +35,7 @@ $data = $client->list_events();
 
 $data = $client->list_products();
 
-$data = $client->list_products_folders();
+$data = $client->list_products_folders_recursive();
 print_r($data);
+
+$data = $client->list_products_folders();
