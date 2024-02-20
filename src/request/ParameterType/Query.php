@@ -4,16 +4,16 @@ namespace Compucie\Congressus\Request\ParameterType;
 
 use Compucie\Congressus\Request\ParameterType\ParameterTypeInterface;
 
-enum Query: int implements ParameterTypeInterface
+enum Query: string implements ParameterTypeInterface
 {
-    case category_id = 200;
-    case context = 205;
-    case period_filter = 201;
-    case published = 202;
-    case order = 203;
-    case term = 204;
+    case category_id = "category_id";
+    case context = "context";
+    case period_filter = "period_filter";
+    case published = "published";
+    case order = "order";
+    case term = "term";
 
-    public function get_value(): int
+    public function get_value(): string
     {
         return $this->value;
     }

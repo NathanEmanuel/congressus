@@ -6,20 +6,20 @@ use Compucie\Congressus\Request\ParameterType\ParameterTypeInterface;
 
 class Parameters
 {
-    private array $arguments = array();
+    private array $parameters = array();
 
     public function add(ParameterTypeInterface $type, mixed $value): void
     {
-        $this->arguments[$type->get_value()] = $value;
-    }
-
-    public function get_keys(): array
-    {
-        return array_keys($this->arguments);
+        $this->parameters[$type->get_value()] = $value;
     }
 
     public function as_array(): array
     {
-        return $this->arguments;
+        return $this->parameters;
+    }
+    
+    public function get_keys(): array
+    {
+        return array_keys($this->as_array());
     }
 }

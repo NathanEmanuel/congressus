@@ -4,11 +4,11 @@ namespace Compucie\Congressus\Request\ParameterType;
 
 use Compucie\Congressus\Request\ParameterType\ParameterTypeInterface;
 
-enum Path: int implements ParameterTypeInterface
+enum Path: string implements ParameterTypeInterface
 {
-    case obj_id = 100;
+    case obj_id = "obj_id";
 
-    public function get_value(): int
+    public function get_value(): string
     {
         return $this->value;
     }

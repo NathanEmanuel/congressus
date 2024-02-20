@@ -2,19 +2,13 @@
 
 namespace Compucie\Congressus\Request;
 
-class PathParameters
+class PathParameters extends Parameters
 {
     private string $path;
-    private array $path_parameters;
 
     function __construct(string $path)
     {
         $this->path = $path;
-    }
-
-    function as_array(): array
-    {
-        return $this->path_parameters;
     }
 
     function as_path(): string
@@ -22,8 +16,8 @@ class PathParameters
         return $this->path;
     }
 
-    function obj_id(int|string $argument): void
+    function obj_id(int|string $parameter): void
     {
-        $this->path = str_replace("{obj_id}", $argument, $this->path);
+        $this->path = str_replace("{obj_id}", $parameter, $this->path);
     }
 }

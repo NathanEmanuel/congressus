@@ -2,36 +2,26 @@
 
 namespace Compucie\Congressus\Request;
 
-class QueryParameters
+use Compucie\Congressus\Request\ParameterType\Query;
+
+class QueryParameters extends Parameters
 {
-    private array $query_parameters = array();
-
-    function as_array()
-    {
-        return $this->query_parameters;
-    }
-
     function as_option()
     {
-        return ["query" => $this->query_parameters];
+        return ["query" => $this->as_array()];
     }
 
-    private function append(string $key, string $value)
+    function category_id(?string $parameter)
     {
-        $this->query_parameters = array_merge($this->query_parameters, [$key => $value]);
-    }
-
-    function category_id(?string $argument)
-    {
-        if (!is_null($argument)) {
-            $this->append("category_id", $argument);
+        if (!is_null($parameter)) {
+            $this->add(Query::category_id, $parameter);
         }
     }
 
-    function context(?string $argument)
+    function context(?string $parameter)
     {
-        if (!is_null($argument)) {
-            $this->append("context", $argument);
+        if (!is_null($parameter)) {
+            $this->add(Query::context, $parameter);
         }
     }
 
@@ -46,23 +36,23 @@ class QueryParameters
         } else {
             return;
         }
-        $this->append("period_filter", $value);
+        $this->add(Query::period_filter, $value);
     }
 
-    function published(bool $argument): void
+    function published(bool $parameter): void
     {
-        if ($argument) {
-            $this->append("published", "1");
+        if ($parameter) {
+            $this->add(Query::published, "1");
         }
     }
 
-    function order(string $argument): void
+    function order(string $parameter): void
     {
-        $this->append("order", $argument);
+        $this->add(Query::order, $parameter);
     }
 
-    function term(string $argument): void
+    function term(string $parameter): void
     {
-        $this->append("term", $argument);
+        $this->add(Query::term, $parameter);
     }
 }
