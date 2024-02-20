@@ -35,7 +35,7 @@ class RawClient extends GuzzleHttpClient
     public function list_members(Parameters $parameters = new Parameters()): MemberPagination
     {
         $request = new Request("GET", "/v30/members", $parameters);
-        $request->allow_parameter([
+        $request->allow_parameters([
             Query::status_id,
             Query::socie_app_id,
             Query::page,
@@ -49,7 +49,7 @@ class RawClient extends GuzzleHttpClient
     public function retrieve_member(Parameters $parameters): Member
     {
         $request = new Request("GET", "/v30/members/{obj_id}", $parameters);
-        $request->allow_parameter([
+        $request->allow_parameters([
             Path::obj_id,
             Query::context,
         ]);
@@ -59,7 +59,7 @@ class RawClient extends GuzzleHttpClient
     public function search_members(Parameters $parameters): ElasticMemberPagination
     {
         $request = new Request("GET", "/v30/members/search", $parameters);
-        $request->allow_parameter([
+        $request->allow_parameters([
             Query::term
         ]);
         return $this->submit($request, new ElasticMemberPagination);
@@ -71,7 +71,7 @@ class RawClient extends GuzzleHttpClient
     public function list_events(?Parameters $parameters = new Parameters()): EventPagination
     {
         $request = new Request("GET", "/v30/events", $parameters);
-        $request->allow_parameter([
+        $request->allow_parameters([
             Query::category_id,
             Query::period_filter,
             Query::published,

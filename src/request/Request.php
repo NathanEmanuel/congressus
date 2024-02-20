@@ -22,7 +22,7 @@ class Request extends Psr7Request
         $this->query_parameters = new QueryParameters();
     }
 
-    public function allow_parameter(array $allowed): void
+    public function allow_parameters(array $allowed): void
     {
         foreach ($allowed as $enum) {
             array_push($this->allowed, $enum->value);
@@ -47,8 +47,8 @@ class Request extends Psr7Request
         }
 
         // route each argument value to its handler method
-        foreach ($parameters->as_array() as $key => $value) {
-            match ($key) {
+        foreach ($parameters->as_array() as $parameter_type => $value) {
+            match ($parameter_type) {
                 Path::obj_id->value => $this->path_parameters->obj_id($value),
 
                 Query::category_id  ->value => $this->query_parameters->category_id     ($value),
