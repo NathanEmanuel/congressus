@@ -4,6 +4,7 @@ namespace Compucie\Congressus;
 
 use Compucie\Congressus\RawClient;
 use Compucie\Congressus\Model\Member;
+use Compucie\Congressus\Model\ProductPagination;
 use Compucie\Congressus\Request\Parameters;
 use Compucie\Congressus\Request\ParameterType\Path;
 use Compucie\Congressus\Request\ParameterType\Query;
@@ -40,5 +41,15 @@ class Client extends RawClient
             }
         }
         return null;
+    }
+
+
+    // Products
+    
+    public function list_products_in_folder(int|string|array $folder_id): ProductPagination
+    {
+        $parameters = new Parameters();
+        $parameters->add(Query::folder_id, $folder_id);
+        return $this->list_products($parameters);
     }
 }
