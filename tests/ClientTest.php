@@ -1,9 +1,9 @@
 <?php
 
 use Compucie\Congressus\Client;
-use Compucie\Congressus\request\Arguments;
-use Compucie\Congressus\request\PathParameter;
-use Compucie\Congressus\request\QueryParameter;
+use Compucie\Congressus\Request\Arguments;
+use Compucie\Congressus\Request\PathParameter;
+use Compucie\Congressus\Request\QueryParameter;
 
 require_once '../vendor/autoload.php';
 

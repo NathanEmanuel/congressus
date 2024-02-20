@@ -5,10 +5,10 @@ namespace Compucie\Congressus;
 use Compucie\Congressus\Model\ElasticMemberPagination;
 use Compucie\Congressus\Model\EventPagination;
 use Compucie\Congressus\Model\Member;
-use Compucie\Congressus\request\Arguments;
-use Compucie\Congressus\request\PathParameter;
-use Compucie\Congressus\request\QueryParameter;
-use Compucie\Congressus\request\Request;
+use Compucie\Congressus\Request\Arguments;
+use Compucie\Congressus\Request\PathParameter;
+use Compucie\Congressus\Request\QueryParameter;
+use Compucie\Congressus\Request\Request;
 use GuzzleHttp\Client as GuzzleHttpClient;
 
 class Client extends GuzzleHttpClient

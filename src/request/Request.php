@@ -1,6 +1,6 @@
 <?php
 
-namespace Compucie\Congressus\request;
+namespace Compucie\Congressus\Request;
 
 use GuzzleHttp\Psr7\Request as Psr7Request;
 

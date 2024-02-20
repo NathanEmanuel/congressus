@@ -1,6 +1,6 @@
 <?php
 
-namespace Compucie\Congressus\request;
+namespace Compucie\Congressus\Request;
 
 enum QueryParameter: int implements Parameter
 {
