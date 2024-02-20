@@ -1,6 +1,8 @@
 <?php
 
+use Compucie\Congressus\models\ElasticMemberPagination;
 use Compucie\Congressus\models\EventPagination;
+use Compucie\Congressus\models\Member;
 use Psr\Http\Message\ResponseInterface;
 
 require_once '../vendor/autoload.php';
@@ -16,14 +18,16 @@ class Client extends GuzzleHttp\Client
         ]);
     }
 
-    private function submit(Request $request): ResponseInterface
+    private function submit(Request $request, mixed $type): mixed
     {
-        return $this->send($request, $request->get_options());
+        $response = $this->send($request, $request->get_options());
+        $data = json_decode($response->getBody(), associative: true);
+        return new $type($data);
     }
 
     // Members - raw
 
-    public function retrieve_member(Arguments $arguments)
+    public function retrieve_member(Arguments $arguments): Member
     {
         $request = new Request("GET", "/v30/members/{obj_id}");
         $request->allow([
@@ -31,17 +35,17 @@ class Client extends GuzzleHttp\Client
             QueryParameter::context,
         ]);
         $request->handle_arguments($arguments);
-        return $this->submit($request);
+        return $this->submit($request, new Member);
     }
 
-    public function search_members(Arguments $arguments)
+    public function search_members(Arguments $arguments): ElasticMemberPagination
     {
         $request = new Request("GET", "/v30/members/search");
         $request->allow([
             QueryParameter::term
         ]);
         $request->handle_arguments($arguments);
-        return $this->submit($request);
+        return $this->submit($request, new ElasticMemberPagination);
     }
 
     // Members - custom
@@ -50,17 +54,15 @@ class Client extends GuzzleHttp\Client
     {
         $arguments = new Arguments();
         $arguments->add(PathParameter::obj_id, $id);
-        $response = $this->retrieve_member($arguments);
-        return json_decode($response->getBody());
+        return $this->retrieve_member($arguments);
     }
 
     public function retrieve_member_by_username(string $username)
     {
         $arguments = new Arguments();
         $arguments->add(QueryParameter::term, $username);
-        $response = $this->search_members($arguments);
-        $data = json_decode($response->getBody())->data;
-        foreach ($data as $member) {
+        $member_page = $this->search_members($arguments);
+        foreach ($member_page as $member) {
             if ($member->username === $username) {
                 return $this->retrieve_member_by_id($member->id);
             }
@@ -70,7 +72,7 @@ class Client extends GuzzleHttp\Client
 
     // Events - raw
 
-    public function list_events(?Arguments $arguments = new Arguments())
+    public function list_events(?Arguments $arguments = new Arguments()): EventPagination
     {
         $request = new Request("GET", "/v30/events");
         $request->allow([
@@ -80,8 +82,6 @@ class Client extends GuzzleHttp\Client
             QueryParameter::order,
         ]);
         $request->handle_arguments($arguments);
-        $response = $this->submit($request);
-        $data = json_decode($response->getBody(), associative: true);
-        return new EventPagination($data);
+        return $this->submit($request, new EventPagination);
     }
 }
