@@ -10,17 +10,17 @@ class Parameters
 
     public function add(ParameterTypeInterface $type, mixed $value): void
     {
-        $this->parameters[$type->get_value()] = $value;
+        $this->parameters[$type->getValue()] = $value;
     }
 
-    public function as_array(): array
+    public function asArray(): array
     {
         return $this->parameters;
     }
     
-    public function get_keys(): array
+    public function getKeys(): array
     {
-        return array_keys($this->as_array());
+        return array_keys($this->asArray());
     }
 
     public function get(ParameterTypeInterface $type): mixed

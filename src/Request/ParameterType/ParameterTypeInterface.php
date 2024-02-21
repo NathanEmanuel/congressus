@@ -4,5 +4,5 @@ namespace Compucie\Congressus\Request\ParameterType;
 
 interface ParameterTypeInterface
 {
-    public function get_value(): string;
+    public function getValue(): string;
 }

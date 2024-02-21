@@ -62,7 +62,7 @@ enum Query: string implements ParameterTypeInterface
     case visibility = "visibility";
     case website_id = "website_id";
 
-    public function get_value(): string
+    public function getValue(): string
     {
         return $this->value;
     }

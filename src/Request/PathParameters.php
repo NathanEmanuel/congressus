@@ -11,10 +11,14 @@ class PathParameters extends Parameters
         $this->path = $path;
     }
 
-    function as_path(): string
+    function asPath(): string
     {
         return $this->path;
     }
+
+
+    // Parameter serialization functions
+    // These are in underscore_case to match Congressus's definitions
 
     function obj_id(int|string $parameter): void
     {
