@@ -49,6 +49,7 @@ class Client extends RawClient
     public function list_upcoming_events(int|string $max): array
     {
         $parameters = new Parameters();
+        $parameters->add(Query::published, true);
         $parameters->add(Query::period_filter, [time(), null]);
         $parameters->add(Query::order, "start:asc");
         $page = $this->list_events($parameters);
