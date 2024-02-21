@@ -12,7 +12,13 @@ $client = new Client(getenv("congressus"));
 // print_r($member);
 
 
+// Events
+
+$events = $client->list_upcoming_events(8);
+print_r($events);
+
+
 // Products
 
-$products = $client->list_products_in_folder(5427);
-print_r($products);
+// $products = $client->list_products_in_folder(5427);
+// print_r($products);

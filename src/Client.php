@@ -44,8 +44,20 @@ class Client extends RawClient
     }
 
 
+    // Events
+
+    public function list_upcoming_events(int|string $max): array
+    {
+        $parameters = new Parameters();
+        $parameters->add(Query::period_filter, [time(), null]);
+        $parameters->add(Query::order, "start:asc");
+        $page = $this->list_events($parameters);
+        return array_slice($page["data"], 0, $max);
+    }
+
+
     // Products
-    
+
     public function list_products_in_folder(int|string|array $folder_id): ProductPagination
     {
         $parameters = new Parameters();
