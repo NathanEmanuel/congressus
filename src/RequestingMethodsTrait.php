@@ -460,4 +460,46 @@ trait RequestingMethodsTrait
         ]);
         return $this->submit($request, new Model\BankMutation);
     }
+
+
+    /*
+        -------------------- Webhooks --------------------
+    */
+
+    // Generated method
+    public function listWebhooks(Parameters $parameters = new Parameters()): Page
+    {
+        $request = new Request("GET", "/v30/webhooks", $parameters);
+        $request->allowParameters([
+            Query::page,
+            Query::page_size,
+            Query::order,
+        ]);
+        return $this->submit($request, new Model\WebhookPagination);
+    }
+
+    // Generated method
+    public function retrieveWebhook(Parameters $parameters): Model\Webhook
+    {
+        $request = new Request("GET", "/v30/webhooks/{obj_id}", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+        ]);
+        return $this->submit($request, new Model\Webhook);
+    }
+
+    // Generated method
+    public function listWebhookCalls(Parameters $parameters = new Parameters()): Page
+    {
+        $request = new Request("GET", "/v30/webhooks/{obj_id}/calls", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+            Query::period_filter,
+            Query::status_code,
+            Query::page,
+            Query::page_size,
+            Query::order,
+        ]);
+        return $this->submit($request, new Model\WebhookCallPagination);
+    }
 }
