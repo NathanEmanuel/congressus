@@ -6,6 +6,7 @@ use Compucie\Congressus\Request\ParameterType\ParameterTypeInterface;
 
 enum Path: string implements ParameterTypeInterface
 {
+    case album_id = "album_id";
     case event_id = "event_id";
     case log_entry_id = "log_entry_id";
     case member_id = "member_id";
