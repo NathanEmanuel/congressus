@@ -267,6 +267,36 @@ trait RequestingMethodsTrait
 
 
     /*
+        -------------------- Webpages --------------------
+    */
+
+    // Generated method
+    public function listWebpages(Parameters $parameters = new Parameters()): Page
+    {
+        $request = new Request("GET", "/v30/webpages", $parameters);
+        $request->allowParameters([
+            Query::published,
+            Query::website_id,
+            Query::template_id,
+            Query::page,
+            Query::page_size,
+            Query::order,
+        ]);
+        return $this->submit($request, new Model\WebpagePagination);
+    }
+
+    // Generated method
+    public function retrieveWebpage(Parameters $parameters): Model\WebpageWithContent
+    {
+        $request = new Request("GET", "/v30/webpages/{obj_id}", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+        ]);
+        return $this->submit($request, new Model\WebpageWithContent);
+    }
+
+
+    /*
         -------------------- Events --------------------
     */
 
