@@ -427,4 +427,37 @@ trait RequestingMethodsTrait
         ]);
         return $this->submit($request, new Model\ProductFolder);
     }
+
+
+    /*
+        -------------------- Bank mutations --------------------
+    */
+
+    // Generated method
+    public function listBankMutations(Parameters $parameters = new Parameters()): Page
+    {
+        $request = new Request("GET", "/v30/bank", $parameters);
+        $request->allowParameters([
+            Query::period_filter,
+            Query::status,
+            Query::mutation_type,
+            Query::bank_import_id,
+            Query::bank_statement_id,
+            Query::bank_mutation_id,
+            Query::page,
+            Query::page_size,
+            Query::order,
+        ]);
+        return $this->submit($request, new Model\BankMutationPagination);
+    }
+
+    // Generated method
+    public function retrieveBankMutation(Parameters $parameters): Model\BankMutation
+    {
+        $request = new Request("GET", "/v30/bank/{obj_id}", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+        ]);
+        return $this->submit($request, new Model\BankMutation);
+    }
 }
