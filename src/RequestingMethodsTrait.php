@@ -50,6 +50,36 @@ trait RequestingMethodsTrait
 
 
     /*
+        -------------------- Member statuses --------------------
+    */
+
+    // Generated method
+    public function listMemberStatuses(Parameters $parameters = new Parameters()): Page
+    {
+        $request = new Request("GET", "/v30/member-statuses", $parameters);
+        $request->allowParameters([
+            Query::archived,
+            Query::hidden,
+            Query::deceased,
+            Query::page,
+            Query::page_size,
+            Query::order,
+        ]);
+        return $this->submit($request, new Model\MemberStatusListPagination);
+    }
+
+    // Generated method
+    public function retrieveMemberStatus(Parameters $parameters): Model\MemberStatusWithFieldSettings
+    {
+        $request = new Request("GET", "/v30/member-statuses/{obj_id}", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+        ]);
+        return $this->submit($request, new Model\MemberStatusWithFieldSettings);
+    }
+
+
+    /*
         -------------------- Groups --------------------
     */
 
