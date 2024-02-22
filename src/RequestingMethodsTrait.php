@@ -146,6 +146,83 @@ trait RequestingMethodsTrait
 
 
     /*
+        -------------------- Organisations --------------------
+    */
+
+    // Generated method
+    public function listOrganisationCategories(Parameters $parameters = new Parameters()): Page
+    {
+        $request = new Request("GET", "/v30/organisations/categories", $parameters);
+        $request->allowParameters([
+            Query::page,
+            Query::page_size,
+            Query::order,
+        ]);
+        return $this->submit($request, new Model\OrganisationCategoryPagination);
+    }
+
+    // Generated method
+    public function retrieveOrganisationCategory(Parameters $parameters): Model\OrganisationCategory
+    {
+        $request = new Request("GET", "/v30/organisations/categories/{obj_id}", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+        ]);
+        return $this->submit($request, new Model\OrganisationCategory);
+    }
+
+    // Generated method
+    public function listOrganisations(Parameters $parameters = new Parameters()): Page
+    {
+        $request = new Request("GET", "/v30/organisations", $parameters);
+        $request->allowParameters([
+            Query::category_id,
+            Query::sbi_code,
+            Query::legal_form,
+            Query::member_id,
+            Query::page,
+            Query::page_size,
+            Query::order,
+        ]);
+        return $this->submit($request, new Model\OrganisationPagination);
+    }
+
+    // Generated method
+    public function retrieveOrganisation(Parameters $parameters): Model\Organisation
+    {
+        $request = new Request("GET", "/v30/organisations/{obj_id}", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+        ]);
+        return $this->submit($request, new Model\Organisation);
+    }
+
+    // Generated method
+    public function listOrganisationMemberships(Parameters $parameters = new Parameters()): Page
+    {
+        $request = new Request("GET", "/v30/organisations/memberships", $parameters);
+        $request->allowParameters([
+            Query::organisation_id,
+            Query::member_id,
+            Query::page,
+            Query::page_size,
+            Query::order,
+        ]);
+        return $this->submit($request, new Model\OrganisationMembershipPagination);
+    }
+
+    // Generated method
+    public function retrieveOrganisationMembership(Parameters $parameters): Model\OrganisationMembership
+    {
+        $request = new Request("GET", "/v30/organisations/memberships/{obj_id}", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+        ]);
+        return $this->submit($request, new Model\OrganisationMembership);
+    }
+
+
+    /*
         -------------------- Events --------------------
     */
 
