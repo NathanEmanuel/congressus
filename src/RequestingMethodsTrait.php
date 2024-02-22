@@ -529,4 +529,31 @@ trait RequestingMethodsTrait
         ]);
         return $this->submit($request, new Model\StorageObject);
     }
+
+
+    /*
+        -------------------- Countries --------------------
+    */
+
+    // Generated method
+    public function listCountries(Parameters $parameters = new Parameters()): Page
+    {
+        $request = new Request("GET", "/v30/countries", $parameters);
+        $request->allowParameters([
+            Query::page,
+            Query::page_size,
+            Query::order,
+        ]);
+        return $this->submit($request, new Model\CountryPagination);
+    }
+
+    // Generated method
+    public function retrieveCountry(Parameters $parameters): Model\Country
+    {
+        $request = new Request("GET", "/v30/countries/{obj_id}", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+        ]);
+        return $this->submit($request, new Model\Country);
+    }
 }
