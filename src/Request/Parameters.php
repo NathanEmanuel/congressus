@@ -33,4 +33,9 @@ class Parameters
     {
         $this->add(Query::page, $page);
     }
+
+    public function page_size(int $page_size): void
+    {
+        $this->add(Query::page_size, $page_size);
+    }
 }
