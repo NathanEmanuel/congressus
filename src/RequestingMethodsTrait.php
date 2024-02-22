@@ -502,4 +502,31 @@ trait RequestingMethodsTrait
         ]);
         return $this->submit($request, new Model\WebhookCallPagination);
     }
+
+
+    /*
+        -------------------- Storage --------------------
+    */
+
+    // Generated method
+    public function listStorageObjects(Parameters $parameters = new Parameters()): Page
+    {
+        $request = new Request("GET", "/v30/storage", $parameters);
+        $request->allowParameters([
+            Query::page,
+            Query::page_size,
+            Query::order,
+        ]);
+        return $this->submit($request, new Model\StorageObjectPagination);
+    }
+
+    // Generated method
+    public function retrieveStorageObject(Parameters $parameters): Model\StorageObject
+    {
+        $request = new Request("GET", "/v30/storage/{obj_id}", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+        ]);
+        return $this->submit($request, new Model\StorageObject);
+    }
 }
