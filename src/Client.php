@@ -58,12 +58,9 @@ class Client extends RawClient
         $data = $page->getData();
 
         // request subsequent pages if $max > 100
-        // for maintainability, all requested pages are of size 100 in this
+        // for maintainability, all subsequent pages are of size 100
         // this means that it is likely that more data is requested than necessary
-        $pages = $this->nextPages($page, intdiv($max, 100));
-        foreach ($pages as $page) {
-            $data = array_merge($data, $page->getData());
-        }
+        $data = $this->nextPagesAsData($page, intdiv($max, 100), $data);
 
         return array_slice($data, 0, $max);
     }
