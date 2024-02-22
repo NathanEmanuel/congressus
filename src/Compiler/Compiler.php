@@ -1,4 +1,9 @@
 <?php
+
+use Compucie\Congressus\Request\ParameterType\Path;
+
+require_once("../../vendor/autoload.php");
+
 define("TARGET_DIR", "target");
 define("TARGET", str_replace("\\", "/", dirname(__FILE__))  . "/" . TARGET_DIR . "/GeneratedRequests.php");
 define(
@@ -9,6 +14,7 @@ use Compucie\Congressus\Model;
 use Compucie\Congressus\Page;
 use Compucie\Congressus\Request\Parameters;
 use Compucie\Congressus\Request\ParameterType\Query;
+use Compucie\Congressus\Request\ParameterType\Path;
 use Compucie\Congressus\Request\Request;
 
 trait GeneratedRequests {
@@ -58,6 +64,13 @@ foreach ($paths as $path => $array) {
     }
 
     $parameters = "";
+    $path_parameters = array_column(Path::cases(), 'name');
+    foreach ($path_parameters as $param) {
+        if (str_contains($path, $param)) {
+            $parameters = $parameters . "Path::" . $param  . ",\n";
+        }
+    }
+
     foreach ($array["parameters"] as $parameter) {
         // Example: Query::page_size,
         $parameters = $parameters . ucfirst($parameter["in"]) . "::" . $parameter["name"] . ",\n";
