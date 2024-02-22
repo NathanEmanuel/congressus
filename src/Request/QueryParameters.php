@@ -6,12 +6,12 @@ use Compucie\Congressus\Request\ParameterType\Query;
 
 class QueryParameters extends Parameters
 {
-    function as_option()
+    function asOption()
     {
-        return ["query" => $this->as_array()];
+        return ["query" => $this->asArray()];
     }
 
-    private function serialize_array(int|string|array $array): string
+    private function serializeArray(int|string|array $array): string
     {
         try {
             return implode(",", $array);
@@ -20,29 +20,33 @@ class QueryParameters extends Parameters
         }
     }
 
+
+    // Parameter serialization functions
+    // These are in underscore_case to match Congressus's definitions
+
     function category_id(int|string|array $parameter): void
     {
-        $this->add(Query::category_id, $this->serialize_array($parameter));
+        $this->add(Query::category_id, $this->serializeArray($parameter));
     }
 
     function context(string|array $parameter): void
     {
-        $this->add(Query::context, $this->serialize_array($parameter));
+        $this->add(Query::context, $this->serializeArray($parameter));
     }
 
     function folder_id(int|string|array $parameter): void
     {
-        $this->add(Query::folder_id, $this->serialize_array($parameter));
+        $this->add(Query::folder_id, $this->serializeArray($parameter));
     }
 
     function group_id(int|string|array $parameter): void
     {
-        $this->add(Query::group_id, $this->serialize_array($parameter));
+        $this->add(Query::group_id, $this->serializeArray($parameter));
     }
 
     function member_id(int|string|array $parameter): void
     {
-        $this->add(Query::member_id, $this->serialize_array($parameter));
+        $this->add(Query::member_id, $this->serializeArray($parameter));
     }
 
     function order(string $parameter): void
@@ -57,7 +61,7 @@ class QueryParameters extends Parameters
 
     function page_size(int|string $parameter): void
     {
-        $this->add(Query::page, $parameter);
+        $this->add(Query::page_size, $parameter);
     }
 
     function parent_id(int|string $parameter): void
@@ -67,12 +71,12 @@ class QueryParameters extends Parameters
 
     function participation_billing_enabled(string|array $parameter): void
     {
-        $this->add(Query::participation_billing_enabled, $this->serialize_array($parameter));
+        $this->add(Query::participation_billing_enabled, $this->serializeArray($parameter));
     }
 
     function participating_member_id(int|string|array $parameter): void
     {
-        $this->add(Query::participating_member_id, $this->serialize_array($parameter));
+        $this->add(Query::participating_member_id, $this->serializeArray($parameter));
     }
 
     function period_filter(string $parameter): void
@@ -92,12 +96,12 @@ class QueryParameters extends Parameters
 
     function status_id(int|string|array $parameter): void
     {
-        $this->add(Query::status_id, $this->serialize_array($parameter));
+        $this->add(Query::status_id, $this->serializeArray($parameter));
     }
 
     function socie_app_id(int|string|array $parameter): void
     {
-        $this->add(Query::socie_app_id, $this->serialize_array($parameter));
+        $this->add(Query::socie_app_id, $this->serializeArray($parameter));
     }
 
     function term(string $parameter): void

@@ -12,7 +12,7 @@ enum Path: string implements ParameterTypeInterface
     case membership_status_id = "membership_status_id";
     case obj_id = "obj_id";
 
-    public function get_value(): string
+    public function getValue(): string
     {
         return $this->value;
     }
