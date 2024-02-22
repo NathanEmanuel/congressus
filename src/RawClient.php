@@ -28,6 +28,12 @@ class RawClient extends GuzzleHttpClient
         ]);
     }
 
+    /**
+     * Submit request to the Congressus API and return the response as a page or as a data model object.
+     * @param   Request $request    The request to submit
+     * @param   mixed   $type       The data type of the response
+     * @return  mixed               The response as a page or data model object
+     */
     private function submit(Request $request, mixed $type): mixed
     {
         // do request
@@ -46,9 +52,10 @@ class RawClient extends GuzzleHttpClient
         return new $type($body);
     }
 
-
     /**
-     * @return  Page                The next page
+     * Request next page.
+     * @param   Page                $page   The current page
+     * @return  Page                        The next page
      * @throws  NoNextPageException
      */
     public function nextPage(Page $page): Page
@@ -63,12 +70,14 @@ class RawClient extends GuzzleHttpClient
     }
 
     /**
-     * Request all subsequent pages.
+     * Request subsequent pages.
+     * @param   Page    $page   The current page
+     * @param   int     $max    The maximum amount of pages to request
      */
     public function nextPages(Page $page, int $max): array
     {
         $pages = array();
-        for ($i=0; $i < $max; $i++) {
+        for ($i = 0; $i < $max; $i++) {
             try {
                 $page = $this->nextPage($page);
                 array_push($pages, $page);
@@ -86,7 +95,8 @@ class RawClient extends GuzzleHttpClient
      * @param   array   $array  Array to append the data to
      * @param   array           The data of the subsequent pages
      */
-    public function nextPagesAsData(Page $page, int $max, array $array = array()) {
+    public function nextPagesAsData(Page $page, int $max, array $array = array())
+    {
         $pages = $this->nextPages($page, $max);
         foreach ($pages as $page) {
             $array = array_merge($array, $page->getData());
