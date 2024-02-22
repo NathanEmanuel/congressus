@@ -360,6 +360,7 @@ trait RequestingMethodsTrait
         -------------------- Products --------------------
     */
 
+    // Generated method
     public function listProducts(Parameters $parameters = new Parameters()): Page
     {
         $request = new Request("GET", "/v30/products", $parameters);
@@ -373,6 +374,17 @@ trait RequestingMethodsTrait
         ]);
         return $this->submit($request, new Model\ProductPagination);
     }
+
+    // Generated method
+    public function retrieveProduct(Parameters $parameters): Model\Product
+    {
+        $request = new Request("GET", "/v30/products/{obj_id}", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+        ]);
+        return $this->submit($request, new Model\Product);
+    }
+
 
     /*
         -------------------- Product folders --------------------
