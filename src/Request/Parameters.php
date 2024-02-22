@@ -3,6 +3,7 @@
 namespace Compucie\Congressus\Request;
 
 use Compucie\Congressus\Request\ParameterType\ParameterTypeInterface;
+use Compucie\Congressus\Request\ParameterType\Query;
 
 class Parameters
 {
@@ -10,21 +11,31 @@ class Parameters
 
     public function add(ParameterTypeInterface $type, mixed $value): void
     {
-        $this->parameters[$type->get_value()] = $value;
+        $this->parameters[$type->getValue()] = $value;
     }
 
-    public function as_array(): array
+    public function asArray(): array
     {
         return $this->parameters;
     }
-    
-    public function get_keys(): array
+
+    public function getKeys(): array
     {
-        return array_keys($this->as_array());
+        return array_keys($this->asArray());
     }
 
     public function get(ParameterTypeInterface $type): mixed
     {
         return $this->parameters[$type->value] ?? null;
+    }
+
+    public function page(int $page): void
+    {
+        $this->add(Query::page, $page);
+    }
+
+    public function page_size(int $page_size): void
+    {
+        $this->add(Query::page_size, $page_size);
     }
 }

@@ -22,32 +22,32 @@ class Request extends Psr7Request
         $this->query_parameters = new QueryParameters();
     }
 
-    public function allow_parameters(array $allowed): void
+    public function allowParameters(array $allowed): void
     {
         foreach ($allowed as $enum) {
             array_push($this->allowed, $enum->value);
         }
 
-        $this->apply_arguments();
+        $this->applyArguments();
     }
 
-    public function get_options(): array
+    public function getOptions(): array
     {
-        return $this->query_parameters->as_option();
+        return $this->query_parameters->asOption();
     }
 
-    private function apply_arguments(): void
+    private function applyArguments(): void
     {
-        $parameters = $this->get_parameters(); // shorthand
+        $parameters = $this->getParameters(); // shorthand
 
         // check if all parameters are allowed
-        $invalid_arguments = array_diff($parameters->get_keys(), $this->allowed);
+        $invalid_arguments = array_diff($parameters->getKeys(), $this->allowed);
         if (!empty($invalid_arguments)) {
             throw new \InvalidArgumentException("Invalid argument(s): " . print_r($invalid_arguments));
         }
 
         // route each argument value to its handler method
-        foreach ($parameters->as_array() as $parameter_type => $value) {
+        foreach ($parameters->asArray() as $parameter_type => $value) {
             match ($parameter_type) {
                 Path::obj_id->value => $this->path_parameters->obj_id($value),
 
@@ -70,18 +70,18 @@ class Request extends Psr7Request
                 Query::term                         ->value => $this->query_parameters->term                            ($value),
             };
         }
-        
-        
+
         // the parent constructor can only be called now the path parameters are handled
-        parent::__construct($this->get_method(), $this->path_parameters->as_path());
+        // because the parent's method and uri fields are read-only
+        parent::__construct($this->getMethod(), $this->path_parameters->asPath());
     }
 
-    private function get_method(): string
+    public function getMethod(): string
     {
         return $this->method;
     }
 
-    private function get_parameters(): Parameters
+    public function getParameters(): Parameters
     {
         return $this->parameters;
     }

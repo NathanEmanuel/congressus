@@ -2,6 +2,7 @@
 
 namespace Compucie\Congressus;
 
+use Compucie\Congressus\Exception\NoNextPageException;
 use Compucie\Congressus\Model\ElasticMemberPagination;
 use Compucie\Congressus\Model\EventPagination;
 use Compucie\Congressus\Model\GroupMembershipPagination;
@@ -27,20 +28,89 @@ class RawClient extends GuzzleHttpClient
         ]);
     }
 
+    /**
+     * Submit request to the Congressus API and return the response as a page or as a data model object.
+     * @param   Request $request    The request to submit
+     * @param   mixed   $type       The data type of the response
+     * @return  mixed               The response as a page or data model object
+     */
     private function submit(Request $request, mixed $type): mixed
     {
-        $response = $this->send($request, $request->get_options());
-        $data = json_decode($response->getBody(), associative: true);
-        return new $type($data);
+        // do request
+        $response = $this->send($request, $request->getOptions());
+        $body = json_decode($response->getBody(), associative: true);
+
+        // deserialize request
+        $isPaginated = str_contains(get_class($type), "Pagination");
+        if ($isPaginated) {
+            $pagination = new $type($body);
+            $get_calling_method = function () {
+                return debug_backtrace()[2]["function"];
+            };
+            return new Page($pagination, $get_calling_method(), $request->getParameters());
+        }
+        return new $type($body);
+    }
+
+    /**
+     * Request next page.
+     * @param   Page                $page   The current page
+     * @return  Page                        The next page
+     * @throws  NoNextPageException
+     */
+    public function nextPage(Page $page): Page
+    {
+        if ($page->hasNext()) {
+            $parameters = $page->getParameters();
+            $parameters->page($page->getNextPage());
+            return call_user_func(array($this, $page->getCaller()), $parameters);
+        } else {
+            throw new NoNextPageException();
+        }
+    }
+
+    /**
+     * Request subsequent pages.
+     * @param   Page    $page   The current page
+     * @param   int     $max    The maximum amount of pages to request
+     */
+    public function nextPages(Page $page, int $max): array
+    {
+        $pages = array();
+        for ($i = 0; $i < $max; $i++) {
+            try {
+                $page = $this->nextPage($page);
+                array_push($pages, $page);
+            } catch (NoNextPageException) {
+                break;
+            }
+        }
+        return $pages;
+    }
+
+    /**
+     * Request subsequent pages and return an array containing their data.
+     * @param   Page    $page   The current page
+     * @param   int     $max    The maximum amount of pages to request
+     * @param   array   $array  Array to append the data to
+     * @param   array           The data of the subsequent pages
+     */
+    public function nextPagesAsData(Page $page, int $max, array $array = array())
+    {
+        $pages = $this->nextPages($page, $max);
+        foreach ($pages as $page) {
+            $array = array_merge($array, $page->getData());
+        }
+        return $array;
     }
 
 
     // Members
 
-    public function list_members(Parameters $parameters = new Parameters()): MemberPagination
+    public function listMembers(Parameters $parameters = new Parameters()): Page
     {
         $request = new Request("GET", "/v30/members", $parameters);
-        $request->allow_parameters([
+        $request->allowParameters([
             Query::status_id,
             Query::socie_app_id,
             Query::page,
@@ -51,20 +121,21 @@ class RawClient extends GuzzleHttpClient
         return $this->submit($request, new MemberPagination);
     }
 
-    public function retrieve_member(Parameters $parameters): Member
+    public function retrieveMember(Parameters $parameters): Member
     {
         $request = new Request("GET", "/v30/members/{obj_id}", $parameters);
-        $request->allow_parameters([
+        $request->allowParameters([
             Path::obj_id,
             Query::context,
         ]);
         return $this->submit($request, new Member);
     }
 
-    public function search_members(Parameters $parameters): ElasticMemberPagination
+
+    public function searchMembers(Parameters $parameters): Page
     {
         $request = new Request("GET", "/v30/members/search", $parameters);
-        $request->allow_parameters([
+        $request->allowParameters([
             Query::term
         ]);
         return $this->submit($request, new ElasticMemberPagination);
@@ -73,10 +144,10 @@ class RawClient extends GuzzleHttpClient
 
     // Groups
 
-    public function list_groups(Parameters $parameters = new Parameters()): GroupPagination
+    public function listGroups(Parameters $parameters = new Parameters()): Page
     {
         $request = new Request("GET", "/v30/groups", $parameters);
-        $request->allow_parameters([
+        $request->allowParameters([
             Query::published,
             Query::folder_id,
             Query::member_id,
@@ -88,10 +159,10 @@ class RawClient extends GuzzleHttpClient
         return $this->submit($request, new GroupPagination);
     }
 
-    public function list_group_memberships(Parameters $parameters = new Parameters()): GroupMembershipPagination
+    public function listGroupMemberships(Parameters $parameters = new Parameters()): Page
     {
         $request = new Request("GET", "/v30/groups/memberships", $parameters);
-        $request->allow_parameters([
+        $request->allowParameters([
             Query::group_id,
             Query::member_id,
             Query::page,
@@ -107,10 +178,10 @@ class RawClient extends GuzzleHttpClient
     /**
      * @param   array   period_filter   Array containing the start and end of the period
      */
-    public function list_events(Parameters $parameters = new Parameters()): EventPagination
+    public function listEvents(Parameters $parameters = new Parameters()): Page
     {
         // hook into the given parameters to format the period_filter correctly
-        $period_filter_hook = function (Parameters $parameters) {
+        $formatPeriodFilter = function (Parameters $parameters) {
             $period = $parameters->get(Query::period_filter);
             if (is_null($period)) {
                 return $parameters; // filter_period parameter not set
@@ -131,11 +202,11 @@ class RawClient extends GuzzleHttpClient
             return $parameters;
         };
 
-        $parameters = $period_filter_hook($parameters);
+        $parameters = $formatPeriodFilter($parameters);
 
         // submit request
         $request = new Request("GET", "/v30/events", $parameters);
-        $request->allow_parameters([
+        $request->allowParameters([
             Query::category_id,
             Query::period_filter,
             Query::published,
@@ -153,10 +224,10 @@ class RawClient extends GuzzleHttpClient
 
     // Products
 
-    public function list_products(Parameters $parameters = new Parameters()): ProductPagination
+    public function listProducts(Parameters $parameters = new Parameters()): Page
     {
         $request = new Request("GET", "/v30/products", $parameters);
-        $request->allow_parameters([
+        $request->allowParameters([
             Query::published,
             Query::status,
             Query::folder_id,
@@ -170,10 +241,10 @@ class RawClient extends GuzzleHttpClient
 
     // Product folders
 
-    public function list_product_folders_recursive(Parameters $parameters = new Parameters()): ProductFolderListRecursivePagination
+    public function listProductFoldersRecursive(Parameters $parameters = new Parameters()): Page
     {
         $request = new Request("GET", "/v30/product-folders/recursive", $parameters);
-        $request->allow_parameters([
+        $request->allowParameters([
             Query::published,
             Query::parent_id,
             Query::page,
@@ -183,10 +254,10 @@ class RawClient extends GuzzleHttpClient
         return $this->submit($request, new ProductFolderListRecursivePagination);
     }
 
-    public function list_product_folders(Parameters $parameters = new Parameters()): ProductFolderPagination
+    public function listProductFolders(Parameters $parameters = new Parameters()): Page
     {
         $request = new Request("GET", "/v30/product-folders", $parameters);
-        $request->allow_parameters([
+        $request->allowParameters([
             Query::published,
             Query::parent_id,
             Query::page,
