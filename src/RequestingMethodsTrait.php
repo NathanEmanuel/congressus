@@ -105,6 +105,47 @@ trait RequestingMethodsTrait
 
 
     /*
+        -------------------- Group folders --------------------
+    */
+
+    // Generated method
+    public function listGroupFoldersRecursive(Parameters $parameters = new Parameters()): Page
+    {
+        $request = new Request("GET", "/v30/group-folders/recursive", $parameters);
+        $request->allowParameters([
+            Query::page,
+            Query::page_size,
+            Query::order,
+        ]);
+        return $this->submit($request, new Model\GroupFolderListRecursivePagination);
+    }
+
+    // Generated method
+    public function listGroupFolders(Parameters $parameters = new Parameters()): Page
+    {
+        $request = new Request("GET", "/v30/group-folders", $parameters);
+        $request->allowParameters([
+            Query::published,
+            Query::parent_id,
+            Query::page,
+            Query::page_size,
+            Query::order,
+        ]);
+        return $this->submit($request, new Model\GroupFolderPagination);
+    }
+
+    // Generated method
+    public function retrieveGroupFolder(Parameters $parameters): Model\GroupFolder
+    {
+        $request = new Request("GET", "/v30/group-folders/{obj_id}", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+        ]);
+        return $this->submit($request, new Model\GroupFolder);
+    }
+
+
+    /*
         -------------------- Events --------------------
     */
 
