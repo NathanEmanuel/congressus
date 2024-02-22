@@ -390,6 +390,7 @@ trait RequestingMethodsTrait
         -------------------- Product folders --------------------
     */
 
+    // Generated method
     public function listProductFoldersRecursive(Parameters $parameters = new Parameters()): Page
     {
         $request = new Request("GET", "/v30/product-folders/recursive", $parameters);
@@ -403,6 +404,7 @@ trait RequestingMethodsTrait
         return $this->submit($request, new Model\ProductFolderListRecursivePagination);
     }
 
+    // Generated method
     public function listProductFolders(Parameters $parameters = new Parameters()): Page
     {
         $request = new Request("GET", "/v30/product-folders", $parameters);
@@ -414,5 +416,15 @@ trait RequestingMethodsTrait
             Query::order,
         ]);
         return $this->submit($request, new Model\ProductFolderPagination);
+    }
+
+    // Generated method
+    public function retrieveProductFolder(Parameters $parameters): Model\ProductFolder
+    {
+        $request = new Request("GET", "/v30/product-folders/{obj_id}", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+        ]);
+        return $this->submit($request, new Model\ProductFolder);
     }
 }
