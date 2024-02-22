@@ -62,6 +62,23 @@ class RawClient extends GuzzleHttpClient
         }
     }
 
+    /**
+     * Request all subsequent pages.
+     */
+    public function nextPages(Page $page, int $max): array
+    {
+        $pages = array();
+        for ($i=0; $i < $max; $i++) {
+            try {
+                $page = $this->nextPage($page);
+                array_push($pages, $page);
+            } catch (NoNextPageException) {
+                break;
+            }
+        }
+        return $pages;
+    }
+
 
     // Members
 
