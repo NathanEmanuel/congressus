@@ -340,6 +340,23 @@ trait RequestingMethodsTrait
 
 
     /*
+        -------------------- Event categories --------------------
+    */
+
+    // Generated method
+    public function listEventCategories(Parameters $parameters = new Parameters()): Page
+    {
+        $request = new Request("GET", "/v30/event-categories", $parameters);
+        $request->allowParameters([
+            Query::page,
+            Query::page_size,
+            Query::order,
+        ]);
+        return $this->submit($request, new Model\EventCategoryPagination);
+    }
+
+
+    /*
         -------------------- Products --------------------
     */
 
