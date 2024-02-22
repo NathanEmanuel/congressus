@@ -51,9 +51,9 @@ foreach ($paths as $path => $array) {
     $name = @str_replace([' ', '-'], '', lcfirst(ucwords($array["summary"])));
     $response_type = @str_replace(' ', '', ucwords(str_replace("#/components/schemas/", "", $array["responses"]["200"]["content"]["application/json"]["schema"]["\$ref"])));
     $optional = @str_contains($name, "list") ? " = new Parameters()" : "";
-    $return_type = @str_contains($response_type, "Pagination") ? "Page" : $response_type;
+    $return_type = @str_contains($response_type, "Pagination") ? "Page" : "Model\\" . $response_type;
 
-    if (empty($name) || empty($response_type) || empty($optional) || empty($return_type)) {
+    if (empty($name) || empty($response_type) || empty($return_type)) {
         continue; // missing data in openapi.json
     }
 
