@@ -272,6 +272,73 @@ trait RequestingMethodsTrait
         return $this->submit($request, new Model\EventPagination);
     }
 
+    // Generated method
+    public function retrieveEvent(Parameters $parameters): Model\Event
+    {
+        $request = new Request("GET", "/v30/events/{obj_id}", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+        ]);
+        return $this->submit($request, new Model\Event);
+    }
+
+    // Generated method
+    public function listEventParticipations(Parameters $parameters = new Parameters()): Page
+    {
+        $request = new Request("GET", "/v30/events/{obj_id}/participations", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+            Query::event_id,
+            Query::status,
+            Query::has_invoice,
+            Query::sale_invoice_status,
+            Query::member_id,
+            Query::page,
+            Query::page_size,
+            Query::order,
+        ]);
+        return $this->submit($request, new Model\EventParticipationPagination);
+    }
+
+    // Generated method
+    public function retrieveEventParticipation(Parameters $parameters): Model\EventParticipationWithRelations
+    {
+        $request = new Request("GET", "/v30/events/{event_id}/participations/{obj_id}", $parameters);
+        $request->allowParameters([
+            Path::event_id,
+            Path::obj_id,
+        ]);
+        return $this->submit($request, new Model\EventParticipationWithRelations);
+    }
+
+    // Generated method
+    public function listTicketTypes(Parameters $parameters = new Parameters()): Page
+    {
+        $request = new Request("GET", "/v30/events/{obj_id}/ticket-types", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+            Query::is_available_for_members,
+            Query::is_available_for_external,
+            Query::availability_status,
+            Query::page,
+            Query::page_size,
+            Query::order,
+        ]);
+        return $this->submit($request, new Model\TicketTypePagination);
+    }
+
+    // Generated method
+    public function retrieveTicketType(Parameters $parameters): Model\EventTicketType
+    {
+        $request = new Request("GET", "/v30/events/{event_id}/ticket-types/{obj_id}", $parameters);
+        $request->allowParameters([
+            Path::event_id,
+            Path::obj_id,
+        ]);
+        return $this->submit($request, new Model\EventTicketType);
+    }
+
+
     /*
         -------------------- Products --------------------
     */
