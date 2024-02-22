@@ -29,7 +29,7 @@ class Parameters
         return $this->parameters[$type->value] ?? null;
     }
 
-    public function page(int $page)
+    public function page(int $page): void
     {
         $this->add(Query::page, $page);
     }

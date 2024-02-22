@@ -59,7 +59,7 @@ class Client extends RawClient
 
     // Products
 
-    public function listProductsInFolder(int|string|array $folder_id): ProductPagination
+    public function listProductsInFolder(int|string|array $folder_id): Page
     {
         $parameters = new Parameters();
         $parameters->add(Query::folder_id, $folder_id);
