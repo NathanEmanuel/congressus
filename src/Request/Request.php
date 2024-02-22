@@ -70,8 +70,7 @@ class Request extends Psr7Request
                 Query::term                         ->value => $this->query_parameters->term                            ($value),
             };
         }
-        
-        
+
         // the parent constructor can only be called now the path parameters are handled
         // because the parent's method and uri fields are read-only
         parent::__construct($this->getMethod(), $this->path_parameters->asPath());

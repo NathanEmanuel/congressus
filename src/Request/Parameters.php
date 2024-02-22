@@ -18,7 +18,7 @@ class Parameters
     {
         return $this->parameters;
     }
-    
+
     public function getKeys(): array
     {
         return array_keys($this->asArray());
@@ -29,7 +29,8 @@ class Parameters
         return $this->parameters[$type->value] ?? null;
     }
 
-    public function page(int $page) {
+    public function page(int $page)
+    {
         $this->add(Query::page, $page);
     }
 }
