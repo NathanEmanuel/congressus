@@ -476,6 +476,37 @@ trait RequestingMethodsTrait
 
 
     /*
+        -------------------- News --------------------
+    */
+
+    // Generated method
+    public function listNews(Parameters $parameters = new Parameters()): Page
+    {
+        $request = new Request("GET", "/v30/news", $parameters);
+        $request->allowParameters([
+            Query::period_filter,
+            Query::actual,
+            Query::comments_open,
+            Query::visibility,
+            Query::page,
+            Query::page_size,
+            Query::order,
+        ]);
+        return $this->submit($request, new Model\NewsPagination);
+    }
+
+    // Generated method
+    public function retrieveNews(Parameters $parameters): Model\News
+    {
+        $request = new Request("GET", "/v30/news/{obj_id}", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+        ]);
+        return $this->submit($request, new Model\News);
+    }
+
+
+    /*
         -------------------- Products --------------------
     */
 
