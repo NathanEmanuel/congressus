@@ -61,7 +61,7 @@ class QueryParameters extends Parameters
 
     function page_size(int|string $parameter): void
     {
-        $this->add(Query::page, $parameter);
+        $this->add(Query::page_size, $parameter);
     }
 
     function parent_id(int|string $parameter): void
