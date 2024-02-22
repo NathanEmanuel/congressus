@@ -8,5 +8,5 @@ $client = new Client(getenv("congressus"));
 
 // Events
 
-$events = $client->listUpcomingEvents(8);
-print_r($events);
+$events = $client->listUpcomingEvents(4);
+print_r(count($events));

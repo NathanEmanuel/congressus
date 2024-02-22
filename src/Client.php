@@ -48,11 +48,24 @@ class Client extends RawClient
     public function listUpcomingEvents(int|string $max): array
     {
         $parameters = new Parameters();
+        $parameters->add(Query::page_size, min($max, 100));
         $parameters->add(Query::published, true);
         $parameters->add(Query::period_filter, [time(), null]);
         $parameters->add(Query::order, "start:asc");
+
+        // request (first) page
         $page = $this->listEvents($parameters);
-        return array_slice($page["data"], 0, $max);
+        $data = $page->getData();
+
+        // request subsequent pages if $max > 100
+        // for maintainability, all requested pages are of size 100 in this
+        // this means that it is likely that more data is requested than necessary
+        $pages = $this->nextPages($page, intdiv($max, 100));
+        foreach ($pages as $page) {
+            $data = array_merge($data, $page->getData());
+        }
+
+        return array_slice($data, 0, $max);
     }
 
 
