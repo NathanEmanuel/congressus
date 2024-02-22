@@ -3,6 +3,7 @@
 namespace Compucie\Congressus\Request;
 
 use Compucie\Congressus\Request\ParameterType\ParameterTypeInterface;
+use Compucie\Congressus\Request\ParameterType\Query;
 
 class Parameters
 {
@@ -26,5 +27,9 @@ class Parameters
     public function get(ParameterTypeInterface $type): mixed
     {
         return $this->parameters[$type->value] ?? null;
+    }
+
+    public function page(int $page) {
+        $this->add(Query::page, $page);
     }
 }

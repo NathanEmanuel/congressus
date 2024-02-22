@@ -82,7 +82,7 @@ class Request extends Psr7Request
         return $this->method;
     }
 
-    private function getParameters(): Parameters
+    public function getParameters(): Parameters
     {
         return $this->parameters;
     }
