@@ -4,7 +4,6 @@ namespace Compucie\Congressus;
 
 use Compucie\Congressus\RawClient;
 use Compucie\Congressus\Model\Member;
-use Compucie\Congressus\Model\ProductPagination;
 use Compucie\Congressus\Request\Parameters;
 use Compucie\Congressus\Request\ParameterType\Path;
 use Compucie\Congressus\Request\ParameterType\Query;
