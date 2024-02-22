@@ -357,6 +357,125 @@ trait RequestingMethodsTrait
 
 
     /*
+        -------------------- Blogs --------------------
+    */
+
+    // Generated method
+    public function listBlogAuthors(Parameters $parameters = new Parameters()): Page
+    {
+        $request = new Request("GET", "/v30/blogs/authors", $parameters);
+        $request->allowParameters([
+            Query::page,
+            Query::page_size,
+            Query::order,
+        ]);
+        return $this->submit($request, new Model\BlogAuthorPagination);
+    }
+
+    // Generated method
+    public function retrieveBlogAuthor(Parameters $parameters): Model\BlogAuthor
+    {
+        $request = new Request("GET", "/v30/blogs/authors/{obj_id}", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+        ]);
+        return $this->submit($request, new Model\BlogAuthor);
+    }
+
+    // Generated method
+    public function listBlogs(Parameters $parameters = new Parameters()): Page
+    {
+        $request = new Request("GET", "/v30/blogs", $parameters);
+        $request->allowParameters([
+            Query::period_filter,
+            Query::author_id,
+            Query::issue_id,
+            Query::category_id,
+            Query::published,
+            Query::visibility,
+            Query::page,
+            Query::page_size,
+            Query::order,
+        ]);
+        return $this->submit($request, new Model\BlogPagination);
+    }
+
+    // Generated method
+    public function retrieveBlog(Parameters $parameters): Model\BlogWithParagraph
+    {
+        $request = new Request("GET", "/v30/blogs/{obj_id}", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+        ]);
+        return $this->submit($request, new Model\BlogWithParagraph);
+    }
+
+    // Generated method
+    public function retrieveBlogTextParagraph(Parameters $parameters): Model\BlogTextParagraph
+    {
+        $request = new Request("GET", "/v30/blogs/paragraphs/text/{obj_id}", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+        ]);
+        return $this->submit($request, new Model\BlogTextParagraph);
+    }
+
+    // Generated method
+    public function retrieveBlogImageParagraph(Parameters $parameters): Model\BlogImageParagraph
+    {
+        $request = new Request("GET", "/v30/blogs/paragraphs/image/{obj_id}", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+        ]);
+        return $this->submit($request, new Model\BlogImageParagraph);
+    }
+
+    // Generated method
+    public function listBlogCategories(Parameters $parameters = new Parameters()): Page
+    {
+        $request = new Request("GET", "/v30/blogs/categories", $parameters);
+        $request->allowParameters([
+            Query::page,
+            Query::page_size,
+            Query::order,
+        ]);
+        return $this->submit($request, new Model\BlogCategoryPagination);
+    }
+
+    // Generated method
+    public function retrieveBlogCategory(Parameters $parameters): Model\BlogCategory
+    {
+        $request = new Request("GET", "/v30/blogs/categories/{obj_id}", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+        ]);
+        return $this->submit($request, new Model\BlogCategory);
+    }
+
+    // Generated method
+    public function listBlogIssues(Parameters $parameters = new Parameters()): Page
+    {
+        $request = new Request("GET", "/v30/blogs/issues", $parameters);
+        $request->allowParameters([
+            Query::page,
+            Query::page_size,
+            Query::order,
+        ]);
+        return $this->submit($request, new Model\BlogIssuePagination);
+    }
+
+    // Generated method
+    public function retrieveBlogIssue(Parameters $parameters): Model\BlogIssue
+    {
+        $request = new Request("GET", "/v30/blogs/issues/{obj_id}", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+        ]);
+        return $this->submit($request, new Model\BlogIssue);
+    }
+
+
+    /*
         -------------------- Products --------------------
     */
 
