@@ -53,6 +53,7 @@ trait RequestingMethodsTrait
         -------------------- Groups --------------------
     */
 
+    // Generated method
     public function listGroups(Parameters $parameters = new Parameters()): Page
     {
         $request = new Request("GET", "/v30/groups", $parameters);
@@ -68,6 +69,17 @@ trait RequestingMethodsTrait
         return $this->submit($request, new Model\GroupPagination);
     }
 
+    // Generated method
+    public function retrieveGroup(Parameters $parameters): Model\GroupWithMemberships
+    {
+        $request = new Request("GET", "/v30/groups/{obj_id}", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+        ]);
+        return $this->submit($request, new Model\GroupWithMemberships);
+    }
+
+    // Generated method
     public function listGroupMemberships(Parameters $parameters = new Parameters()): Page
     {
         $request = new Request("GET", "/v30/groups/memberships", $parameters);
@@ -79,6 +91,16 @@ trait RequestingMethodsTrait
             Query::order,
         ]);
         return $this->submit($request, new Model\GroupMembershipPagination);
+    }
+
+    // Generated method
+    public function retrieveGroupMembership(Parameters $parameters): Model\GroupMembership
+    {
+        $request = new Request("GET", "/v30/groups/memberships/{obj_id}", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+        ]);
+        return $this->submit($request, new Model\GroupMembership);
     }
 
 
