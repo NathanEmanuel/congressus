@@ -507,6 +507,56 @@ trait RequestingMethodsTrait
 
 
     /*
+        -------------------- Career partners  --------------------
+    */
+
+    // Generated method
+    public function listCareerPartnerCategories(Parameters $parameters = new Parameters()): Page
+    {
+        $request = new Request("GET", "/v30/career/partners/categories", $parameters);
+        $request->allowParameters([
+            Query::page,
+            Query::page_size,
+            Query::order,
+        ]);
+        return $this->submit($request, new Model\CareerPartnerCategoryPagination);
+    }
+
+    // Generated method
+    public function retrieveCareerPartnerCategory(Parameters $parameters): Model\CareerPartnerCategory
+    {
+        $request = new Request("GET", "/v30/career/partners/categories/{obj_id}", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+        ]);
+        return $this->submit($request, new Model\CareerPartnerCategory);
+    }
+
+    // Generated method
+    public function listCareerPartners(Parameters $parameters = new Parameters()): Page
+    {
+        $request = new Request("GET", "/v30/career/partners", $parameters);
+        $request->allowParameters([
+            Query::career_partner_category_id,
+            Query::page,
+            Query::page_size,
+            Query::order,
+        ]);
+        return $this->submit($request, new Model\CareerPartnerPagination);
+    }
+
+    // Generated method
+    public function retrieveCareerPartner(Parameters $parameters): Model\CareerPartner
+    {
+        $request = new Request("GET", "/v30/career/partners/{obj_id}", $parameters);
+        $request->allowParameters([
+            Path::obj_id,
+        ]);
+        return $this->submit($request, new Model\CareerPartner);
+    }
+
+
+    /*
         -------------------- Products --------------------
     */
 
