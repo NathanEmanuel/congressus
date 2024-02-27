@@ -1,7 +1,5 @@
 <?php
 
-use Compucie\Congressus\Request\ParameterType\Path;
-
 require_once("../../vendor/autoload.php");
 
 define("TARGET_DIR", "target");
@@ -9,6 +7,8 @@ define("TARGET", str_replace("\\", "/", dirname(__FILE__))  . "/" . TARGET_DIR .
 define(
     "HEADER",
     "<?php
+
+namespace Compucie\Congressus;
 
 use Compucie\Congressus\Model;
 use Compucie\Congressus\Page;
