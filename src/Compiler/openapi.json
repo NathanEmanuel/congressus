@@ -208,7 +208,7 @@
             }
           }
         },
-        "summary": "List Background processs",
+        "summary": "List Background processes",
         "description": "",
         "x-codeSamples": [
           {
@@ -373,7 +373,7 @@
             }
           }
         },
-        "summary": "Retrieve BackgroundProcess",
+        "summary": "Retrieve BackgroundProcess result",
         "description": "",
         "tags": [
           "Background processes"
@@ -6495,7 +6495,7 @@
         "parameters": [
           {
             "in": "query",
-            "name": "socie_app",
+            "name": "published",
             "description": "Filter on `filter_id`, `published`",
             "schema": {
               "type": "string",
@@ -9666,7 +9666,7 @@
             }
           }
         },
-        "summary": "List LogEntries",
+        "summary": "List Member LogEntries",
         "description": "List log entries. Log entries can be of type `note`, `task`, `action` or `change`.",
         "x-codeSamples": [
           {
@@ -9837,7 +9837,7 @@
             }
           }
         },
-        "summary": "Retrieve LogEntry",
+        "summary": "Retrieve Member LogEntry",
         "description": "",
         "tags": [
           "Members"
@@ -14221,7 +14221,7 @@
             }
           }
         },
-        "summary": "List LogEntries",
+        "summary": "List SaleInvoice LogEntries",
         "description": "List log entries. Log entries can be of type `note`, `task`, `action` or `change`.",
         "x-codeSamples": [
           {
@@ -14392,7 +14392,7 @@
             }
           }
         },
-        "summary": "Retrieve LogEntry",
+        "summary": "Retrieve SaleInvoice LogEntry",
         "description": "",
         "tags": [
           "Sale invoices"
@@ -17504,7 +17504,7 @@
             }
           }
         },
-        "summary": "List Webpages",
+        "summary": "List Website Webpages",
         "description": "Retrieve the complete tree of Webpages on this Website.",
         "x-codeSamples": [
           {
