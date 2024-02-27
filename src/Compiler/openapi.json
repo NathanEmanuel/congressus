@@ -202,7 +202,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Background processPagination"
+                  "$ref": "#/components/schemas/BackgroundProcessPagination"
                 }
               }
             }
@@ -558,7 +558,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/bank mutationPagination"
+                  "$ref": "#/components/schemas/BankMutationPagination"
                 }
               }
             }
@@ -2529,7 +2529,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Blog categoryPagination"
+                  "$ref": "#/components/schemas/BlogCategoryPagination"
                 }
               }
             }
@@ -3361,7 +3361,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Career partner categoryPagination"
+                  "$ref": "#/components/schemas/CareerPartnerCategoryPagination"
                 }
               }
             }
@@ -3790,7 +3790,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Career partnerPagination"
+                  "$ref": "#/components/schemas/CareerPartnerPagination"
                 }
               }
             }
@@ -4913,7 +4913,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Event categoryPagination"
+                  "$ref": "#/components/schemas/EventCategoryPagination"
                 }
               }
             }
@@ -5610,7 +5610,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Event participationPagination"
+                  "$ref": "#/components/schemas/EventParticipationPagination"
                 }
               }
             }
@@ -6136,7 +6136,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Ticket typePagination"
+                  "$ref": "#/components/schemas/TicketTypePagination"
                 }
               }
             }
@@ -6593,7 +6593,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Gallery albumPagination"
+                  "$ref": "#/components/schemas/GalleryAlbumPagination"
                 }
               }
             }
@@ -6789,7 +6789,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Gallery photoPagination"
+                  "$ref": "#/components/schemas/GalleryPhotoPagination"
                 }
               }
             }
@@ -7139,7 +7139,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Group folderPagination"
+                  "$ref": "#/components/schemas/GroupFolderPagination"
                 }
               }
             }
@@ -7689,7 +7689,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Group folderPagination"
+                  "$ref": "#/components/schemas/GroupFolderPagination"
                 }
               }
             }
@@ -8530,7 +8530,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Group membershipPagination"
+                  "$ref": "#/components/schemas/GroupMembershipPagination"
                 }
               }
             }
@@ -10631,7 +10631,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Membership statusPagination"
+                  "$ref": "#/components/schemas/MembershipStatusPagination"
                 }
               }
             }
@@ -11773,7 +11773,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Organisation categoryPagination"
+                  "$ref": "#/components/schemas/OrganisationCategoryPagination"
                 }
               }
             }
@@ -12688,7 +12688,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Organisation membershipPagination"
+                  "$ref": "#/components/schemas/OrganisationMembershipPagination"
                 }
               }
             }
@@ -13308,7 +13308,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Product folderPagination"
+                  "$ref": "#/components/schemas/ProductFolderPagination"
                 }
               }
             }
@@ -15658,7 +15658,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/sale invoice itemPagination"
+                  "$ref": "#/components/schemas/SaleInvoiceItemPagination"
                 }
               }
             }
@@ -15860,7 +15860,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/sale invoice workflowPagination"
+                  "$ref": "#/components/schemas/SaleInvoiceWorkflowPagination"
                 }
               }
             }
