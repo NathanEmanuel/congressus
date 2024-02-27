@@ -6481,15 +6481,6 @@
         }
       ]
     },
-    "/v30/external-invoices/imports": {
-      "post": {
-        "summary": "Add a new external invoice import",
-        "description": "**Note:** this endpoint is part of the external invoices module and is only available if the module is enabled.\n\nTo import external invoices, you need to send a `multipart/form-data` POST request to this endpoint. The following\nfields are required:\n\n- `file`: The file to import;\n- `source`: The source of the file (e.g. \"creo\"), this value can be defined by the client but should be consistent;\n- `format`: The format of the file (e.g. \"eExact\"), this value is used to validate and parse the file.\n\n### Example\n\nBelow is a raw HTTP request that can be used to import an external invoice file:\n\n```http\nPOST http://api.congressus.nl/v30/external-invoices/imports\nAuthorization: Bearer [your bearer token]\nContent-Type: multipart/form-data; boundary=WebAppBoundary\n\n--WebAppBoundary\nContent-Disposition: form-data; name=\"source\"\nContent-Type: text/plain\n\ncreo\n--WebAppBoundary\nContent-Disposition: form-data; name=\"format\"\nContent-Type: text/plain\n\neExact\n--WebAppBoundary\nContent-Disposition: form-data; name=\"file\"; filename=\"export_01-02-2023.xml\"\n\n< /path/to/export_01-02-2023.xml\n--WebAppBoundary--\n```\n\nYou can perform the same request using `curl`:\n\n```bash\ncurl -X POST --location \"http://api.congressus.nl/v30/external-invoices/imports\" \\\n    -H \"Authorization: Bearer [your bearer token]\" \\\n    -H \"Content-Type: multipart/form-data; boundary=WebAppBoundary\" \\\n    -F \"source=creo;type=text/plain\" \\\n    -F \"format=eExact;type=text/plain\" \\\n    -F \"file=@/path/to/export_01-02-2023.xml;filename=export_01-02-2023.xml;type=*/*\"\n```",
-        "tags": [
-          "External invoices"
-        ]
-      }
-    },
     "/v30/galleries/albums": {
       "get": {
         "parameters": [
@@ -9487,47 +9478,6 @@
         {
           "in": "path",
           "name": "obj_id",
-          "required": true,
-          "schema": {
-            "type": "integer",
-            "minimum": 0
-          }
-        }
-      ]
-    },
-    "/v30/members/{member_id}/app/profile-form": {
-      "get": {
-        "tags": [
-          "Members"
-        ]
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "member_id",
-          "required": true,
-          "schema": {
-            "type": "integer",
-            "minimum": 0
-          }
-        }
-      ]
-    },
-    "/v30/members/{member_id}/app/profile": {
-      "get": {
-        "tags": [
-          "Members"
-        ]
-      },
-      "post": {
-        "tags": [
-          "Members"
-        ]
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "member_id",
           "required": true,
           "schema": {
             "type": "integer",
@@ -17753,7 +17703,7 @@
           }
         }
       },
-      "Background processPagination": {
+      "BackgroundProcessPagination": {
         "type": "object",
         "properties": {
           "total": {
@@ -17998,7 +17948,7 @@
           }
         }
       },
-      "bank mutationPagination": {
+      "BankMutationPagination": {
         "type": "object",
         "properties": {
           "total": {
@@ -18449,7 +18399,7 @@
           "name"
         ]
       },
-      "Blog categoryPagination": {
+      "BlogCategoryPagination": {
         "type": "object",
         "properties": {
           "total": {
@@ -18571,7 +18521,7 @@
           "name"
         ]
       },
-      "Career partner categoryPagination": {
+      "CareerPartnerCategoryPagination": {
         "type": "object",
         "properties": {
           "total": {
@@ -19046,7 +18996,7 @@
           "slug"
         ]
       },
-      "Career partnerPagination": {
+      "CareerPartnerPagination": {
         "type": "object",
         "properties": {
           "total": {
@@ -19282,7 +19232,7 @@
           "name"
         ]
       },
-      "Event categoryPagination": {
+      "EventCategoryPagination": {
         "type": "object",
         "properties": {
           "total": {
@@ -19904,7 +19854,7 @@
           "event_id"
         ]
       },
-      "Event participationPagination": {
+      "EventParticipationPagination": {
         "type": "object",
         "properties": {
           "total": {
@@ -20648,7 +20598,7 @@
           "tickets"
         ]
       },
-      "Ticket typePagination": {
+      "TicketTypePagination": {
         "type": "object",
         "properties": {
           "total": {
@@ -20713,7 +20663,7 @@
           }
         }
       },
-      "Gallery albumPagination": {
+      "GalleryAlbumPagination": {
         "type": "object",
         "properties": {
           "total": {
@@ -20767,7 +20717,7 @@
           }
         }
       },
-      "Gallery photoPagination": {
+      "GalleryPhotoPagination": {
         "type": "object",
         "properties": {
           "total": {
@@ -20922,7 +20872,7 @@
           "slug"
         ]
       },
-      "Group folderPagination": {
+      "GroupFolderPagination": {
         "type": "object",
         "properties": {
           "total": {
@@ -21285,7 +21235,7 @@
           "start"
         ]
       },
-      "Group membershipPagination": {
+      "GroupMembershipPagination": {
         "type": "object",
         "properties": {
           "total": {
@@ -23063,7 +23013,7 @@
           "id"
         ]
       },
-      "Membership statusPagination": {
+      "MembershipStatusPagination": {
         "type": "object",
         "properties": {
           "total": {
@@ -23442,7 +23392,7 @@
           "name"
         ]
       },
-      "Organisation categoryPagination": {
+      "OrganisationCategoryPagination": {
         "type": "object",
         "properties": {
           "total": {
@@ -23659,7 +23609,7 @@
           "start"
         ]
       },
-      "Organisation membershipPagination": {
+      "OrganisationMembershipPagination": {
         "type": "object",
         "properties": {
           "total": {
@@ -23886,7 +23836,7 @@
           "slug"
         ]
       },
-      "Product folderPagination": {
+      "ProductFolderPagination": {
         "type": "object",
         "properties": {
           "total": {
@@ -24069,7 +24019,7 @@
         "type": "object",
         "properties": {}
       },
-      "sale invoice itemPagination": {
+      "SaleInvoiceItemPagination": {
         "type": "object",
         "properties": {
           "total": {
@@ -24293,7 +24243,7 @@
           "id"
         ]
       },
-      "sale invoice workflowPagination": {
+      "SaleInvoiceWorkflowPagination": {
         "type": "object",
         "properties": {
           "total": {
