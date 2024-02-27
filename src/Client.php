@@ -3,10 +3,7 @@
 namespace Compucie\Congressus;
 
 use Compucie\Congressus\RawClient;
-use Compucie\Congressus\Model\Member;
-use Compucie\Congressus\Request\Parameters;
-use Compucie\Congressus\Request\ParameterType\Path;
-use Compucie\Congressus\Request\ParameterType\Query;
+use Compucie\Congressus\Model;
 use GuzzleHttp\Client as GuzzleHttpClient;
 
 class Client extends RawClient
@@ -22,21 +19,12 @@ class Client extends RawClient
 
     // Members
 
-    public function retrieveMemberById(int|string $id): ?Member
+    public function retrieveMemberByUsername(string $username): ?Model\MemberWithCustomFields
     {
-        $parameters = new Parameters();
-        $parameters->add(Path::obj_id, $id);
-        return $this->retrieveMember($parameters);
-    }
-
-    public function retrieveMemberByUsername(string $username): ?Member
-    {
-        $parameters = new Parameters();
-        $parameters->add(Query::term, $username);
-        $member_page = $this->searchMembers($parameters);
-        foreach ($member_page as $member) {
+        $page = $this->searchMembers(term: $username);
+        foreach ($page->getData() as $member) {
             if ($member->username === $username) {
-                return $this->retrieveMemberById($member->id);
+                return $this->retrieveMember(obj_id: $member->id);
             }
         }
         return null;
@@ -47,14 +35,13 @@ class Client extends RawClient
 
     public function listUpcomingEvents(int|string $max): array
     {
-        $parameters = new Parameters();
-        $parameters->add(Query::page_size, min($max, 100));
-        $parameters->add(Query::published, true);
-        $parameters->add(Query::period_filter, [time(), null]);
-        $parameters->add(Query::order, "start:asc");
-
         // request (first) page
-        $page = $this->listEvents($parameters);
+        $page = $this->listEvents(
+            page_size: min($max, 100),
+            published: true,
+            period_start: time(),
+            order: "start:asc",
+        );
         $data = $page->getData();
 
         // request subsequent pages if $max > 100
@@ -63,15 +50,5 @@ class Client extends RawClient
         $data = $this->nextPagesAsData($page, intdiv($max, 100), $data);
 
         return array_slice($data, 0, $max);
-    }
-
-
-    // Products
-
-    public function listProductsInFolder(int|string|array $folder_id): Page
-    {
-        $parameters = new Parameters();
-        $parameters->add(Query::folder_id, $folder_id);
-        return $this->listProducts($parameters);
     }
 }

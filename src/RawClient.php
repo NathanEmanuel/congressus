@@ -3,7 +3,7 @@
 namespace Compucie\Congressus;
 
 use Compucie\Congressus\Exception\NoNextPageException;
-use Compucie\Congressus\Request\Request;
+use Compucie\Congressus\Request;
 use GuzzleHttp\Client as GuzzleHttpClient;
 
 class RawClient extends GuzzleHttpClient
@@ -52,8 +52,8 @@ class RawClient extends GuzzleHttpClient
     {
         if ($page->hasNext()) {
             $parameters = $page->getParameters();
-            $parameters->page($page->getNextPage());
-            return call_user_func(array($this, $page->getCaller()), $parameters);
+            $parameters["page"] = $page->getNextPage();
+            return call_user_func(array($this, $page->getCaller()), ...$parameters);
         } else {
             throw new NoNextPageException();
         }

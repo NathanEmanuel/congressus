@@ -3,14 +3,13 @@
 namespace Compucie\Congressus;
 
 use Compucie\Congressus\Model\PaginationMetadata;
-use Compucie\Congressus\Request\Parameters;
 
 class Page extends PaginationMetadata
 {
     public function __construct(
         private mixed $pagination,
         private string $caller,
-        private Parameters $parameters,
+        private array $parameters,
     ) {
         parent::__construct(array(
             "total" => $pagination->getTotal(),
@@ -35,7 +34,7 @@ class Page extends PaginationMetadata
     /**
      * Return the parameters that yielded this page.
      */
-    public function getParameters(): Parameters
+    public function getParameters(): array
     {
         return $this->parameters;
     }
