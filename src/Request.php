@@ -6,14 +6,17 @@ use GuzzleHttp\Psr7\Request as Psr7Request;
 
 class Request extends Psr7Request
 {
-    private array $options = array();
+    private array $options = array(); // query, json
 
     public function __construct(private string $method, private string $path, private array $parameters)
     {
-        $this->applyParameters($parameters);
+        // wait with calling the parent's constructor until the parameters are set
+    }
 
-        // the parent constructor can only be called now the path parameters are handled
-        // because the parent's method and uri fields are read-only
+    public function finalize(): void
+    {
+        // the parent constructor can only be called now the parameters are handled
+        // because the parent's fields are read-only apart from the headers field
         parent::__construct($this->getMethod(), $this->getPath());
     }
 
@@ -27,13 +30,14 @@ class Request extends Psr7Request
         $this->options = $options;
     }
 
-    private function applyParameters(array $parameters): void
+    private function setOption(string $key, mixed $value): void
     {
-        $remaining_parameters = $this->applyPathParameters($parameters);
-        $this->setQueryParameters($remaining_parameters);
+        $options = $this->getOptions();
+        $options[$key] = $value;
+        $this->setOptions($options);
     }
 
-    private function applyPathParameters(array $parameters): array
+    public function setPathParameters(...$parameters): void
     {
         $path = $this->getPath();
 
@@ -48,14 +52,16 @@ class Request extends Psr7Request
         }
 
         $this->setPath($path);
-        return $parameters;
     }
 
-    private function setQueryParameters(array $parameters): void
+    public function setQueryParameters(...$parameters): void
     {
-        $options = $this->getOptions();
-        $options["query"] = $parameters;
-        $this->setOptions($options);
+        $this->setOption("query", $parameters[0]);
+    }
+
+    public function setBody(...$body): void
+    {
+        $this->setOption("json", $body);
     }
 
     public function getMethod(): string

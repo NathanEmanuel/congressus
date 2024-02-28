@@ -27,6 +27,7 @@ class RawClient extends GuzzleHttpClient
     private function submit(Request $request, mixed $response_type = null): mixed
     {
         // do request
+        $request->finalize();
         $response = $this->send($request, $request->getOptions());
         $body = json_decode($response->getBody(), associative: true);
 

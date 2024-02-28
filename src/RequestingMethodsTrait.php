@@ -5,6 +5,7 @@ namespace Compucie\Congressus;
 use Compucie\Congressus\Model;
 use Compucie\Congressus\Page;
 use Compucie\Congressus\Request;
+use stdClass;
 
 trait RequestingMethodsTrait
 {
@@ -340,6 +341,7 @@ trait RequestingMethodsTrait
         $parameters["period_filter"] = $set_period_filter($parameters["period_start"], $parameters["period_end"]);
 
         $request = new Request("GET", "/v30/events", $parameters);
+        $request->setQueryParameters($parameters);
         return $this->submit($request, new Model\EventPagination);
     }
 
@@ -1120,5 +1122,14 @@ trait RequestingMethodsTrait
         $parameters = get_defined_vars();
         $request = new Request("GET", "/v30/websites/{obj_id}/webpages", $parameters);
         return $this->submit($request, new Model\WebpagePagination);
+    }
+
+    public function createMemberLogEntry(int $member_id, string $type, ?string $text): void
+    {
+        $args = get_defined_vars();
+        $request = new Request("POST", "/v30/members/{member_id}/logs", $args);
+        $request->setPathParameters(member_id: $member_id);
+        $request->setBody(type: $type, text: $text);
+        $this->submit($request);
     }
 }
