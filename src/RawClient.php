@@ -30,7 +30,12 @@ class RawClient extends GuzzleHttpClient
         $response = $this->send($request, $request->getOptions());
         $body = json_decode($response->getBody(), associative: true);
 
-        // deserialize request
+        // ignore response
+        if (is_null($response_type)) {
+            return null;
+        }
+
+        // deserialize response
         $isPaginated = str_contains(get_class($response_type), "Pagination");
         if ($isPaginated) {
             $pagination = new $response_type($body);
