@@ -8,7 +8,8 @@ use GuzzleHttp\Client as GuzzleHttpClient;
 
 class RawClient extends GuzzleHttpClient
 {
-    use RequestingMethodsTrait;
+    use CustomRequestingMethodsTrait;
+    use GeneratedRequestingMethodsTrait;
 
     public function __construct(string $token)
     {
@@ -43,7 +44,7 @@ class RawClient extends GuzzleHttpClient
             $get_calling_method = function () {
                 return debug_backtrace()[2]["function"];
             };
-            return new Page($pagination, $get_calling_method(), $request->getParameters());
+            return new Page($pagination, $get_calling_method(), $request->getArgs());
         }
         return new $response_type($body);
     }

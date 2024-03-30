@@ -23,8 +23,8 @@ class Client extends RawClient
     {
         $page = $this->searchMembers(term: $username);
         foreach ($page->getData() as $member) {
-            if ($member->username === $username) {
-                return $this->retrieveMember(obj_id: $member->id);
+            if ($member["username"] === $username) {
+                return $this->retrieveMember(obj_id: $member["id"]);
             }
         }
         return null;

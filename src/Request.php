@@ -8,7 +8,7 @@ class Request extends Psr7Request
 {
     private array $options = array(); // query, json
 
-    public function __construct(private string $method, private string $path, private array $parameters)
+    public function __construct(private string $method, private string $path, private array $args)
     {
         // wait with calling the parent's constructor until the parameters are set
     }
@@ -37,31 +37,49 @@ class Request extends Psr7Request
         $this->setOptions($options);
     }
 
-    public function setPathParameters(...$parameters): void
+    public function enablePathParameters(...$parameters): void
     {
         $path = $this->getPath();
+        $args = $this->getArgs();
 
-        preg_match_all("/\{[a-z_]*\}/", $path, $matches);
-        foreach ($matches[0] as $match) {
-            foreach ($parameters as $key => $value) {
-                if (str_contains($match, $key)) {
-                    $path = str_replace($match, $value, $path);
-                    unset($parameters[$key]);
-                }
+        foreach ($parameters as $param) {
+            if (array_key_exists($param, $args)) {
+                $search = "{" . $param . "}";
+                $path = str_replace($search, $args[$param], $path);
             }
         }
 
         $this->setPath($path);
     }
 
-    public function setQueryParameters(...$parameters): void
+    public function enableQueryParameters(...$parameters): void
     {
-        $this->setOption("query", $parameters[0]);
+        $query = array();
+
+        foreach ($parameters as $param) {
+            try {
+                $query[$param] = $this->getArg($param);
+            } catch (\TypeError) {
+                continue;
+            }
+        }
+
+        $this->setOption("query", $query);
     }
 
-    public function setBody(...$body): void
+    public function enableBodyFields(...$body): void
     {
-        $this->setOption("json", $body);
+        $json = array();
+
+        foreach ($body as $param) {
+            try {
+                $json[$param] = $this->getArg($param);
+            } catch (\TypeError) {
+                continue;
+            }
+        }
+
+        $this->setOption("json", $json);
     }
 
     public function getMethod(): string
@@ -79,8 +97,13 @@ class Request extends Psr7Request
         $this->path = $path;
     }
 
-    public function getParameters(): array
+    public function getArgs(): array
     {
-        return $this->parameters;
+        return $this->args;
+    }
+
+    private function getArg(string $key): string
+    {
+        return $this->getArgs()[$key];
     }
 }
