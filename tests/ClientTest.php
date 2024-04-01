@@ -1,12 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 use Compucie\Congressus\Client;
+use PHPUnit\Framework\TestCase;
 
-require_once '../vendor/autoload.php';
+class ClientTest extends TestCase
+{
+    private Client $client;
 
-$client = new Client(getenv("congressus"));
+    protected function setUp(): void
+    {
+        $this->client = new Client(getenv("congressus"));
+    }
 
-// Events
-
-$events = $client->listUpcomingEvents(269);
-print_r(count($events));
+    public function testRetrieveMemberByUsername()
+    {
+        $member = $this->client->retrieveMemberByUsername("s2191229");
+        $this->assertSame("s2191229", $member->getUsername());
+    }
+}
