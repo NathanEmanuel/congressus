@@ -70,6 +70,7 @@ class RawClient extends GuzzleHttpClient
      * Request subsequent pages.
      * @param   Page    $page   The current page
      * @param   int     $max    The maximum amount of pages to request
+     * @return  Page[]          Array of the subsequent pages
      */
     public function nextPages(Page $page, int $max): array
     {
