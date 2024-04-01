@@ -40,11 +40,10 @@ class RawClient extends GuzzleHttpClient
         // deserialize response
         $isPaginated = str_contains(get_class($response_type), "Pagination");
         if ($isPaginated) {
-            $pagination = new $response_type($body);
             $get_calling_method = function () {
                 return debug_backtrace()[2]["function"];
             };
-            return new Page($pagination, $get_calling_method(), $request->getArgs());
+            return new Page($body, $get_calling_method(), $request->getArgs());
         }
         return new $response_type($body);
     }
@@ -59,7 +58,7 @@ class RawClient extends GuzzleHttpClient
     {
         if ($page->hasNext()) {
             $parameters = $page->getParameters();
-            $parameters["page"] = $page->getNextPage();
+            $parameters["page"] = $page->getNextPageNumber();
             return call_user_func(array($this, $page->getCaller()), ...$parameters);
         } else {
             throw new NoNextPageException();
