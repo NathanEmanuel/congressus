@@ -4,6 +4,7 @@ namespace Compucie\Congressus;
 
 use Compucie\Congressus\RawClient;
 use Compucie\Congressus\Model;
+use Compucie\Congressus\Exception\UserNotFoundException;
 use GuzzleHttp\Client as GuzzleHttpClient;
 
 class Client extends RawClient
@@ -22,11 +23,12 @@ class Client extends RawClient
      ***************************************************************/
 
     /**
-     * Retrieve the user by its username. This function performs a search
-     * based on the given username and checks the returned users for the correct username.
-     * If no user with the correct user is found, null is returned.
-     * @param   string $username                    The username to search for.
-     * @return  Model\MemberWithCustomFields|null   The user with the given username or null.
+     * Retrieve the user by its username. This function performs a search based on
+     * the given username and checks the returned users for the correct username.
+     * Throw a UserNotFoundException when no user with the correct username is found.
+     * @param   string $username                The username to search for.
+     * @return  Model\MemberWithCustomFields    The user with the given username.
+     * @throws  UserNotFoundException
      */
     public function retrieveMemberByUsername(string $username): ?Model\MemberWithCustomFields
     {
@@ -36,7 +38,7 @@ class Client extends RawClient
                 return $this->retrieveMember(obj_id: $member["id"]);
             }
         }
-        return null;
+        throw new UserNotFoundException();
     }
 
 
