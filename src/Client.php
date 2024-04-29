@@ -65,7 +65,7 @@ class Client extends RawClient
         // request subsequent pages if $max > 100
         // for maintainability, all subsequent pages are of size 100
         // this means that it is likely that more data is requested than necessary
-        $data = $this->nextPagesAsData($page, intdiv($max, 100), $data);
+        $this->addDataFromNextPages($data, $page, intdiv($max, 100));
 
         return array_slice($data, 0, $max);
     }

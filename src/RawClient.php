@@ -86,18 +86,16 @@ class RawClient extends GuzzleHttpClient
     }
 
     /**
-     * Request subsequent pages and return an array containing their data.
-     * @param   Page    $page   The current page
-     * @param   int     $max    The maximum amount of pages to request
-     * @param   array   $array  Array to append the data to
-     * @param   array           The data of the subsequent pages
+     * Request subsequent pages and add their data to the data array.
+     * @param   array   $data   Data array.
+     * @param   Page    $page   The current page.
+     * @param   int     $max    The maximum amount of pages to request.
      */
-    public function nextPagesAsData(Page $page, int $max, array $array = array())
+    public function addDataFromNextPages(array &$data, Page $page, int $max): void
     {
         $pages = $this->nextPages($page, $max);
         foreach ($pages as $page) {
-            $array = array_merge($array, $page->getData());
+            $data = array_merge($data, $page->getData());
         }
-        return $array;
     }
 }
