@@ -17,8 +17,17 @@ class Client extends RawClient
     }
 
 
-    // Members
+    /***************************************************************
+     * MEMBERS
+     ***************************************************************/
 
+    /**
+     * Retrieve the user by its username. This function performs a search
+     * based on the given username and checks the returned users for the correct username.
+     * If no user with the correct user is found, null is returned.
+     * @param   string $username                    The username to search for.
+     * @return  Model\MemberWithCustomFields|null   The user with the given username or null.
+     */
     public function retrieveMemberByUsername(string $username): ?Model\MemberWithCustomFields
     {
         $page = $this->searchMembers(term: $username);
@@ -31,8 +40,15 @@ class Client extends RawClient
     }
 
 
-    // Events
+    /***************************************************************
+     * EVENTS
+     ***************************************************************/
 
+    /**
+     * Return the upcoming events.
+     * @param   int|string    $max  The maximum amount of events to return.
+     * @return  array               An array containting the upcoming events as Event objects.
+     */
     public function listUpcomingEvents(int|string $max): array
     {
         // request (first) page
