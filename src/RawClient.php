@@ -21,32 +21,31 @@ class RawClient extends GuzzleHttpClient
 
     /**
      * Submit request to the Congressus API and return the response as a page or as a data model object.
-     * @param   Request $request    The request to submit
-     * @param   mixed   $response_type       The data type of the response
-     * @return  mixed               The response as a page or data model object
+     * @param   Request $request        The request to submit
+     * @param   mixed   $responseType       The data type of the response
+     * @return  mixed                   The response as a page or data model object
      */
-    private function submit(Request $request, mixed $response_type = null): mixed
+    private function submit(Request $request, mixed $responseType = null): mixed
     {
         // do request
         $request->finalize();
         $response = $this->send($request, $request->getOptions());
-        $body = json_decode($response->getBody(), associative: true);
+        $responseBody = json_decode($response->getBody(), associative: true);
 
         // ignore response
-        if (is_null($response_type)) {
+        if (is_null($responseType)) {
             return null;
         }
 
         // deserialize response
-        $isPaginated = str_contains(get_class($response_type), "Pagination");
+        $isPaginated = str_contains(get_class($responseType), "Pagination");
         if ($isPaginated) {
-            $pagination = new $response_type($body);
             $get_calling_method = function () {
                 return debug_backtrace()[2]["function"];
             };
-            return new Page($pagination, $get_calling_method(), $request->getArgs());
+            return new Page(get_class($responseType), $responseBody, $get_calling_method(), $request->getArgs());
         }
-        return new $response_type($body);
+        return new $responseType($responseBody);
     }
 
     /**
@@ -59,7 +58,7 @@ class RawClient extends GuzzleHttpClient
     {
         if ($page->hasNext()) {
             $parameters = $page->getParameters();
-            $parameters["page"] = $page->getNextPage();
+            $parameters["page"] = $page->getNextPageNumber();
             return call_user_func(array($this, $page->getCaller()), ...$parameters);
         } else {
             throw new NoNextPageException();
@@ -70,6 +69,7 @@ class RawClient extends GuzzleHttpClient
      * Request subsequent pages.
      * @param   Page    $page   The current page
      * @param   int     $max    The maximum amount of pages to request
+     * @return  Page[]          Array of the subsequent pages
      */
     public function nextPages(Page $page, int $max): array
     {
