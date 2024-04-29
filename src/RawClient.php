@@ -43,7 +43,7 @@ class RawClient extends GuzzleHttpClient
             $get_calling_method = function () {
                 return debug_backtrace()[2]["function"];
             };
-            return new Page($responseType, $responseBody, $get_calling_method(), $request->getArgs());
+            return new Page(get_class($responseType), $responseBody, $get_calling_method(), $request->getArgs());
         }
         return new $responseType($responseBody);
     }

@@ -5,14 +5,15 @@ namespace Compucie\Congressus;
 class Page
 {
     private bool $hasPrevious;
-    private int $previousPageNumber;
+    private ?int $previousPageNumber;
     private bool $hasNext;
-    private int $nextPageNumber;
+    private ?int $nextPageNumber;
     private array $data;
     private int $total;
 
     public function __construct(
-        mixed $responseBody,
+        private string $responseType,
+        array $responseBody,
         private string $caller,
         private array $parameters,
     ) {
@@ -53,7 +54,7 @@ class Page
     /**
      * Set the value of previousPageNumber
      */
-    public function setPreviousPageNumber(int $previousPageNumber): self
+    public function setPreviousPageNumber(?int $previousPageNumber): self
     {
         $this->previousPageNumber = $previousPageNumber;
 
@@ -89,7 +90,7 @@ class Page
     /**
      * Set the value of nextPageNumber
      */
-    public function setNextPageNumber(int $nextPageNumber): self
+    public function setNextPageNumber(?int $nextPageNumber): self
     {
         $this->nextPageNumber = $nextPageNumber;
 
@@ -107,11 +108,15 @@ class Page
     /**
      * Set the value of data
      */
-    public function setData(array $data): self
+    public function setData(array $data): void
     {
-        $this->data = $data;
+        $elementType = array_fill(
+            0,
+            count($data),
+            str_replace("Pagination", "", $this->getResponseType())
+        );
 
-        return $this;
+        $this->data = array_map([$this, 'buildObjectArray'], $elementType, $data);
     }
 
     /**
@@ -133,6 +138,14 @@ class Page
     }
 
     /**
+     * Get the value of responseType
+     */
+    public function getResponseType(): string
+    {
+        return $this->responseType;
+    }
+
+    /**
      * Get the value of caller
      */
     public function getCaller(): string
@@ -146,5 +159,10 @@ class Page
     public function getParameters(): array
     {
         return $this->parameters;
+    }
+
+    private static function buildObjectArray($type, $element): mixed
+    {
+        return new $type($element);
     }
 }
