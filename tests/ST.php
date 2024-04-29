@@ -9,5 +9,7 @@ $events = $client->listUpcomingEvents(100);
 
 foreach ($events as $event) {
     echo $event->getName();
+    echo " ";
+    echo $event->getStart();
     echo "\n";
 }
