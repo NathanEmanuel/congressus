@@ -21,31 +21,31 @@ class RawClient extends GuzzleHttpClient
 
     /**
      * Submit request to the Congressus API and return the response as a page or as a data model object.
-     * @param   Request $request    The request to submit
-     * @param   mixed   $response_type       The data type of the response
-     * @return  mixed               The response as a page or data model object
+     * @param   Request $request        The request to submit
+     * @param   mixed   $responseType       The data type of the response
+     * @return  mixed                   The response as a page or data model object
      */
-    private function submit(Request $request, mixed $response_type = null): mixed
+    private function submit(Request $request, mixed $responseType = null): mixed
     {
         // do request
         $request->finalize();
         $response = $this->send($request, $request->getOptions());
-        $body = json_decode($response->getBody(), associative: true);
+        $responseBody = json_decode($response->getBody(), associative: true);
 
         // ignore response
-        if (is_null($response_type)) {
+        if (is_null($responseType)) {
             return null;
         }
 
         // deserialize response
-        $isPaginated = str_contains(get_class($response_type), "Pagination");
+        $isPaginated = str_contains(get_class($responseType), "Pagination");
         if ($isPaginated) {
             $get_calling_method = function () {
                 return debug_backtrace()[2]["function"];
             };
-            return new Page($body, $get_calling_method(), $request->getArgs());
+            return new Page($responseType, $responseBody, $get_calling_method(), $request->getArgs());
         }
-        return new $response_type($body);
+        return new $responseType($responseBody);
     }
 
     /**
