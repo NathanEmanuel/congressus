@@ -196,4 +196,13 @@ trait CustomRequestingMethodsTrait
         $request->enableBodyFields("fine_percentage");
         $this->submit($request);
     }
+
+    public function declineParticipation(int $event_id, int $obj_id, int $fine_percentage = 0)
+    {
+        $args = get_defined_vars(); // MUST be the first line in the method
+        $request = new Request("POST", "/v30/events/{event_id}/participations/{obj_id}/decline", $args);
+        $request->enablePathParameters("obj_id", "event_id");
+        $request->enableBodyFields("fine_percentage");
+        $this->submit($request);
+    }
 }
