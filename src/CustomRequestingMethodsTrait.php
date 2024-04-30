@@ -161,15 +161,6 @@ trait CustomRequestingMethodsTrait
         $this->submit($request);
     }
 
-    public function updateTicketType(int $obj_id, int $event_id, string $availability_status = null, string $available_from = null, string $available_to = null, string $cancel_to = null, string $confirmation_email_text = null, bool $confirmation_email_text_enabled = null, string $description = null, int $filter_id = null, int $id = null, string $modified = null, string $name, int $num_tickets = null, object $num_tickets_available = null, int $num_tickets_max = null, string $num_tickets_max_per = null, int $num_tickets_sold = null, float $price = null, bool $pricing_enabled = null, object $vat_category = null, int $vat_category_id, string $visibility_level = null, bool $waiting_list_enabled = null, float $participation_certificate_credits = null): void
-    {
-        $args = get_defined_vars(); // MUST be the first line in the method
-        $request = new Request("PUT", "/v30/events/{event_id}/ticket-types/{obj_id}", $args);
-        $request->enablePathParameters("obj_id", "event_id");
-        $request->enableBodyFields("availability_status", "available_from", "available_to", "cancel_to", "confirmation_email_text", "confirmation_email_text_enabled", "description", "event_id", "filter_id", "id", "modified", "name", "num_tickets", "num_tickets_available", "num_tickets_max", "num_tickets_max_per", "num_tickets_sold", "price", "pricing_enabled", "vat_category", "vat_category_id", "visibility_level", "waiting_list_enabled", "participation_certificate_credits");
-        $this->submit($request);
-    }
-
     public function approveParticipation(int $event_id, int $obj_id, bool $check_conditions = true)
     {
         $args = get_defined_vars(); // MUST be the first line in the method
@@ -203,6 +194,15 @@ trait CustomRequestingMethodsTrait
         $request = new Request("POST", "/v30/events/{event_id}/participations/{obj_id}/decline", $args);
         $request->enablePathParameters("obj_id", "event_id");
         $request->enableBodyFields("fine_percentage");
+        $this->submit($request);
+    }
+
+    public function updateTicketType(int $obj_id, int $event_id, string $availability_status = null, string $available_from = null, string $available_to = null, string $cancel_to = null, string $confirmation_email_text = null, bool $confirmation_email_text_enabled = null, string $description = null, int $filter_id = null, int $id = null, string $modified = null, string $name, int $num_tickets = null, object $num_tickets_available = null, int $num_tickets_max = null, string $num_tickets_max_per = null, int $num_tickets_sold = null, float $price = null, bool $pricing_enabled = null, object $vat_category = null, int $vat_category_id, string $visibility_level = null, bool $waiting_list_enabled = null, float $participation_certificate_credits = null): void
+    {
+        $args = get_defined_vars(); // MUST be the first line in the method
+        $request = new Request("PUT", "/v30/events/{event_id}/ticket-types/{obj_id}", $args);
+        $request->enablePathParameters("obj_id", "event_id");
+        $request->enableBodyFields("availability_status", "available_from", "available_to", "cancel_to", "confirmation_email_text", "confirmation_email_text_enabled", "description", "event_id", "filter_id", "id", "modified", "name", "num_tickets", "num_tickets_available", "num_tickets_max", "num_tickets_max_per", "num_tickets_sold", "price", "pricing_enabled", "vat_category", "vat_category_id", "visibility_level", "waiting_list_enabled", "participation_certificate_credits");
         $this->submit($request);
     }
 }
