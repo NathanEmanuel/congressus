@@ -9,6 +9,21 @@ use Compucie\Congressus\Request;
 trait CustomRequestingMethodsTrait
 {
     /**
+     * Submit request to the Congressus API and return the response as a page or as a data model object.
+     * @param   Request $request        The request to submit
+     * @param   mixed   $responseType   The data type of the response
+     * @return  mixed                   The response as a page or data model object
+     */
+    abstract private function submit(): mixed;
+
+    /**
+     * Download a file to the given file system location.
+     * @param   Request $request    The request to submit.
+     * @param   string  $filePath   The location where to save the file.
+     */
+    abstract private function download(Request $request, string $filePath): void;
+
+    /**
      * @param   int $period_start   The start of the filter period in Unix time
      * @param   int $period_end     The end of the filter period in Unix time
      */

@@ -22,7 +22,7 @@ class RawClient extends GuzzleHttpClient
     /**
      * Submit request to the Congressus API and return the response as a page or as a data model object.
      * @param   Request $request        The request to submit
-     * @param   mixed   $responseType       The data type of the response
+     * @param   mixed   $responseType   The data type of the response
      * @return  mixed                   The response as a page or data model object
      */
     private function submit(Request $request, mixed $responseType = null): mixed
@@ -48,7 +48,12 @@ class RawClient extends GuzzleHttpClient
         return new $responseType($responseBody);
     }
 
-    private function download(Request $request, string $filePath)
+    /**
+     * Download a file to the given file system location.
+     * @param   Request $request    The request to submit.
+     * @param   string  $filePath   The location where to save the file.
+     */
+    private function download(Request $request, string $filePath): void
     {
         $resource = \GuzzleHttp\Psr7\Utils::tryFopen($filePath, 'w');
         $stream = \GuzzleHttp\Psr7\Utils::streamFor($resource);
