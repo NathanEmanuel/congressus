@@ -14,7 +14,7 @@ trait CustomRequestingMethodsTrait
      * @param   mixed   $responseType   The data type of the response
      * @return  mixed                   The response as a page or data model object
      */
-    abstract private function submit(): mixed;
+    abstract private function submit(Request $request, mixed $responseType = null): mixed;
 
     /**
      * Download a file to the given file system location.
