@@ -48,6 +48,13 @@ class RawClient extends GuzzleHttpClient
         return new $responseType($responseBody);
     }
 
+    private function download(Request $request, string $filePath)
+    {
+        $resource = \GuzzleHttp\Psr7\Utils::tryFopen($filePath, 'w');
+        $stream = \GuzzleHttp\Psr7\Utils::streamFor($resource);
+        $this->request($request->getMethod(), $request->getPath(), ["sink" => $stream]); // send() does not seem to work
+    }
+
     /**
      * Request next page.
      * @param   Page                $page   The current page

@@ -30,7 +30,7 @@ class Request extends Psr7Request
         $this->options = $options;
     }
 
-    private function setOption(string $key, mixed $value): void
+    public function setOption(string $key, mixed $value): void
     {
         $options = $this->getOptions();
         $options[$key] = $value;
@@ -87,7 +87,7 @@ class Request extends Psr7Request
         return $this->method;
     }
 
-    private function getPath(): string
+    public function getPath(): string
     {
         return $this->path;
     }

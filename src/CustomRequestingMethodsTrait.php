@@ -206,11 +206,15 @@ trait CustomRequestingMethodsTrait
         $this->submit($request);
     }
 
-    public function downloadASaleInvoiceAsPdfFile(int $obj_id)
+    /**
+     * @param   int $obj_id     The ID of the invoice to download.
+     * @param   int $filePath   The file system location where to save the file.
+     */
+    public function downloadASaleInvoiceAsPdfFile(int $obj_id, string $filePath): void
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/sale-invoices/{obj_id}/download", $args);
         $request->enablePathParameters("obj_id");
-        $this->submit($request);
+        $this->download($request, $filePath);
     }
 }
