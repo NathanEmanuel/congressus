@@ -152,12 +152,12 @@ trait CustomRequestingMethodsTrait
         return $this->submit($request, new Model\UpdateTask);
     }
 
-    public function updateEventParticipation(int $obj_id, int $event_id, int $id = null, int $member_id = null, int $sale_invoice_id = null, int $form_entry_id = null, int $rental_reservation_id = null, string $addressee = null, string $email = null, int $num_tickets_sold = null, string $uuid = null, string $status = null, string $access_key = null, string $remarks = null, float $participation_certificates_credits_override = null, string $participation_certificates_date_override = null, object $event = null, object $member = null, array $tickets = null, object $sale_invoice = null, object $rental_reservation = null): void
+    public function updateEventParticipation(int $obj_id, int $event_id, ?string $remarks = null, ?int $participation_certificates_credits_override = null, ?string $participation_certificates_date_override = null): void
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("PUT", "/v30/events/{event_id}/participations/{obj_id}", $args);
         $request->enablePathParameters("obj_id", "event_id");
-        $request->enableBodyFields("id", "event_id", "member_id", "sale_invoice_id", "form_entry_id", "rental_reservation_id", "addressee", "email", "num_tickets_sold", "uuid", "status", "access_key", "remarks", "participation_certificates_credits_override", "participation_certificates_date_override", "event", "member", "tickets", "sale_invoice", "rental_reservation");
+        $request->enableBodyFields("remarks", "participation_certificates_credits_override", "participation_certificates_date_override");
         $this->submit($request);
     }
 
