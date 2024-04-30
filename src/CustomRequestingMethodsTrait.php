@@ -170,6 +170,15 @@ trait CustomRequestingMethodsTrait
         $this->submit($request);
     }
 
+    public function approveParticipation(int $event_id, int $obj_id, bool $check_conditions = true)
+    {
+        $args = get_defined_vars(); // MUST be the first line in the method
+        $request = new Request("POST", "/v30/events/{event_id}/participations/{obj_id}/approve", $args);
+        $request->enablePathParameters("obj_id", "event_id");
+        $request->enableBodyFields("check_conditions");
+        $this->submit($request);
+    }
+
     public function unsubscribeParticipation(int $event_id, int $obj_id, int $fine_percentage = 0)
     {
         $args = get_defined_vars(); // MUST be the first line in the method
