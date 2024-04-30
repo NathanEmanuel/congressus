@@ -169,4 +169,13 @@ trait CustomRequestingMethodsTrait
         $request->enableBodyFields("availability_status", "available_from", "available_to", "cancel_to", "confirmation_email_text", "confirmation_email_text_enabled", "description", "event_id", "filter_id", "id", "modified", "name", "num_tickets", "num_tickets_available", "num_tickets_max", "num_tickets_max_per", "num_tickets_sold", "price", "pricing_enabled", "vat_category", "vat_category_id", "visibility_level", "waiting_list_enabled", "participation_certificate_credits");
         $this->submit($request);
     }
+
+    public function unsubscribeParticipation(int $event_id, int $obj_id, int $fine_percentage = 0)
+    {
+        $args = get_defined_vars(); // MUST be the first line in the method
+        $request = new Request("POST", "/v30/events/{event_id}/participations/{obj_id}/unsubscribe", $args);
+        $request->enablePathParameters("obj_id", "event_id");
+        $request->enableBodyFields("fine_percentage");
+        $this->submit($request);
+    }
 }
