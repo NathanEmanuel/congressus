@@ -102,7 +102,7 @@ class Request extends Psr7Request
         return $this->args;
     }
 
-    private function getArg(string $key): string
+    private function getArg(string $key): string|array
     {
         return $this->getArgs()[$key];
     }

@@ -805,7 +805,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function createEventParticipation(int $obj_id, string $addressee = null, string $email = null, array $tickets, int $member_id = null, string $remarks = null, string $invoice_addressee = null, string $invoice_email = null, string $invoice_invoice_reference = null, object $invoice_address = null): void
+    public function createEventParticipation(int $obj_id, string $addressee = null, string $email = null, array $tickets, int $member_id = null, string $remarks = null, string $invoice_addressee = null, string $invoice_email = null, string $invoice_invoice_reference = null, array $invoice_address = null): void
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("POST", "/v30/events/{obj_id}/sign-up", $args);
