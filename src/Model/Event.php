@@ -1060,7 +1060,7 @@ class Event implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function getStart()
     {
-        return $this->container['start'];
+        return new \DateTime($this->container['start']);
     }
 
     /**
