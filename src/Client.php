@@ -7,6 +7,7 @@ use Compucie\Congressus\Model;
 use Compucie\Congressus\Exception\UserNotFoundException;
 use Compucie\Congressus\Model\Event;
 use Compucie\Congressus\Model\Member;
+use Compucie\Congressus\Model\MemberWithCustomFields;
 use GuzzleHttp\Client as GuzzleHttpClient;
 
 class Client extends RawClient
@@ -77,7 +78,7 @@ class Client extends RawClient
      * @param   Member  $member
      * @param   Event   $event
      */
-    public function isMemberEventParticipant(Member $member, Event $event): bool
+    public function isMemberEventParticipant(Member|MemberWithCustomFields $member, Event $event): bool
     {
         $participations = $this->listEventParticipations(obj_id: $event->getId(), member_id: $member->getId())->getData();
         return count($participations) > 0;
