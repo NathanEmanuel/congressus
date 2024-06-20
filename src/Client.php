@@ -5,6 +5,8 @@ namespace Compucie\Congressus;
 use Compucie\Congressus\RawClient;
 use Compucie\Congressus\Model;
 use Compucie\Congressus\Exception\UserNotFoundException;
+use Compucie\Congressus\Model\Event;
+use Compucie\Congressus\Model\Member;
 use GuzzleHttp\Client as GuzzleHttpClient;
 
 class Client extends RawClient
@@ -68,5 +70,16 @@ class Client extends RawClient
         $this->addDataFromNextPages($data, $page, intdiv($max, 100));
 
         return array_slice($data, 0, $max);
+    }
+
+    /**
+     * Return whether the given member is a participant of the given event.
+     * @param   Member  $member
+     * @param   Event   $event
+     */
+    public function isMemberEventParticipant(Member $member, Event $event): bool
+    {
+        $participations = $this->listEventParticipations(obj_id: $event->getId(), member_id: $member->getId())->getData();
+        return count($participations) > 0;
     }
 }
