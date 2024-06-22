@@ -477,7 +477,10 @@ class BankAccount implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function getSddMandates()
     {
-        return $this->container['sdd_mandates'];
+        foreach ($this->container['sdd_mandates'] as $sdd_mandate) {
+            $sddMandates[] = new SDDMandate($sdd_mandate);
+        }
+        return $sddMandates;
     }
 
     /**
