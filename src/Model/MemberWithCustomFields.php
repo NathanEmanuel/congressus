@@ -31,6 +31,7 @@ namespace Compucie\Congressus\Model;
 
 use \ArrayAccess;
 use \Compucie\Congressus\ObjectSerializer;
+use DateTime;
 
 /**
  * MemberWithCustomFields Class Doc Comment
@@ -721,7 +722,7 @@ class MemberWithCustomFields implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function getStatus()
     {
-        return $this->container['status'];
+        return new MembershipStatus($this->container['status']);
     }
 
     /**
@@ -1363,7 +1364,7 @@ class MemberWithCustomFields implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function getDateOfBirth()
     {
-        return $this->container['date_of_birth'];
+        return new \DateTime($this->container['date_of_birth']);
     }
 
     /**
@@ -1435,7 +1436,7 @@ class MemberWithCustomFields implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function getPhoneMobile()
     {
-        return $this->container['phone_mobile'];
+        return new PhoneNumber($this->container['phone_mobile']);
     }
 
     /**
@@ -1469,7 +1470,7 @@ class MemberWithCustomFields implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function getPhoneHome()
     {
-        return $this->container['phone_home'];
+        return new PhoneNumber($this->container['phone_home']);
     }
 
     /**
@@ -1503,7 +1504,7 @@ class MemberWithCustomFields implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function getAddress()
     {
-        return $this->container['address'];
+        return new Address($this->container['address']);
     }
 
     /**
@@ -1571,7 +1572,7 @@ class MemberWithCustomFields implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function getProfilePicture()
     {
-        return $this->container['profile_picture'];
+        return new StorageObject($this->container['profile_picture']);
     }
 
     /**
@@ -1639,7 +1640,7 @@ class MemberWithCustomFields implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function getFormalPicture()
     {
-        return $this->container['formal_picture'];
+        return new StorageObject($this->container['formal_picture']);
     }
 
     /**
@@ -1923,7 +1924,7 @@ class MemberWithCustomFields implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function getModified()
     {
-        return $this->container['modified'];
+        return new \DateTime($this->container['modified']);
     }
 
     /**
@@ -1991,7 +1992,7 @@ class MemberWithCustomFields implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function getBankAccount()
     {
-        return $this->container['bank_account'];
+        return new BankAccount($this->container['bank_account']);
     }
 
     /**
