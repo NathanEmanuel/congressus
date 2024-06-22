@@ -83,4 +83,26 @@ class Client extends RawClient
         $participations = $this->listEventParticipations(obj_id: $event->getId(), member_id: $member->getId())->getData();
         return count($participations) > 0;
     }
+
+    /***************************************************************
+     * PRODUCTS
+     ***************************************************************/
+
+    /**
+     * @return  ProductFolder[]
+     */
+    public function retrieveProductFoldersBySlug(...$slugs): array
+    {
+        $productFoldersPage = $this->listProductFolders();
+        $productFolders = $productFoldersPage->getData();
+        $this->addDataFromNextPages($productFolders, $productFoldersPage, 100);
+
+        $output = array();
+        foreach ($productFolders as $productFolder) {
+            if (in_array($productFolder->getSlug(), $slugs)) {
+                $output[$productFolder->getSlug()] = $productFolder;
+            }
+        }
+        return $output;
+    }
 }
