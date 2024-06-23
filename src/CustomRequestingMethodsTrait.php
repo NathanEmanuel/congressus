@@ -38,7 +38,7 @@ trait CustomRequestingMethodsTrait
         int $socie_app_id = null,
         int $member_id = null,
         int $page = null,
-        int $page_size = null,
+        int $page_size = 100,
         string $order = null,
     ): Page {
         $args = get_defined_vars(); // this MUST be first
