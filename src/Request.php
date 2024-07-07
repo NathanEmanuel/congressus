@@ -64,7 +64,22 @@ class Request extends Psr7Request
             }
         }
 
-        $this->setOption("query", $query);
+        $this->setOption("query", self::buildQueryString($query));
+    }
+
+    private static function buildQueryString(array $query): string
+    {
+        $queryString = "";
+        foreach ($query as $key => $value) {
+            if (is_array($value)) {
+                foreach ($value as $param) {
+                    $queryString .= "&$key=$param";
+                }
+            } else {
+                $queryString .= "&$key=$value";
+            }
+        }
+        return $queryString;
     }
 
     public function enableBodyFields(...$body): void
