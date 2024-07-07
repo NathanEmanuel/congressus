@@ -12,7 +12,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listBackgroundProcesses(array $state = null, string $created = null, string $modified = null, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listBackgroundProcesses(array $state = null, string $created = null, string $modified = null, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/background-processes", $args);
@@ -51,7 +51,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listBankMutations(string $period_filter = null, string $status = null, string $mutation_type = null, int $bank_import_id = null, int $bank_statement_id = null, int $bank_mutation_id = null, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listBankMutations(string $period_filter = null, string $status = null, string $mutation_type = null, int $bank_import_id = null, int $bank_statement_id = null, int $bank_mutation_id = null, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/bank", $args);
@@ -116,7 +116,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listBlogAuthors(int $page = null, int $page_size = 100, string $order = null): Page
+    public function listBlogAuthors(int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/blogs/authors", $args);
@@ -181,7 +181,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listBlogs(string $period_filter = null, int $author_id = null, int $issue_id = null, int $category_id = null, int $published = null, array $visibility = null, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listBlogs(string $period_filter = null, int $author_id = null, int $issue_id = null, int $category_id = null, int $published = null, array $visibility = null, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/blogs", $args);
@@ -350,7 +350,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listBlogCategories(int $page = null, int $page_size = 100, string $order = null): Page
+    public function listBlogCategories(int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/blogs/categories", $args);
@@ -415,7 +415,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listBlogIssues(int $page = null, int $page_size = 100, string $order = null): Page
+    public function listBlogIssues(int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/blogs/issues", $args);
@@ -480,7 +480,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listCareerPartnerCategories(int $page = null, int $page_size = 100, string $order = null): Page
+    public function listCareerPartnerCategories(int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/career/partners/categories", $args);
@@ -545,7 +545,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listCareerPartners(int $career_partner_category_id = null, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listCareerPartners(int $career_partner_category_id = null, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/career/partners", $args);
@@ -610,7 +610,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listSavedReplies(int $page = null, int $page_size = 100, string $order = null): Page
+    public function listSavedReplies(int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/communication/saved-replies", $args);
@@ -675,7 +675,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listCountries(int $page = null, int $page_size = 100, string $order = null): Page
+    public function listCountries(int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/countries", $args);
@@ -701,7 +701,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listEventCategories(int $page = null, int $page_size = 100, string $order = null): Page
+    public function listEventCategories(int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/event-categories", $args);
@@ -766,7 +766,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listEventParticipations(int $obj_id, int $event_id = null, array $status = null, string $has_invoice = null, array $sale_invoice_status = null, int $member_id = null, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listEventParticipations(int $obj_id, int $event_id = null, array $status = null, string $has_invoice = null, array $sale_invoice_status = null, int $member_id = null, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/events/{obj_id}/participations", $args);
@@ -818,7 +818,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listTicketTypes(int $obj_id, string $is_available_for_members = null, string $is_available_for_external = null, array $availability_status = null, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listTicketTypes(int $obj_id, string $is_available_for_members = null, string $is_available_for_external = null, array $availability_status = null, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/events/{obj_id}/ticket-types", $args);
@@ -870,7 +870,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listGalleryAlbums(string $published = null, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listGalleryAlbums(string $published = null, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/galleries/albums", $args);
@@ -896,7 +896,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listGalleryPhotos(int $album_id, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listGalleryPhotos(int $album_id, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/galleries/albums/{album_id}/photos", $args);
@@ -922,7 +922,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listGroupFoldersRecursive(int $page = null, int $page_size = 100, string $order = null): Page
+    public function listGroupFoldersRecursive(int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/group-folders/recursive", $args);
@@ -935,7 +935,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listGroupFolders(string $published = null, int $parent_id = null, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listGroupFolders(string $published = null, int $parent_id = null, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/group-folders", $args);
@@ -1000,7 +1000,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listGroups(string $published = null, int $folder_id = null, int $member_id = null, int $socie_app_id = null, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listGroups(string $published = null, int $folder_id = null, int $member_id = null, int $socie_app_id = null, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/groups", $args);
@@ -1052,7 +1052,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listGroupMemberships(int $group_id = null, int $member_id = null, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listGroupMemberships(int $group_id = null, int $member_id = null, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/groups/memberships", $args);
@@ -1117,7 +1117,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listTasks(int $author_id = null, int $assignee_id = null, array $subject_type = null, string $is_completed = null, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listTasks(int $author_id = null, int $assignee_id = null, array $subject_type = null, string $is_completed = null, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/tasks", $args);
@@ -1143,7 +1143,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listMemberStatuses(string $archived = null, string $hidden = null, string $deceased = null, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listMemberStatuses(string $archived = null, string $hidden = null, string $deceased = null, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/member-statuses", $args);
@@ -1195,7 +1195,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listMemberLogEntries(int $member_id, int $author_id = null, array $type = null, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listMemberLogEntries(int $member_id, int $author_id = null, array $type = null, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/members/{member_id}/logs", $args);
@@ -1234,7 +1234,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listMembers(int $status_id = null, int $socie_app_id = null, int $page = null, int $page_size = 100, string $order = null, array $context = null): Page
+    public function listMembers(int $status_id = null, int $socie_app_id = null, int $page = null, int $page_size = null, string $order = null, array $context = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/members", $args);
@@ -1299,7 +1299,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listMembershipStatuses(int $obj_id, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listMembershipStatuses(int $obj_id, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/members/{obj_id}/statuses", $args);
@@ -1364,7 +1364,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function searchMembers(string $term, int $page = null, int $page_size = 100, string $order = null): Page
+    public function searchMembers(string $term, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/members/search", $args);
@@ -1377,7 +1377,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listNews(string $period_filter = null, string $actual = null, string $comments_open = null, array $visibility = null, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listNews(string $period_filter = null, string $actual = null, string $comments_open = null, array $visibility = null, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/news", $args);
@@ -1442,7 +1442,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listNotifications(int $page = null, int $page_size = 100, string $order = null): Page
+    public function listNotifications(int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/notifications", $args);
@@ -1455,7 +1455,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listOrganisationCategories(int $page = null, int $page_size = 100, string $order = null): Page
+    public function listOrganisationCategories(int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/organisations/categories", $args);
@@ -1520,7 +1520,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listOrganisations(int $category_id = null, array $sbi_code = null, array $legal_form = null, int $member_id = null, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listOrganisations(int $category_id = null, array $sbi_code = null, array $legal_form = null, int $member_id = null, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/organisations", $args);
@@ -1585,7 +1585,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listOrganisationMemberships(int $organisation_id = null, int $member_id = null, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listOrganisationMemberships(int $organisation_id = null, int $member_id = null, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/organisations/memberships", $args);
@@ -1663,7 +1663,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listProductFoldersRecursive(string $published = null, int $parent_id = null, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listProductFoldersRecursive(string $published = null, int $parent_id = null, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/product-folders/recursive", $args);
@@ -1676,7 +1676,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listProductFolders(string $published = null, int $parent_id = null, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listProductFolders(string $published = null, int $parent_id = null, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/product-folders", $args);
@@ -1741,7 +1741,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listProducts(string $published = null, string $status = null, int $folder_id = null, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listProducts(string $published = null, string $status = null, int $folder_id = null, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/products", $args);
@@ -1806,7 +1806,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listSaleInvoiceLogEntries(int $obj_id, int $author_id = null, array $type = null, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listSaleInvoiceLogEntries(int $obj_id, int $author_id = null, array $type = null, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/sale-invoices/{obj_id}/logs", $args);
@@ -1845,7 +1845,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listSaleInvoices(int $entity_id = null, string $period_filter = null, array $invoice_status = null, array $invoice_num_reminders_send = null, array $invoice_type = null, array $category = null, int $product_offer_id = null, int $member_id = null, int $collection_id = null, string $use_direct_debit = null, string $contribution_start = null, string $contribution_end = null, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listSaleInvoices(int $entity_id = null, string $period_filter = null, array $invoice_status = null, array $invoice_num_reminders_send = null, array $invoice_type = null, array $category = null, int $product_offer_id = null, int $member_id = null, int $collection_id = null, string $use_direct_debit = null, string $contribution_start = null, string $contribution_end = null, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/sale-invoices", $args);
@@ -1962,7 +1962,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listSaleInvoiceItems(int $obj_id, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listSaleInvoiceItems(int $obj_id, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/sale-invoices/{obj_id}/items", $args);
@@ -1988,7 +1988,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listSaleInvoiceWorkflows(int $page = null, int $page_size = 100, string $order = null): Page
+    public function listSaleInvoiceWorkflows(int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/sale-invoices/workflows", $args);
@@ -2001,7 +2001,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listStorageObjects(int $page = null, int $page_size = 100, string $order = null): Page
+    public function listStorageObjects(int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/storage", $args);
@@ -2079,7 +2079,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listWebhooks(int $page = null, int $page_size = 100, string $order = null): Page
+    public function listWebhooks(int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/webhooks", $args);
@@ -2144,7 +2144,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listWebhookCalls(int $obj_id, string $period_filter = null, array $status_code = null, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listWebhookCalls(int $obj_id, string $period_filter = null, array $status_code = null, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/webhooks/{obj_id}/calls", $args);
@@ -2157,7 +2157,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listWebpages(string $published = null, int $website_id = null, int $template_id = null, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listWebpages(string $published = null, int $website_id = null, int $template_id = null, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/webpages", $args);
@@ -2183,7 +2183,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listWebsites(string $published = null, int $template_id = null, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listWebsites(string $published = null, int $template_id = null, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/websites", $args);
@@ -2209,7 +2209,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function listWebsiteWebpages(int $obj_id, string $published = null, int $website_id = null, int $template_id = null, int $page = null, int $page_size = 100, string $order = null): Page
+    public function listWebsiteWebpages(int $obj_id, string $published = null, int $website_id = null, int $template_id = null, int $page = null, int $page_size = null, string $order = null): Page
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("GET", "/v30/websites/{obj_id}/webpages", $args);
