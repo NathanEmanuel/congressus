@@ -31,7 +31,6 @@ namespace Compucie\Congressus\Model;
 
 use \ArrayAccess;
 use \Compucie\Congressus\ObjectSerializer;
-use DateTime;
 
 /**
  * MemberWithCustomFields Class Doc Comment
