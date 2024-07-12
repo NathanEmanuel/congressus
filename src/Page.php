@@ -13,7 +13,7 @@ class Page
 
     public function __construct(
         private string $responseType,
-        array $responseBody,
+        private array $responseBody,
         private string $caller,
         private array $parameters,
     ) {
@@ -24,6 +24,17 @@ class Page
         $this->setData($responseBody["data"]);
         $this->setTotal($responseBody["total"]);
     }
+
+    /**
+     * Deserialize the given data into an object of the given type. Child objects are also deserialized.
+     */
+    private static function deserialize(mixed $data, string $type): mixed
+    {
+        return ObjectSerializer::deserialize($data, get_class(new $type));
+    }
+
+
+    // GETTERS AND SETTERS
 
     /**
      * Get the value of hasPrevious
@@ -110,13 +121,13 @@ class Page
      */
     public function setData(array $data): void
     {
-        $elementType = array_fill(
+        $type = array_fill(
             0,
             count($data),
             str_replace("Pagination", "", $this->getResponseType())
         );
 
-        $this->data = array_map([$this, 'buildObjectArray'], $elementType, $data);
+        $this->data = array_map([$this, 'deserialize'], $data, $type);
     }
 
     /**
@@ -159,10 +170,5 @@ class Page
     public function getParameters(): array
     {
         return $this->parameters;
-    }
-
-    private static function buildObjectArray($type, $element): mixed
-    {
-        return new $type($element);
     }
 }
