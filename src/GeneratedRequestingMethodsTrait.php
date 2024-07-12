@@ -1856,16 +1856,16 @@ trait GeneratedRequestingMethodsTrait
     }
 
     /**
-     * @generated
+     * @modified
      */
-    public function createSaleInvoice(int $id = null, string $uuid = null, int $entity_id = null, object $entity = null, string $invoice_date = null, string $invoice_source, string $invoice_type = null, string $delivery_method = null, string $invoice_send_date_time = null, string $invoice_due_date = null, string $invoice_reminded_date_time = null, int $invoice_num_reminders_send = null, string $invoice_next_due_date = null, string $invoice_status = null, string $invoice_reference = null, string $invoice_number = null, int $member_id = null, int $collection_id = null, string $contribution_start = null, string $contribution_end = null, bool $use_direct_debit = null, int $invoice_workflow_id = null, string $addressee = null, string $addressee_attention = null, string $email = null, object $address = null, array $items, array $payments = null, object $price_inclusive_vat = null, object $price_exclusive_vat = null, object $vat = null, object $price_paid = null, object $price_unpaid = null, object $currency = null, string $created = null, string $modified = null): void
+    public function createSaleInvoice(array $items, int $id = null, string $uuid = null, int $entity_id = null, object $entity = null, string $invoice_date = null, string $invoice_type = null, string $delivery_method = null, string $invoice_send_date_time = null, string $invoice_due_date = null, string $invoice_reminded_date_time = null, int $invoice_num_reminders_send = null, string $invoice_next_due_date = null, string $invoice_status = null, string $invoice_reference = null, string $invoice_number = null, int $member_id = null, int $collection_id = null, string $contribution_start = null, string $contribution_end = null, bool $use_direct_debit = null, int $invoice_workflow_id = null, string $addressee = null, string $addressee_attention = null, string $email = null, object $address = null, array $payments = null, object $price_inclusive_vat = null, object $price_exclusive_vat = null, object $vat = null, object $price_paid = null, object $price_unpaid = null, object $currency = null, string $created = null, string $modified = null): Model\SaleInvoice
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("POST", "/v30/sale-invoices", $args);
         $request->enablePathParameters();
         $request->enableQueryParameters();
-        $request->enableBodyFields("id", "uuid", "entity_id", "entity", "invoice_date", "invoice_source", "invoice_type", "delivery_method", "invoice_send_date_time", "invoice_due_date", "invoice_reminded_date_time", "invoice_num_reminders_send", "invoice_next_due_date", "invoice_status", "invoice_reference", "invoice_number", "member_id", "collection_id", "contribution_start", "contribution_end", "use_direct_debit", "invoice_workflow_id", "addressee", "addressee_attention", "email", "address", "items", "payments", "price_inclusive_vat", "price_exclusive_vat", "vat", "price_paid", "price_unpaid", "currency", "created", "modified");
-        $this->submit($request);
+        $request->enableBodyFields("id", "uuid", "entity_id", "entity", "invoice_date", "invoice_type", "delivery_method", "invoice_send_date_time", "invoice_due_date", "invoice_reminded_date_time", "invoice_num_reminders_send", "invoice_next_due_date", "invoice_status", "invoice_reference", "invoice_number", "member_id", "collection_id", "contribution_start", "contribution_end", "use_direct_debit", "invoice_workflow_id", "addressee", "addressee_attention", "email", "address", "items", "payments", "price_inclusive_vat", "price_exclusive_vat", "vat", "price_paid", "price_unpaid", "currency", "created", "modified");
+        return $this->submit($request, new Model\SaleInvoice);
     }
 
     /**
@@ -1908,9 +1908,11 @@ trait GeneratedRequestingMethodsTrait
     }
 
     /**
-     * @generated
+     * @modified
+     * This method needs at least one of the optional argument for some stupid reason. This seems to be a bug in Congressus's API.
+     * I "fixed" this by always setting a delivery method, with the API's default value as this method's default value.
      */
-    public function sendASaleInvoice(int $obj_id, string $delivery_method = null, string $email_subject = null, string $email_text = null): void
+    public function sendASaleInvoice(int $obj_id, string $delivery_method = "according_workflow", string $email_subject = null, string $email_text = null): void
     {
         $args = get_defined_vars(); // MUST be the first line in the method
         $request = new Request("POST", "/v30/sale-invoices/{obj_id}/send", $args);
