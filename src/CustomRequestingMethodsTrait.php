@@ -222,6 +222,32 @@ trait CustomRequestingMethodsTrait
     }
 
     /**
+     * Mistake in Congressus's OpenAPI spec.
+     */
+    public function createSaleInvoice(array $items, int $entity_id = null, string $invoice_date = null, string $invoice_reference = null, int $member_id = null, int $collection_id = null, string $contribution_start = null, string $contribution_end = null, bool $use_direct_debit = null, int $invoice_workflow_id = null, string $addressee = null, string $addressee_attention = null, string $email = null, object $address = null): Model\SaleInvoice
+    {
+        $args = get_defined_vars(); // MUST be the first line in the method
+        $request = new Request("POST", "/v30/sale-invoices", $args);
+        $request->enablePathParameters();
+        $request->enableQueryParameters();
+        $request->enableBodyFields("items", "entity_id", "invoice_date", "invoice_reference", "member_id", "collection_id", "contribution_start", "contribution_end", "use_direct_debit", "invoice_workflow_id", "addressee", "addressee_attention", "email", "address");
+        return $this->submit($request, new Model\SaleInvoice);
+    }
+
+    /**
+     * Mistake in Congressus's OpenAPI spec.
+     */
+    public function updateSaleInvoice(int $obj_id, array $items, int $entity_id = null, string $invoice_date = null, string $invoice_reference = null, int $member_id = null, int $collection_id = null, string $contribution_start = null, string $contribution_end = null, bool $use_direct_debit = null, int $invoice_workflow_id = null, string $addressee = null, string $addressee_attention = null, string $email = null, object $address = null): Model\SaleInvoice
+    {
+        $args = get_defined_vars(); // MUST be the first line in the method
+        $request = new Request("PUT", "/v30/sale-invoices/{obj_id}", $args);
+        $request->enablePathParameters("obj_id");
+        $request->enableQueryParameters();
+        $request->enableBodyFields("items", "entity_id", "invoice_date", "invoice_reference", "member_id", "collection_id", "contribution_start", "contribution_end", "use_direct_debit", "invoice_workflow_id", "addressee", "addressee_attention", "email", "address");
+        return $this->submit($request, new Model\SaleInvoice);
+    }
+
+    /**
      * @param   int $obj_id     The ID of the invoice to download.
      * @param   int $filePath   The file system location where to save the file.
      */
@@ -245,5 +271,18 @@ trait CustomRequestingMethodsTrait
         $request->enableQueryParameters();
         $request->enableBodyFields("delivery_method", "email_subject", "email_text");
         $this->submit($request);
+    }
+
+    /**
+     * Mistake in Congressus's OpenAPI spec.
+     */
+    public function createSaleInvoiceItem(int $obj_id, int $product_offer_id, int $quantity = null, float $price = null, object $sort_order = null): Model\SaleInvoiceItem
+    {
+        $args = get_defined_vars(); // MUST be the first line in the method
+        $request = new Request("POST", "/v30/sale-invoices/{obj_id}/items", $args);
+        $request->enablePathParameters("obj_id");
+        $request->enableQueryParameters();
+        $request->enableBodyFields("product_offer_id", "quantity", "price", "sort_order");
+        return $this->submit($request, new Model\SaleInvoiceItem);
     }
 }

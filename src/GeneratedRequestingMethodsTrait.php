@@ -1857,19 +1857,6 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function createSaleInvoice(string $invoice_source, array $items, int $id = null, string $uuid = null, int $entity_id = null, object $entity = null, string $invoice_date = null, string $invoice_type = null, string $delivery_method = null, string $invoice_send_date_time = null, string $invoice_due_date = null, string $invoice_reminded_date_time = null, int $invoice_num_reminders_send = null, string $invoice_next_due_date = null, string $invoice_status = null, string $invoice_reference = null, string $invoice_number = null, int $member_id = null, int $collection_id = null, string $contribution_start = null, string $contribution_end = null, bool $use_direct_debit = null, int $invoice_workflow_id = null, string $addressee = null, string $addressee_attention = null, string $email = null, object $address = null, array $payments = null, object $price_inclusive_vat = null, object $price_exclusive_vat = null, object $vat = null, object $price_paid = null, object $price_unpaid = null, object $currency = null, string $created = null, string $modified = null): Model\SaleInvoice
-    {
-        $args = get_defined_vars(); // MUST be the first line in the method
-        $request = new Request("POST", "/v30/sale-invoices", $args);
-        $request->enablePathParameters();
-        $request->enableQueryParameters();
-        $request->enableBodyFields("id", "uuid", "entity_id", "entity", "invoice_date", "invoice_source", "invoice_type", "delivery_method", "invoice_send_date_time", "invoice_due_date", "invoice_reminded_date_time", "invoice_num_reminders_send", "invoice_next_due_date", "invoice_status", "invoice_reference", "invoice_number", "member_id", "collection_id", "contribution_start", "contribution_end", "use_direct_debit", "invoice_workflow_id", "addressee", "addressee_attention", "email", "address", "items", "payments", "price_inclusive_vat", "price_exclusive_vat", "vat", "price_paid", "price_unpaid", "currency", "created", "modified");
-        return $this->submit($request, new Model\SaleInvoice);
-    }
-
-    /**
-     * @generated
-     */
     public function retrieveSaleInvoice(int $obj_id): Model\SaleInvoice
     {
         $args = get_defined_vars(); // MUST be the first line in the method
@@ -1877,19 +1864,6 @@ trait GeneratedRequestingMethodsTrait
         $request->enablePathParameters("obj_id");
         $request->enableQueryParameters();
         $request->enableBodyFields();
-        return $this->submit($request, new Model\SaleInvoice);
-    }
-
-    /**
-     * @generated
-     */
-    public function updateSaleInvoice(int $obj_id, string $invoice_source, array $items, int $id = null, string $uuid = null, int $entity_id = null, object $entity = null, string $invoice_date = null, string $invoice_type = null, string $delivery_method = null, string $invoice_send_date_time = null, string $invoice_due_date = null, string $invoice_reminded_date_time = null, int $invoice_num_reminders_send = null, string $invoice_next_due_date = null, string $invoice_status = null, string $invoice_reference = null, string $invoice_number = null, int $member_id = null, int $collection_id = null, string $contribution_start = null, string $contribution_end = null, bool $use_direct_debit = null, int $invoice_workflow_id = null, string $addressee = null, string $addressee_attention = null, string $email = null, object $address = null, array $payments = null, object $price_inclusive_vat = null, object $price_exclusive_vat = null, object $vat = null, object $price_paid = null, object $price_unpaid = null, object $currency = null, string $created = null, string $modified = null): Model\SaleInvoice
-    {
-        $args = get_defined_vars(); // MUST be the first line in the method
-        $request = new Request("PUT", "/v30/sale-invoices/{obj_id}", $args);
-        $request->enablePathParameters("obj_id");
-        $request->enableQueryParameters();
-        $request->enableBodyFields("id", "uuid", "entity_id", "entity", "invoice_date", "invoice_source", "invoice_type", "delivery_method", "invoice_send_date_time", "invoice_due_date", "invoice_reminded_date_time", "invoice_num_reminders_send", "invoice_next_due_date", "invoice_status", "invoice_reference", "invoice_number", "member_id", "collection_id", "contribution_start", "contribution_end", "use_direct_debit", "invoice_workflow_id", "addressee", "addressee_attention", "email", "address", "items", "payments", "price_inclusive_vat", "price_exclusive_vat", "vat", "price_paid", "price_unpaid", "currency", "created", "modified");
         return $this->submit($request, new Model\SaleInvoice);
     }
 
@@ -1956,19 +1930,6 @@ trait GeneratedRequestingMethodsTrait
         $request->enableQueryParameters("page", "page_size", "order");
         $request->enableBodyFields();
         return $this->submit($request, new Model\SaleInvoiceItemPagination);
-    }
-
-    /**
-     * @generated
-     */
-    public function createSaleInvoiceItem(int $obj_id, int $product_offer_id, object $id = null, int $sale_invoice_id = null, string $name = null, string $description = null, int $quantity = null, float $price = null, object $sort_order = null, object $vat_percentage = null, int $vat_category_id = null, string $vat_category = null, object $uuid = null): Model\SaleInvoiceItem
-    {
-        $args = get_defined_vars(); // MUST be the first line in the method
-        $request = new Request("POST", "/v30/sale-invoices/{obj_id}/items", $args);
-        $request->enablePathParameters("obj_id");
-        $request->enableQueryParameters();
-        $request->enableBodyFields("id", "sale_invoice_id", "product_offer_id", "name", "description", "quantity", "price", "sort_order", "vat_percentage", "vat_category_id", "vat_category", "uuid");
-        return $this->submit($request, new Model\SaleInvoiceItem);
     }
 
     /**
