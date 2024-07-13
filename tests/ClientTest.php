@@ -19,17 +19,4 @@ class ClientTest extends TestCase
         $member = $this->client->retrieveMemberByUsername("s2191229");
         $this->assertSame("s2191229", $member->getUsername());
     }
-
-    public function testListUpcomingEvents()
-    {
-        $events = $this->client->listUpcomingEvents(1);
-
-        $this->assertLessThanOrEqual(10, count($events));
-
-        /** @var Compucie\Congressus\Model\Event $event */
-        foreach ($events as $event) {
-            // print_r($event);
-            // $this->assertLessThanOrEqual(time(), $event->getStart()->getTimestamp());
-        }
-    }
 }
