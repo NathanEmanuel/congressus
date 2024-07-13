@@ -232,4 +232,18 @@ trait CustomRequestingMethodsTrait
         $request->enablePathParameters("obj_id");
         $this->download($request, $filePath);
     }
+
+    /**
+     * This method needs at least one of the optional argument for some stupid reason. This seems to be a bug in Congressus's API.
+     * I "fixed" this by always setting a delivery method, with the API's default value as this method's default value.
+     */
+    public function sendASaleInvoice(int $obj_id, string $delivery_method = "according_workflow", string $email_subject = null, string $email_text = null): void
+    {
+        $args = get_defined_vars(); // MUST be the first line in the method
+        $request = new Request("POST", "/v30/sale-invoices/{obj_id}/send", $args);
+        $request->enablePathParameters("obj_id");
+        $request->enableQueryParameters();
+        $request->enableBodyFields("delivery_method", "email_subject", "email_text");
+        $this->submit($request);
+    }
 }
