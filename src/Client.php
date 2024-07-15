@@ -80,7 +80,11 @@ class Client extends RawClient
      */
     public function isMemberEventParticipant(Member|MemberWithCustomFields $member, Event $event): bool
     {
-        $participations = $this->listEventParticipations(obj_id: $event->getId(), member_id: $member->getId())->getData();
+        $participations = $this->listEventParticipations(
+            obj_id: $event->getId(),
+            member_id: $member->getId(),
+            status: ["approved", "waiting list", "payment pending"]
+        )->getData();
         return count($participations) > 0;
     }
 
