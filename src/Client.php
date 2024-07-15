@@ -98,15 +98,21 @@ class Client extends RawClient
     public function retrieveProductFoldersBySlug(...$slugs): array
     {
         $productFoldersPage = $this->listProductFolders();
-        $productFolders = $productFoldersPage->getData();
-        $this->addDataFromNextPages($productFolders, $productFoldersPage, 100);
+        $productFoldersData = $productFoldersPage->getData();
+        $this->addDataFromNextPages($productFoldersData, $productFoldersPage, 100);
 
-        $output = array();
-        foreach ($productFolders as $productFolder) {
-            if (in_array($productFolder->getSlug(), $slugs)) {
-                $output[$productFolder->getSlug()] = $productFolder;
+        // Filter on argument slugs
+        foreach ($productFoldersData as $folder) {
+            if (in_array($folder->getSlug(), $slugs)) {
+                $productFoldersAlphabetical[$folder->getSlug()] = $folder;
             }
         }
-        return $output;
+
+        // Reorder from alphabetical order to custom order
+        foreach ($slugs as $slug) {
+            $productFolders[$slug] = $productFoldersAlphabetical[$slug];
+        }
+
+        return $productFolders;
     }
 }
