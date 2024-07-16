@@ -70,4 +70,19 @@ class RawClient extends GuzzleHttpClient
 
         return true;
     }
+
+    /**
+     * Return a formatted period suitable for the API based on a start and/or end timestamp.
+     * @param   int     $period_start   Start of filter period in Unix time
+     * @param   int     $period_end     End of filter period in Unix time
+     * @return  string                  Period string representation suitable for the API
+     */
+    public static function formatPeriod(int $period_start = null, int $period_end = null,): string
+    {
+        return match (true) {
+            !is_null($period_start) && !is_null($period_end) => date("Ymd", $period_start) . ".." . date("Ymd", $period_end),
+            !is_null($period_start) && is_null($period_end) => date("Ymd", time()) . ".." . date("Ymd", 2147483647),
+            is_null($period_start) && !is_null($period_end) => date("Ymd", 0) . ".." . date("Ymd", $period_end),
+        };
+    }
 }
