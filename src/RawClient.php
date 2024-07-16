@@ -2,7 +2,6 @@
 
 namespace Compucie\Congressus;
 
-use Compucie\Congressus\Exception\NoNextPageException;
 use Compucie\Congressus\Request;
 use GuzzleHttp\Client as GuzzleHttpClient;
 
