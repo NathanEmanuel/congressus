@@ -11,6 +11,8 @@ class RawClient extends GuzzleHttpClient
     use CustomRequestingMethodsTrait;
     use GeneratedRequestingMethodsTrait;
 
+    private const DEFAULT_PAGE_SIZE = 25;
+
     public function __construct(string $token)
     {
         parent::__construct([
@@ -109,5 +111,22 @@ class RawClient extends GuzzleHttpClient
         foreach ($pages as $page) {
             $data = array_merge($data, $page->getData());
         }
+    }
+
+    private function isRequestingAllowed($page, int $limit): bool
+    {
+        if (is_null($page)) {
+            return true;
+        }
+
+        if (!$page->getHasNext()) {
+            return false;
+        }
+
+        if (($page->getPrevNum() + 1) * self::DEFAULT_PAGE_SIZE > $limit) {
+            return false;
+        }
+
+        return true;
     }
 }
