@@ -23,40 +23,6 @@ trait CustomRequestingMethodsTrait
      */
     abstract private function download(Request $request, string $filePath): void;
 
-    /**
-     * @param   int $period_start   The start of the filter period in Unix time
-     * @param   int $period_end     The end of the filter period in Unix time
-     */
-    public function listEvents(
-        array|int $category_id = null,
-        int $period_start = null,
-        int $period_end = null,
-        string $period_filter = null,
-        bool $published = null,
-        array|string $participation_billing_enabled = null,
-        array|int $participating_member_id = null,
-        int $socie_app_id = null,
-        int $member_id = null,
-        int $page = null,
-        int $page_size = null,
-        string $order = null,
-    ): Page {
-        $args = get_defined_vars(); // this MUST be first
-
-        $set_period_filter = function (int $period_start = null, int $period_end = null) {
-            return match (true) {
-                !is_null($period_start) && !is_null($period_end) => date("Ymd", $period_start) . ".." . date("Ymd", $period_end),
-                !is_null($period_start) && is_null($period_end) => date("Ymd", time()) . ".." . date("Ymd", 2147483647),
-                is_null($period_start) && !is_null($period_end) => date("Ymd", 0) . ".." . date("Ymd", $period_end),
-            };
-        };
-        $args["period_filter"] = $set_period_filter($args["period_start"], $args["period_end"]);
-
-        $request = new Request("GET", "/v30/events", $args);
-        $request->enableQueryParameters("category_id", "period_filter", "published", "participation_billing_enabled", "participating_member_id", "socie_app_id", "member_id", "page", "page_size", "order");
-        return $this->submit($request, new Model\EventPagination);
-    }
-
     public function createMemberNote(
         int $member_id,
         ?string $text = null,
