@@ -54,7 +54,7 @@ class RawClient extends GuzzleHttpClient
         $this->request($request->getMethod(), $request->getPath(), ["sink" => $stream]); // send() does not seem to work
     }
 
-    private function isRequestingAllowed($page, int $limit): bool
+    private static function isRequestingAllowed($page, int $limit): bool
     {
         if (is_null($page)) {
             return true;
