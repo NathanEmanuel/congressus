@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-use Compucie\Congressus\NewtonClient;
+use Compucie\Congressus\ExtendedClientnt;
 use PHPUnit\Framework\TestCase;
 
 class ClientTest extends TestCase
 {
-    private NewtonClient $client;
+    private ExtendedClientnt $client;
 
     protected function setUp(): void
     {
-        $this->client = new NewtonClient(getenv("congressus"));
+        $this->client = new ExtendedClientnt(getenv("congressus"));
     }
 
     public function testRetrieveMemberByUsername()
