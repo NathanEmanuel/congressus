@@ -2071,23 +2071,6 @@ trait GeneratedRequestingMethodsTrait
     }
 
     /**
-     * @return  Model\ProductFolderListRecursive[]
-     * @generated
-     */
-    public function listProductFoldersRecursive(?int $limit, string $published = null, int $parent_id = null, string $order = null): array
-    {
-        $pageNumber = 1;
-        $page = null;
-        $result = array();
-        while (self::isRequestingAllowed($page, $limit)) {
-            $page = $this->listProductFoldersRecursivePaginated($published, $parent_id, $order, page: $pageNumber);
-            $result = array_merge($result, $page->getData());
-            $pageNumber++;
-        }
-        return array_slice($result, 0, $limit);
-    }
-
-    /**
      * @generated
      */
     public function listProductFoldersRecursivePaginated(string $published = null, int $parent_id = null, string $order = null, int $page = null, int $page_size = null): Model\ProductFolderListRecursivePagination
