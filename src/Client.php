@@ -2,117 +2,84 @@
 
 namespace Compucie\Congressus;
 
-use Compucie\Congressus\RawClient;
-use Compucie\Congressus\Model;
-use Compucie\Congressus\Exception\UserNotFoundException;
-use Compucie\Congressus\Model\Event;
-use Compucie\Congressus\Model\Member;
-use Compucie\Congressus\Model\MemberWithCustomFields;
-use GuzzleHttp\Client as GuzzleHttpClient;
+use Compucie\Congressus\Request;
+use GuzzleHttp;
 
-class Client extends RawClient
+class Client extends GuzzleHttp\Client
 {
+    use CustomRequestingMethodsTrait;
+    use GeneratedRequestingMethodsTrait;
+
+    private const DEFAULT_PAGE_SIZE = 25;
+
     public function __construct(string $token)
     {
-        GuzzleHttpClient::__construct([
+        parent::__construct([
             'base_uri' => 'https://api.congressus.nl',
             'headers' => ["Authorization" => "Bearer {$token}"]
         ]);
     }
 
-
-    /***************************************************************
-     * MEMBERS
-     ***************************************************************/
-
     /**
-     * Retrieve the user by its username. This function performs a search based on
-     * the given username and checks the returned users for the correct username.
-     * Throw a UserNotFoundException when no user with the correct username is found.
-     * @param   string $username                The username to search for.
-     * @return  Model\MemberWithCustomFields    The user with the given username.
-     * @throws  UserNotFoundException
+     * Submit a request to the Congressus API and return the response as an (array of) data model object(s) or as a page.
+     * @param   Request     $request    Request to submit.
+     * @param   string      $type       Data type of the response.
+     * @return  mixed                   Response as a data model object, data model object array, or page.
      */
-    public function retrieveMemberByUsername(string $username): ?Model\MemberWithCustomFields
+    private function submit(Request $request, string $type = null): mixed
     {
-        $page = $this->searchMembers(term: $username);
-        foreach ($page->getData() as $member) {
-            if ($member["username"] === $username) {
-                return $this->retrieveMember(obj_id: $member["id"]);
-            }
+        $request->finalize();
+        $response = $this->send($request, $request->getOptions());
+
+        if (is_null($type)) {
+            return null;
+        } else {
+            $body = json_decode($response->getBody(), associative: true);
+            return ObjectSerializer::deserialize($body, $type);
         }
-        throw new UserNotFoundException();
-    }
-
-
-    /***************************************************************
-     * EVENTS
-     ***************************************************************/
-
-    /**
-     * Return the upcoming events.
-     * @param   int|string    $max  The maximum amount of events to return.
-     * @return  array               An array containting the upcoming events as Event objects.
-     */
-    public function listUpcomingEvents(int|string $max): array
-    {
-        // request (first) page
-        $page = $this->listEvents(
-            page_size: min($max, 100),
-            published: true,
-            period_start: time(),
-            order: "start:asc",
-        );
-        $data = $page->getData();
-
-        // request subsequent pages if $max > 100
-        // for maintainability, all subsequent pages are of size 100
-        // this means that it is likely that more data is requested than necessary
-        $this->addDataFromNextPages($data, $page, intdiv($max, 100));
-
-        return array_slice($data, 0, $max);
     }
 
     /**
-     * Return whether the given member is a participant of the given event.
-     * @param   Member  $member
-     * @param   Event   $event
+     * Download a file to the given file system location.
+     * @param   Request $request    The request to submit.
+     * @param   string  $filePath   The location where to save the file.
      */
-    public function isMemberEventParticipant(Member|MemberWithCustomFields $member, Event $event): bool
+    private function download(Request $request, string $filePath): void
     {
-        $participations = $this->listEventParticipations(
-            obj_id: $event->getId(),
-            member_id: $member->getId(),
-            status: ["approved", "waiting list", "payment pending"]
-        )->getData();
-        return count($participations) > 0;
+        $resource = \GuzzleHttp\Psr7\Utils::tryFopen($filePath, 'w');
+        $stream = \GuzzleHttp\Psr7\Utils::streamFor($resource);
+        $this->request($request->getMethod(), $request->getPath(), ["sink" => $stream]); // send() does not seem to work
     }
 
-    /***************************************************************
-     * PRODUCTS
-     ***************************************************************/
+    private static function isRequestingAllowed($page, int $limit): bool
+    {
+        if (is_null($page)) {
+            return true;
+        }
+
+        if (!$page->getHasNext()) {
+            return false;
+        }
+
+        if (($page->getPrevNum() + 1) * self::DEFAULT_PAGE_SIZE > $limit) {
+            return false;
+        }
+
+        return true;
+    }
 
     /**
-     * @return  ProductFolder[]
+     * Return a formatted period suitable for the API based on a start and/or end timestamp.
+     * @param   int     $period_start   Start of filter period in Unix time
+     * @param   int     $period_end     End of filter period in Unix time
+     * @return  string                  Period string representation suitable for the API
      */
-    public function retrieveProductFoldersBySlug(...$slugs): array
+    public static function formatPeriod(int $period_start = null, int $period_end = null,): string
     {
-        $productFoldersPage = $this->listProductFolders();
-        $productFoldersData = $productFoldersPage->getData();
-        $this->addDataFromNextPages($productFoldersData, $productFoldersPage, 100);
-
-        // Filter on argument slugs
-        foreach ($productFoldersData as $folder) {
-            if (in_array($folder->getSlug(), $slugs)) {
-                $productFoldersAlphabetical[$folder->getSlug()] = $folder;
-            }
-        }
-
-        // Reorder from alphabetical order to custom order
-        foreach ($slugs as $slug) {
-            $productFolders[$slug] = $productFoldersAlphabetical[$slug];
-        }
-
-        return $productFolders;
+        return match (true) {
+            !is_null($period_start) && !is_null($period_end) => date("Ymd", $period_start) . ".." . date("Ymd", $period_end),
+            !is_null($period_start) && is_null($period_end) => date("Ymd", time()) . ".." . date("Ymd", 2147483647),
+            is_null($period_start) && !is_null($period_end) => date("Ymd", 0) . ".." . date("Ymd", $period_end),
+        };
     }
 }
