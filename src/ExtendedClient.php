@@ -7,6 +7,7 @@ use Compucie\Congressus\Model;
 use Compucie\Congressus\Model\Event;
 use Compucie\Congressus\Model\Member;
 use Compucie\Congressus\Model\MemberWithCustomFields;
+use Compucie\Congressus\Model\ProductFolderWithChildren;
 
 class ExtendedClient extends Client
 {
@@ -91,10 +92,17 @@ class ExtendedClient extends Client
      */
     public function retrieveProductFoldersBySlug(...$slugs): array
     {
-        $allProductFolders = $this->listProductFolders(null);
+        $allProductFolders = $this->listProductFoldersRecursive(null);
+
+        // Flatten
+        /** @var ProductFolder[] */
+        $allProductFoldersFlattened = array();
+        foreach ($allProductFolders as $folder) {
+            $allProductFoldersFlattened = array_merge($allProductFoldersFlattened, self::flattenProductFolderWithChildren($folder));
+        }
 
         // Filter on argument slugs
-        foreach ($allProductFolders as $folder) {
+        foreach ($allProductFoldersFlattened as $folder) {
             if (in_array($folder->getSlug(), $slugs)) {
                 $productFoldersAlphabetical[$folder->getSlug()] = $folder;
             }
@@ -107,6 +115,25 @@ class ExtendedClient extends Client
         }
 
         return $productFolders;
+    }
+
+    /**
+     * @param   Model\ProductFolderWithChildren   $folder
+     * @return  Model\ProductFolder[]
+     */
+    protected static function flattenProductFolderWithChildren(ProductFolderWithChildren $folder): array
+    {
+        /** @var ProductFolder[] */
+        $flattenedChildren = array();
+        foreach ($folder->getChildren() as $child) {
+            $flattenedChildren = array_merge($flattenedChildren, self::flattenProductFolderWithChildren($child));
+        }
+
+        // Quasi-casting
+        $sanitizedFolder = ObjectSerializer::sanitizeForSerialization($folder);
+        $productFolder = ObjectSerializer::deserialize($sanitizedFolder, Model\ProductFolder::class);
+
+        return array_merge(array($productFolder), $flattenedChildren);
     }
 }
 
