@@ -26,6 +26,23 @@ class ExtendedClientTest extends TestCase
         $this->assertSame(2, count($upcomingEvents));
     }
 
+    function testIsMemberEventParticipant()
+    {
+        $member = $this->getClient()->retrieveMember(282676);
+
+        // member was participant
+        $event = $this->getClient()->retrieveEvent(98501);
+        $this->assertTrue($this->getClient()->isMemberEventParticipant($member, $event));
+
+        // event had no sign up
+        $event = $this->getClient()->retrieveEvent(99955);
+        $this->assertFalse($this->getClient()->isMemberEventParticipant($member, $event));
+
+        // event had sign up but member was not participant
+        $event = $this->getClient()->retrieveEvent(99701);
+        $this->assertFalse($this->getClient()->isMemberEventParticipant($member, $event));
+    }
+
     function testRetrieveProductFoldersBySlug()
     {
         $slugs = ["snacks", "drinks", "merch"];
