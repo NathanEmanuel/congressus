@@ -14,9 +14,14 @@ class ExtendedClientTest extends TestCase
         $this->client = new ExtendedClient(getenv("congressus"));
     }
 
-    public function testRetrieveMemberByUsername()
+    function testRetrieveMemberByUsername()
     {
-        $member = $this->client->retrieveMemberByUsername("s2191229");
+        $member = $this->getClient()->retrieveMemberByUsername("s2191229");
         $this->assertSame("s2191229", $member->getUsername());
+    }
+
+    private function getClient(): ExtendedClient
+    {
+        return $this->client;
     }
 }
