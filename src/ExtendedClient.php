@@ -84,9 +84,10 @@ class ExtendedClient extends Client
 
     /**
      * Return an array of product folder whose slugs match the ones given. The
-     * array is in order as the slugs are given.
-     * @param   string                  ...$slugs      The slugs of the folders to retrieve.
-     * @return  Model\ProductFolder[]               Array of the folders with the given slugs.
+     * array is in order as the slugs are given. Watch out for folders with 
+     * differing paths but identical slugs.
+     * @param   string                  ...$slugs       The slugs of the folders to retrieve.
+     * @return  Model\ProductFolder[]                   Array of the folders with the given slugs.
      */
     public function retrieveProductFoldersBySlug(...$slugs): array
     {
