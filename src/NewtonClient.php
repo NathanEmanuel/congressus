@@ -47,26 +47,18 @@ class NewtonClient extends Client
 
     /**
      * Return the upcoming events.
-     * @param   int|string    $max  The maximum amount of events to return.
-     * @return  array               An array containting the upcoming events as Event objects.
+     * @param   int|string      $limit      The maximum amount of events to return.
+     * @return  array                       An array containting the upcoming events as Event objects.
      */
-    public function listUpcomingEvents(int|string $max): array
+    public function listUpcomingEvents(int|string $limit): array
     {
-        // request (first) page
-        $page = $this->listEvents(
-            page_size: min($max, 100),
+        $events = $this->listEvents(
+            $limit,
             published: true,
-            period_start: time(),
+            period_filter: self::formatPeriod(time()),
             order: "start:asc",
         );
-        $data = $page->getData();
-
-        // request subsequent pages if $max > 100
-        // for maintainability, all subsequent pages are of size 100
-        // this means that it is likely that more data is requested than necessary
-        $this->addDataFromNextPages($data, $page, intdiv($max, 100));
-
-        return array_slice($data, 0, $max);
+        return array_slice($events, 0, $limit);
     }
 
     /**
