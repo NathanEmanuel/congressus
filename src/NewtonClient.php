@@ -69,10 +69,11 @@ class NewtonClient extends Client
     public function isMemberEventParticipant(Member|MemberWithCustomFields $member, Event $event): bool
     {
         $participations = $this->listEventParticipations(
+            limit: null,
             obj_id: $event->getId(),
             member_id: $member->getId(),
-            status: ["approved", "waiting list", "payment pending"]
-        )->getData();
+            status: ["approved", "waiting list", "payment pending"],
+        );
         return count($participations) > 0;
     }
 
