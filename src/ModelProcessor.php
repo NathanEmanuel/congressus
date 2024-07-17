@@ -5,7 +5,7 @@ namespace Compucie\Congressus;
 use Compucie\Congressus\Model\ModelInterface;
 
 class ModelProcessor
-{    
+{
     /**
      * Typecast a model object.
      *
@@ -18,7 +18,7 @@ class ModelProcessor
         $data = ObjectSerializer::sanitizeForSerialization($model);
         return ObjectSerializer::deserialize($data, $type);
     }
-    
+
     /**
      * JSON-encode a model object (array).
      *
@@ -29,7 +29,7 @@ class ModelProcessor
     {
         return json_encode(ObjectSerializer::sanitizeForSerialization($data));
     }
-    
+
     /**
      * JSON-decode a model object (array).
      *
