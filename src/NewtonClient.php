@@ -29,12 +29,12 @@ class NewtonClient extends Client
      * @return  Model\MemberWithCustomFields    The user with the given username.
      * @throws  UserNotFoundException
      */
-    public function retrieveMemberByUsername(string $username): ?Model\MemberWithCustomFields
+    public function retrieveMemberByUsername(string $username): Model\MemberWithCustomFields
     {
-        $page = $this->searchMembers(term: $username);
-        foreach ($page->getData() as $member) {
-            if ($member["username"] === $username) {
-                return $this->retrieveMember(obj_id: $member["id"]);
+        $members = $this->searchMembers(limit: null, term: $username);
+        foreach ($members as $member) {
+            if ($member->getUsername() == $username) {
+                return $this->retrieveMember(obj_id: $member->getId()); // don't return ElasticMember
             }
         }
         throw new UserNotFoundException();
