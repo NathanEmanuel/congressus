@@ -86,12 +86,10 @@ class NewtonClient extends Client
      */
     public function retrieveProductFoldersBySlug(...$slugs): array
     {
-        $productFoldersPage = $this->listProductFolders();
-        $productFoldersData = $productFoldersPage->getData();
-        $this->addDataFromNextPages($productFoldersData, $productFoldersPage, 100);
+        $productFolders = $this->listProductFolders(null);
 
         // Filter on argument slugs
-        foreach ($productFoldersData as $folder) {
+        foreach ($productFolders as $folder) {
             if (in_array($folder->getSlug(), $slugs)) {
                 $productFoldersAlphabetical[$folder->getSlug()] = $folder;
             }
