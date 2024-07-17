@@ -21,7 +21,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -74,7 +74,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -151,7 +151,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -228,7 +228,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -401,7 +401,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -478,7 +478,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -555,7 +555,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -632,7 +632,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -709,7 +709,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -786,7 +786,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -827,7 +827,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -856,7 +856,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -933,7 +933,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -998,7 +998,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -1063,7 +1063,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -1104,7 +1104,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -1145,7 +1145,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -1174,7 +1174,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -1251,7 +1251,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -1316,7 +1316,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -1393,7 +1393,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -1434,7 +1434,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -1499,7 +1499,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -1552,7 +1552,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -1629,7 +1629,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -1706,7 +1706,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -1735,7 +1735,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -1812,7 +1812,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -1841,7 +1841,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -1918,7 +1918,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -1995,7 +1995,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -2084,7 +2084,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -2114,7 +2114,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -2191,7 +2191,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -2268,7 +2268,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -2321,7 +2321,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -2410,7 +2410,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -2439,7 +2439,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -2468,7 +2468,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -2557,7 +2557,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -2634,7 +2634,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -2663,7 +2663,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -2704,7 +2704,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
@@ -2745,7 +2745,7 @@ trait GeneratedRequestingMethodsTrait
             $result = array_merge($result, $page->getData());
             $pageNumber++;
         }
-        return $result;
+        return array_slice($result, 0, $limit);
     }
 
     /**
