@@ -61,6 +61,10 @@ class Client extends GuzzleHttp\Client
             return false;
         }
 
+        if (is_null($limit)) {
+            return true;
+        }
+
         if (($page->getPrevNum() + 1) * self::DEFAULT_PAGE_SIZE > $limit) {
             return false;
         }
