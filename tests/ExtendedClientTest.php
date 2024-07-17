@@ -5,7 +5,7 @@ declare(strict_types=1);
 use Compucie\Congressus\ExtendedClient;
 use PHPUnit\Framework\TestCase;
 
-class ClientTest extends TestCase
+class ExtendedClientTest extends TestCase
 {
     private ExtendedClient $client;
 
