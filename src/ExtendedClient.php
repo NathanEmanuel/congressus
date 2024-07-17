@@ -85,21 +85,22 @@ class ExtendedClient extends Client
     /**
      * Return an array of product folder whose slugs match the ones given. The
      * array is in order as the slugs are given.
-     * @param   string[]                $slugs      The slugs of the folders to retrieve.
+     * @param   string                  ...$slugs      The slugs of the folders to retrieve.
      * @return  Model\ProductFolder[]               Array of the folders with the given slugs.
      */
     public function retrieveProductFoldersBySlug(...$slugs): array
     {
-        $productFolders = $this->listProductFolders(null);
+        $allProductFolders = $this->listProductFolders(null);
 
         // Filter on argument slugs
-        foreach ($productFolders as $folder) {
+        foreach ($allProductFolders as $folder) {
             if (in_array($folder->getSlug(), $slugs)) {
                 $productFoldersAlphabetical[$folder->getSlug()] = $folder;
             }
         }
 
         // Reorder from alphabetical order to custom order
+        $productFolders = array();
         foreach ($slugs as $slug) {
             $productFolders[$slug] = $productFoldersAlphabetical[$slug];
         }

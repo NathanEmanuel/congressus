@@ -2109,6 +2109,7 @@ trait GeneratedRequestingMethodsTrait
         $page = null;
         $result = array();
         while (self::isRequestingAllowed($page, $limit)) {
+            $pageNumber = $pageNumber == 1 ? null : $pageNumber; // this line is added solely to circumvent filtering bugs in the API
             $page = $this->listProductFoldersPaginated($published, $parent_id, $order, page: $pageNumber);
             $result = array_merge($result, $page->getData());
             $pageNumber++;
