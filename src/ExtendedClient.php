@@ -8,7 +8,7 @@ use Compucie\Congressus\Model\Event;
 use Compucie\Congressus\Model\Member;
 use Compucie\Congressus\Model\MemberWithCustomFields;
 
-class ExtendedClientnt extends Client
+class ExtendedClient extends Client
 {
     public function __construct(string $token)
     {
