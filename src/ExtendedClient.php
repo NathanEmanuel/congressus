@@ -118,22 +118,19 @@ class ExtendedClient extends Client
     }
 
     /**
-     * @param   Model\ProductFolderWithChildren   $folder
+     * @param   Model\ProductFolderWithChildren   $folderWithChildren
      * @return  Model\ProductFolder[]
      */
-    protected static function flattenProductFolderWithChildren(ProductFolderWithChildren $folder): array
+    protected static function flattenProductFolderWithChildren(ProductFolderWithChildren $folderWithChildren): array
     {
         /** @var ProductFolder[] */
         $flattenedChildren = array();
-        foreach ($folder->getChildren() as $child) {
+        foreach ($folderWithChildren->getChildren() as $child) {
             $flattenedChildren = array_merge($flattenedChildren, self::flattenProductFolderWithChildren($child));
         }
 
-        // Quasi-casting
-        $sanitizedFolder = ObjectSerializer::sanitizeForSerialization($folder);
-        $productFolder = ObjectSerializer::deserialize($sanitizedFolder, Model\ProductFolder::class);
-
-        return array_merge(array($productFolder), $flattenedChildren);
+        $folder = ModelProcessor::typecast($folderWithChildren, Model\ProductFolder::class);
+        return array_merge(array($folder), $flattenedChildren);
     }
 }
 
