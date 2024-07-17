@@ -20,6 +20,12 @@ class ExtendedClientTest extends TestCase
         $this->assertSame("s2191229", $member->getUsername());
     }
 
+    function testListUpcomingEventsList()
+    {
+        $upcomingEvents = $this->getClient()->listUpcomingEvents(2);
+        $this->assertSame(2, count($upcomingEvents));
+    }
+
     function testRetrieveProductFoldersBySlug()
     {
         $slugs = ["snacks", "drinks", "merch"];
