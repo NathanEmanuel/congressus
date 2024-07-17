@@ -33,11 +33,11 @@ class ModelProcessor
     /**
      * JSON-decode a model object (array).
      *
-     * @param  string   $json   The JSON representation of the object (array).
+     * @param  mixed    $json   The JSON representation of the object (array).
      * @param  string   $type   The decoding target type.
      * @return ModelInterface|array
      */
-    public static function json_decode(string $json, string $type): ModelInterface|array
+    public static function json_decode(mixed $json, string $type): ModelInterface|array
     {
         return ObjectSerializer::deserialize($json, $type);
     }
