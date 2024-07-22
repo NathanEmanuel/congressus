@@ -169,7 +169,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function createBlogAuthor(string $name, int $id = null, object $description = null, object $image = null): Model\BlogAuthor
+    public function createBlogAuthor(string $name, int $id = null, object|array $description = null, object|array $image = null): Model\BlogAuthor
     {
         $request = new Request("POST", "/v30/blogs/authors", get_defined_vars());
         $request->enablePathParameters();
@@ -193,7 +193,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function updateBlogAuthor(int $obj_id, string $name, int $id = null, object $description = null, object $image = null): Model\BlogAuthor
+    public function updateBlogAuthor(int $obj_id, string $name, int $id = null, object|array $description = null, object|array $image = null): Model\BlogAuthor
     {
         $request = new Request("PUT", "/v30/blogs/authors/{obj_id}", get_defined_vars());
         $request->enablePathParameters("obj_id");
@@ -306,7 +306,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function createBlogImageParagraph(int $obj_id, int $id = null, string $template = null, string $caption = null, int $order = null, string $type = null, string $created = null, string $modified = null, object $image = null, int $image_id = null): Model\BlogImageParagraph
+    public function createBlogImageParagraph(int $obj_id, int $id = null, string $template = null, string $caption = null, int $order = null, string $type = null, string $created = null, string $modified = null, object|array $image = null, int $image_id = null): Model\BlogImageParagraph
     {
         $request = new Request("POST", "/v30/blogs/{obj_id}/paragraphs/image", get_defined_vars());
         $request->enablePathParameters("obj_id");
@@ -366,7 +366,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function updateBlogImageParagraph(int $obj_id, int $id = null, string $template = null, string $caption = null, int $order = null, string $type = null, string $created = null, string $modified = null, object $image = null, int $image_id = null): Model\BlogImageParagraph
+    public function updateBlogImageParagraph(int $obj_id, int $id = null, string $template = null, string $caption = null, int $order = null, string $type = null, string $created = null, string $modified = null, object|array $image = null, int $image_id = null): Model\BlogImageParagraph
     {
         $request = new Request("PUT", "/v30/blogs/paragraphs/image/{obj_id}", get_defined_vars());
         $request->enablePathParameters("obj_id");
@@ -419,7 +419,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function createBlogCategory(string $name, int $id = null, string $color = null, string $slug = null, bool $published = null, object $visibility = null, array $websites = null): Model\BlogCategory
+    public function createBlogCategory(string $name, int $id = null, string $color = null, string $slug = null, bool $published = null, object|array $visibility = null, array $websites = null): Model\BlogCategory
     {
         $request = new Request("POST", "/v30/blogs/categories", get_defined_vars());
         $request->enablePathParameters();
@@ -443,7 +443,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function updateBlogCategory(int $obj_id, string $name, int $id = null, string $color = null, string $slug = null, bool $published = null, object $visibility = null, array $websites = null): Model\BlogCategory
+    public function updateBlogCategory(int $obj_id, string $name, int $id = null, string $color = null, string $slug = null, bool $published = null, object|array $visibility = null, array $websites = null): Model\BlogCategory
     {
         $request = new Request("PUT", "/v30/blogs/categories/{obj_id}", get_defined_vars());
         $request->enablePathParameters("obj_id");
@@ -496,7 +496,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function createBlogIssue(string $name, int $id = null, object $description = null, object $image = null): Model\BlogIssue
+    public function createBlogIssue(string $name, int $id = null, object|array $description = null, object|array $image = null): Model\BlogIssue
     {
         $request = new Request("POST", "/v30/blogs/issues", get_defined_vars());
         $request->enablePathParameters();
@@ -520,7 +520,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function updateBlogIssue(int $obj_id, string $name, int $id = null, object $description = null, object $image = null): Model\BlogIssue
+    public function updateBlogIssue(int $obj_id, string $name, int $id = null, object|array $description = null, object|array $image = null): Model\BlogIssue
     {
         $request = new Request("PUT", "/v30/blogs/issues/{obj_id}", get_defined_vars());
         $request->enablePathParameters("obj_id");
@@ -573,7 +573,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function createCareerPartnerCategory(string $name, int $id = null, string $color = null, string $slug = null, bool $published = null, object $visibility = null, array $websites = null): Model\CareerPartnerCategory
+    public function createCareerPartnerCategory(string $name, int $id = null, string $color = null, string $slug = null, bool $published = null, object|array $visibility = null, array $websites = null): Model\CareerPartnerCategory
     {
         $request = new Request("POST", "/v30/career/partners/categories", get_defined_vars());
         $request->enablePathParameters();
@@ -597,7 +597,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function updateCareerPartnerCategory(int $obj_id, string $name, int $id = null, string $color = null, string $slug = null, bool $published = null, object $visibility = null, array $websites = null): Model\CareerPartnerCategory
+    public function updateCareerPartnerCategory(int $obj_id, string $name, int $id = null, string $color = null, string $slug = null, bool $published = null, object|array $visibility = null, array $websites = null): Model\CareerPartnerCategory
     {
         $request = new Request("PUT", "/v30/career/partners/categories/{obj_id}", get_defined_vars());
         $request->enablePathParameters("obj_id");
@@ -650,7 +650,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function createCareerPartner(int $id, string $slug, int $category_id, string $invoice_address_field, string $name = null, object $category = null, object $address = null, object $postal_address = null, string $description = null, string $description_short = null, string $email = null, string $url = null, object $logo = null, string $memo = null, string $invoice_reference = null, string $invoice_addressee_attention = null, string $invoice_email = null, array $events = null): Model\CareerPartner
+    public function createCareerPartner(int $id, string $slug, int $category_id, string $invoice_address_field, string $name = null, object|array $category = null, object|array $address = null, object|array $postal_address = null, string $description = null, string $description_short = null, string $email = null, string $url = null, object|array $logo = null, string $memo = null, string $invoice_reference = null, string $invoice_addressee_attention = null, string $invoice_email = null, array $events = null): Model\CareerPartner
     {
         $request = new Request("POST", "/v30/career/partners", get_defined_vars());
         $request->enablePathParameters();
@@ -674,7 +674,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function updateCareerPartner(int $obj_id, int $id, string $slug, int $category_id, string $invoice_address_field, string $name = null, object $category = null, object $address = null, object $postal_address = null, string $description = null, string $description_short = null, string $email = null, string $url = null, object $logo = null, string $memo = null, string $invoice_reference = null, string $invoice_addressee_attention = null, string $invoice_email = null, array $events = null): Model\CareerPartner
+    public function updateCareerPartner(int $obj_id, int $id, string $slug, int $category_id, string $invoice_address_field, string $name = null, object|array $category = null, object|array $address = null, object|array $postal_address = null, string $description = null, string $description_short = null, string $email = null, string $url = null, object|array $logo = null, string $memo = null, string $invoice_reference = null, string $invoice_addressee_attention = null, string $invoice_email = null, array $events = null): Model\CareerPartner
     {
         $request = new Request("PUT", "/v30/career/partners/{obj_id}", get_defined_vars());
         $request->enablePathParameters("obj_id");
@@ -727,7 +727,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function createSavedReply(string $name, int $category_id, int $id = null, string $subject = null, object $message_json = null): Model\SavedReply
+    public function createSavedReply(string $name, int $category_id, int $id = null, string $subject = null, object|array $message_json = null): Model\SavedReply
     {
         $request = new Request("POST", "/v30/communication/saved-replies", get_defined_vars());
         $request->enablePathParameters();
@@ -751,7 +751,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function updateSavedReply(int $obj_id, string $name, int $category_id, int $id = null, string $subject = null, object $message_json = null): Model\SavedReply
+    public function updateSavedReply(int $obj_id, string $name, int $category_id, int $id = null, string $subject = null, object|array $message_json = null): Model\SavedReply
     {
         $request = new Request("PUT", "/v30/communication/saved-replies/{obj_id}", get_defined_vars());
         $request->enablePathParameters("obj_id");
@@ -874,7 +874,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function createEvent(int $category_id, string $name, int $id = null, object $category = null, string $status = null, string $slug = null, string $description = null, bool $published = null, string $visibility = null, bool $authentication_required = null, string $start = null, string $end = null, bool $whole_day = null, string $location = null, bool $show_participants = null, bool $show_waiting_list = null, bool $show_rented_items = null, bool $participation_enabled = null, string $participation_mode = null, bool $participation_billing_enabled = null, string $participation_billing_type = null, bool $participation_payment_ideal = null, bool $participation_payment_direct_debit = null, bool $participation_payment_on_invoice = null, string $participation_information_collection_type = null, bool $qr_ticketing_enabled = null, array $ticket_types = null, int $num_tickets = null, int $num_tickets_sold = null, int $num_tickets_max_per_order = null, bool $participant_remarks_enabled = null, string $participant_remarks_placeholder = null, bool $rental_enabled = null, array $rental_categories = null, float $rental_max_price = null, array $career_partners = null, string $website_url = null, string $website_subscribe_url = null, bool $comments_open = null, array $comments = null, array $media = null, string $memo = null): Model\Event
+    public function createEvent(int $category_id, string $name, int $id = null, object|array $category = null, string $status = null, string $slug = null, string $description = null, bool $published = null, string $visibility = null, bool $authentication_required = null, string $start = null, string $end = null, bool $whole_day = null, string $location = null, bool $show_participants = null, bool $show_waiting_list = null, bool $show_rented_items = null, bool $participation_enabled = null, string $participation_mode = null, bool $participation_billing_enabled = null, string $participation_billing_type = null, bool $participation_payment_ideal = null, bool $participation_payment_direct_debit = null, bool $participation_payment_on_invoice = null, string $participation_information_collection_type = null, bool $qr_ticketing_enabled = null, array $ticket_types = null, int $num_tickets = null, int $num_tickets_sold = null, int $num_tickets_max_per_order = null, bool $participant_remarks_enabled = null, string $participant_remarks_placeholder = null, bool $rental_enabled = null, array $rental_categories = null, float $rental_max_price = null, array $career_partners = null, string $website_url = null, string $website_subscribe_url = null, bool $comments_open = null, array $comments = null, array $media = null, string $memo = null): Model\Event
     {
         $request = new Request("POST", "/v30/events", get_defined_vars());
         $request->enablePathParameters();
@@ -898,7 +898,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function updateEvent(int $obj_id, int $category_id, string $name, int $id = null, object $category = null, string $status = null, string $slug = null, string $description = null, bool $published = null, string $visibility = null, bool $authentication_required = null, string $start = null, string $end = null, bool $whole_day = null, string $location = null, bool $show_participants = null, bool $show_waiting_list = null, bool $show_rented_items = null, bool $participation_enabled = null, string $participation_mode = null, bool $participation_billing_enabled = null, string $participation_billing_type = null, bool $participation_payment_ideal = null, bool $participation_payment_direct_debit = null, bool $participation_payment_on_invoice = null, string $participation_information_collection_type = null, bool $qr_ticketing_enabled = null, array $ticket_types = null, int $num_tickets = null, int $num_tickets_sold = null, int $num_tickets_max_per_order = null, bool $participant_remarks_enabled = null, string $participant_remarks_placeholder = null, bool $rental_enabled = null, array $rental_categories = null, float $rental_max_price = null, array $career_partners = null, string $website_url = null, string $website_subscribe_url = null, bool $comments_open = null, array $comments = null, array $media = null, string $memo = null): Model\Event
+    public function updateEvent(int $obj_id, int $category_id, string $name, int $id = null, object|array $category = null, string $status = null, string $slug = null, string $description = null, bool $published = null, string $visibility = null, bool $authentication_required = null, string $start = null, string $end = null, bool $whole_day = null, string $location = null, bool $show_participants = null, bool $show_waiting_list = null, bool $show_rented_items = null, bool $participation_enabled = null, string $participation_mode = null, bool $participation_billing_enabled = null, string $participation_billing_type = null, bool $participation_payment_ideal = null, bool $participation_payment_direct_debit = null, bool $participation_payment_on_invoice = null, string $participation_information_collection_type = null, bool $qr_ticketing_enabled = null, array $ticket_types = null, int $num_tickets = null, int $num_tickets_sold = null, int $num_tickets_max_per_order = null, bool $participant_remarks_enabled = null, string $participant_remarks_placeholder = null, bool $rental_enabled = null, array $rental_categories = null, float $rental_max_price = null, array $career_partners = null, string $website_url = null, string $website_subscribe_url = null, bool $comments_open = null, array $comments = null, array $media = null, string $memo = null): Model\Event
     {
         $request = new Request("PUT", "/v30/events/{obj_id}", get_defined_vars());
         $request->enablePathParameters("obj_id");
@@ -975,7 +975,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function createEventParticipation(int $obj_id, array $tickets, string $addressee = null, string $email = null, int $member_id = null, string $remarks = null, string $invoice_addressee = null, string $invoice_email = null, string $invoice_invoice_reference = null, object $invoice_address = null): Model\EventParticipationBuilder
+    public function createEventParticipation(int $obj_id, array $tickets, string $addressee = null, string $email = null, int $member_id = null, string $remarks = null, string $invoice_addressee = null, string $invoice_email = null, string $invoice_invoice_reference = null, object|array $invoice_address = null): Model\EventParticipationBuilder
     {
         $request = new Request("POST", "/v30/events/{obj_id}/sign-up", get_defined_vars());
         $request->enablePathParameters("obj_id");
@@ -1016,7 +1016,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function createTicketType(int $obj_id, string $name, int $vat_category_id, string $availability_status = null, string $available_from = null, string $available_to = null, string $cancel_to = null, string $confirmation_email_text = null, bool $confirmation_email_text_enabled = null, string $description = null, int $event_id = null, int $filter_id = null, int $id = null, string $modified = null, int $num_tickets = null, object $num_tickets_available = null, int $num_tickets_max = null, string $num_tickets_max_per = null, int $num_tickets_sold = null, float $price = null, bool $pricing_enabled = null, object $vat_category = null, string $visibility_level = null, bool $waiting_list_enabled = null, float $participation_certificate_credits = null): Model\EventTicketType
+    public function createTicketType(int $obj_id, string $name, int $vat_category_id, string $availability_status = null, string $available_from = null, string $available_to = null, string $cancel_to = null, string $confirmation_email_text = null, bool $confirmation_email_text_enabled = null, string $description = null, int $event_id = null, int $filter_id = null, int $id = null, string $modified = null, int $num_tickets = null, object|array $num_tickets_available = null, int $num_tickets_max = null, string $num_tickets_max_per = null, int $num_tickets_sold = null, float $price = null, bool $pricing_enabled = null, object|array $vat_category = null, string $visibility_level = null, bool $waiting_list_enabled = null, float $participation_certificate_credits = null): Model\EventTicketType
     {
         $request = new Request("POST", "/v30/events/{obj_id}/ticket-types", get_defined_vars());
         $request->enablePathParameters("obj_id");
@@ -1281,7 +1281,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function updateGroup(int $obj_id, int $id, string $slug, string $start, int $folder_id = null, object $folder = null, string $name = null, object $address = null, object $postal_address = null, string $description = null, string $description_short = null, string $email = null, string $url = null, object $logo = null, string $path = null, bool $published = null, string $end = null, string $memo = null, array $memberships = null): Model\GroupWithMemberships
+    public function updateGroup(int $obj_id, int $id, string $slug, string $start, int $folder_id = null, object|array $folder = null, string $name = null, object|array $address = null, object|array $postal_address = null, string $description = null, string $description_short = null, string $email = null, string $url = null, object|array $logo = null, string $path = null, bool $published = null, string $end = null, string $memo = null, array $memberships = null): Model\GroupWithMemberships
     {
         $request = new Request("PUT", "/v30/groups/{obj_id}", get_defined_vars());
         $request->enablePathParameters("obj_id");
@@ -1334,7 +1334,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function createGroupMembership(int $member_id, string $start, int $group_id, int $id = null, string $end = null, string $function = null, bool $may_edit_profile = null, bool $may_manage_memberships = null, bool $may_manage_storage_objects = null, bool $is_self_enroll = null, string $order_type = null, int $order = null, object $group = null): Model\GroupMembership
+    public function createGroupMembership(int $member_id, string $start, int $group_id, int $id = null, string $end = null, string $function = null, bool $may_edit_profile = null, bool $may_manage_memberships = null, bool $may_manage_storage_objects = null, bool $is_self_enroll = null, string $order_type = null, int $order = null, object|array $group = null): Model\GroupMembership
     {
         $request = new Request("POST", "/v30/groups/memberships", get_defined_vars());
         $request->enablePathParameters();
@@ -1358,7 +1358,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function updateGroupMembership(int $obj_id, int $member_id, string $start, int $group_id, int $id = null, string $end = null, string $function = null, bool $may_edit_profile = null, bool $may_manage_memberships = null, bool $may_manage_storage_objects = null, bool $is_self_enroll = null, string $order_type = null, int $order = null, object $group = null): Model\GroupMembership
+    public function updateGroupMembership(int $obj_id, int $member_id, string $start, int $group_id, int $id = null, string $end = null, string $function = null, bool $may_edit_profile = null, bool $may_manage_memberships = null, bool $may_manage_storage_objects = null, bool $is_self_enroll = null, string $order_type = null, int $order = null, object|array $group = null): Model\GroupMembership
     {
         $request = new Request("PUT", "/v30/groups/memberships/{obj_id}", get_defined_vars());
         $request->enablePathParameters("obj_id");
@@ -1411,7 +1411,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function updateTask(int $obj_id, string $type, string $subject_type, int $subject_id, int $id = null, string $text = null, int $author_id = null, string $created = null, string $modified = null, object $author = null, object $subject = null, string $assignee_type = null, int $assignee_id = null, object $assignee = null, bool $is_completed = null, string $completed = null, int $completed_by_id = null, object $completed_by = null): Model\Task
+    public function updateTask(int $obj_id, string $type, string $subject_type, int $subject_id, int $id = null, string $text = null, int $author_id = null, string $created = null, string $modified = null, object|array $author = null, object|array $subject = null, string $assignee_type = null, int $assignee_id = null, object|array $assignee = null, bool $is_completed = null, string $completed = null, int $completed_by_id = null, object|array $completed_by = null): Model\Task
     {
         $request = new Request("PUT", "/v30/tasks/{obj_id}", get_defined_vars());
         $request->enablePathParameters("obj_id");
@@ -1464,7 +1464,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function updateMemberStatus(int $obj_id, string $name, int $id = null, string $description = null, bool $archived = null, bool $hidden = null, bool $deceased = null, int $order = null, bool $is_available_for_online_sign_up = null, int $registration_product_offer_id = null, object $registration_product_offer = null, int $membership_fee_product_offer_id = null, object $membership_fee_product_offer = null, array $websites = null, array $websites_member_list = null): Model\MemberStatusWithFieldSettings
+    public function updateMemberStatus(int $obj_id, string $name, int $id = null, string $description = null, bool $archived = null, bool $hidden = null, bool $deceased = null, int $order = null, bool $is_available_for_online_sign_up = null, int $registration_product_offer_id = null, object|array $registration_product_offer = null, int $membership_fee_product_offer_id = null, object|array $membership_fee_product_offer = null, array $websites = null, array $websites_member_list = null): Model\MemberStatusWithFieldSettings
     {
         $request = new Request("PUT", "/v30/member-statuses/{obj_id}", get_defined_vars());
         $request->enablePathParameters("obj_id");
@@ -1570,7 +1570,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function createMember(int $status_id, int $id, string $primary_last_name_main, array $context = null, string $member_from = null, string $member_to = null, string $username = null, object $status = null, array $statuses = null, object $gender = null, string $prefix = null, string $initials = null, string $nickname = null, string $given_name = null, string $first_name = null, string $primary_last_name_prefix = null, string $primary_last_name = null, string $secondary_last_name_main = null, string $secondary_last_name_prefix = null, string $secondary_last_name = null, string $last_name_display = null, string $last_name = null, string $search_name = null, string $suffix = null, string $date_of_birth = null, string $email = null, object $phone_mobile = null, object $phone_home = null, object $address = null, int $profile_picture_id = null, object $profile_picture = null, int $formal_picture_id = null, object $formal_picture = null, bool $deleted = null, bool $receive_sms = null, bool $receive_mailings = null, bool $show_almanac = null, bool $show_almanac_addresses = null, bool $show_almanac_phonenumbers = null, bool $show_almanac_email = null, bool $show_almanac_date_of_birth = null, bool $show_almanac_custom_fields = null, string $modified = null, string $memo = null, object $bank_account = null): Model\Member
+    public function createMember(int $status_id, int $id, string $primary_last_name_main, array $context = null, string $member_from = null, string $member_to = null, string $username = null, object|array $status = null, array $statuses = null, object|array $gender = null, string $prefix = null, string $initials = null, string $nickname = null, string $given_name = null, string $first_name = null, string $primary_last_name_prefix = null, string $primary_last_name = null, string $secondary_last_name_main = null, string $secondary_last_name_prefix = null, string $secondary_last_name = null, string $last_name_display = null, string $last_name = null, string $search_name = null, string $suffix = null, string $date_of_birth = null, string $email = null, object|array $phone_mobile = null, object|array $phone_home = null, object|array $address = null, int $profile_picture_id = null, object|array $profile_picture = null, int $formal_picture_id = null, object|array $formal_picture = null, bool $deleted = null, bool $receive_sms = null, bool $receive_mailings = null, bool $show_almanac = null, bool $show_almanac_addresses = null, bool $show_almanac_phonenumbers = null, bool $show_almanac_email = null, bool $show_almanac_date_of_birth = null, bool $show_almanac_custom_fields = null, string $modified = null, string $memo = null, object|array $bank_account = null): Model\Member
     {
         $request = new Request("POST", "/v30/members", get_defined_vars());
         $request->enablePathParameters();
@@ -1594,7 +1594,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function updateMember(int $obj_id, int $id, array $context = null, string $username = null, object $status = null, array $statuses = null, object $gender = null, string $prefix = null, string $initials = null, string $nickname = null, string $given_name = null, string $first_name = null, string $primary_last_name_main = null, string $primary_last_name_prefix = null, string $primary_last_name = null, string $secondary_last_name_main = null, string $secondary_last_name_prefix = null, string $secondary_last_name = null, string $last_name_display = null, string $last_name = null, string $search_name = null, string $suffix = null, string $date_of_birth = null, string $email = null, object $phone_mobile = null, object $phone_home = null, object $address = null, int $profile_picture_id = null, object $profile_picture = null, int $formal_picture_id = null, object $formal_picture = null, bool $deleted = null, bool $receive_sms = null, bool $receive_mailings = null, bool $show_almanac = null, bool $show_almanac_addresses = null, bool $show_almanac_phonenumbers = null, bool $show_almanac_email = null, bool $show_almanac_date_of_birth = null, bool $show_almanac_custom_fields = null, string $modified = null, string $memo = null, object $bank_account = null, object $custom_fields = null): Model\MemberWithCustomFields
+    public function updateMember(int $obj_id, int $id, array $context = null, string $username = null, object|array $status = null, array $statuses = null, object|array $gender = null, string $prefix = null, string $initials = null, string $nickname = null, string $given_name = null, string $first_name = null, string $primary_last_name_main = null, string $primary_last_name_prefix = null, string $primary_last_name = null, string $secondary_last_name_main = null, string $secondary_last_name_prefix = null, string $secondary_last_name = null, string $last_name_display = null, string $last_name = null, string $search_name = null, string $suffix = null, string $date_of_birth = null, string $email = null, object|array $phone_mobile = null, object|array $phone_home = null, object|array $address = null, int $profile_picture_id = null, object|array $profile_picture = null, int $formal_picture_id = null, object|array $formal_picture = null, bool $deleted = null, bool $receive_sms = null, bool $receive_mailings = null, bool $show_almanac = null, bool $show_almanac_addresses = null, bool $show_almanac_phonenumbers = null, bool $show_almanac_email = null, bool $show_almanac_date_of_birth = null, bool $show_almanac_custom_fields = null, string $modified = null, string $memo = null, object|array $bank_account = null, object|array $custom_fields = null): Model\MemberWithCustomFields
     {
         $request = new Request("PUT", "/v30/members/{obj_id}", get_defined_vars());
         $request->enablePathParameters("obj_id");
@@ -1753,7 +1753,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function createNews(string $title, string $published_from, string $actual_to, int $id = null, object $content = null, bool $is_published = null, bool $is_actual = null, array $media = null, array $comments = null, string $memo = null, array $websites = null): Model\News
+    public function createNews(string $title, string $published_from, string $actual_to, int $id = null, object|array $content = null, bool $is_published = null, bool $is_actual = null, array $media = null, array $comments = null, string $memo = null, array $websites = null): Model\News
     {
         $request = new Request("POST", "/v30/news", get_defined_vars());
         $request->enablePathParameters();
@@ -1777,7 +1777,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function updateNews(int $obj_id, string $title, string $published_from, string $actual_to, int $id = null, object $content = null, bool $is_published = null, bool $is_actual = null, array $media = null, array $comments = null, string $memo = null, array $websites = null): Model\News
+    public function updateNews(int $obj_id, string $title, string $published_from, string $actual_to, int $id = null, object|array $content = null, bool $is_published = null, bool $is_actual = null, array $media = null, array $comments = null, string $memo = null, array $websites = null): Model\News
     {
         $request = new Request("PUT", "/v30/news/{obj_id}", get_defined_vars());
         $request->enablePathParameters("obj_id");
@@ -1859,7 +1859,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function createOrganisationCategory(string $name, int $id = null, string $color = null, object $slug = null, bool $published = null, object $visibility = null, array $websites = null, string $order_type = null): Model\OrganisationCategory
+    public function createOrganisationCategory(string $name, int $id = null, string $color = null, object|array $slug = null, bool $published = null, object|array $visibility = null, array $websites = null, string $order_type = null): Model\OrganisationCategory
     {
         $request = new Request("POST", "/v30/organisations/categories", get_defined_vars());
         $request->enablePathParameters();
@@ -1883,7 +1883,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function updateOrganisationCategory(int $obj_id, string $name, int $id = null, string $color = null, object $slug = null, bool $published = null, object $visibility = null, array $websites = null, string $order_type = null): Model\OrganisationCategory
+    public function updateOrganisationCategory(int $obj_id, string $name, int $id = null, string $color = null, object|array $slug = null, bool $published = null, object|array $visibility = null, array $websites = null, string $order_type = null): Model\OrganisationCategory
     {
         $request = new Request("PUT", "/v30/organisations/categories/{obj_id}", get_defined_vars());
         $request->enablePathParameters("obj_id");
@@ -1936,7 +1936,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function createOrganisation(int $id, string $slug, int $category_id, string $invoice_address_field, string $name = null, object $category = null, object $address = null, object $postal_address = null, string $description = null, string $description_short = null, string $email = null, string $url = null, object $logo = null, string $memo = null, string $invoice_reference = null, string $invoice_addressee_attention = null, string $invoice_email = null): Model\Organisation
+    public function createOrganisation(int $id, string $slug, int $category_id, string $invoice_address_field, string $name = null, object|array $category = null, object|array $address = null, object|array $postal_address = null, string $description = null, string $description_short = null, string $email = null, string $url = null, object|array $logo = null, string $memo = null, string $invoice_reference = null, string $invoice_addressee_attention = null, string $invoice_email = null): Model\Organisation
     {
         $request = new Request("POST", "/v30/organisations", get_defined_vars());
         $request->enablePathParameters();
@@ -1960,7 +1960,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function updateOrganisation(int $obj_id, int $id, string $slug, int $category_id, string $invoice_address_field, string $name = null, object $category = null, object $address = null, object $postal_address = null, string $description = null, string $description_short = null, string $email = null, string $url = null, object $logo = null, string $memo = null, string $invoice_reference = null, string $invoice_addressee_attention = null, string $invoice_email = null): Model\Organisation
+    public function updateOrganisation(int $obj_id, int $id, string $slug, int $category_id, string $invoice_address_field, string $name = null, object|array $category = null, object|array $address = null, object|array $postal_address = null, string $description = null, string $description_short = null, string $email = null, string $url = null, object|array $logo = null, string $memo = null, string $invoice_reference = null, string $invoice_addressee_attention = null, string $invoice_email = null): Model\Organisation
     {
         $request = new Request("PUT", "/v30/organisations/{obj_id}", get_defined_vars());
         $request->enablePathParameters("obj_id");
@@ -2013,7 +2013,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function createOrganisationMembership(int $member_id, string $start, int $organisation_id, int $id = null, string $end = null, string $function = null, bool $may_edit_profile = null, bool $may_manage_memberships = null, bool $may_manage_storage_objects = null, bool $is_self_enroll = null, string $order_type = null, int $order = null, object $organisation = null): Model\OrganisationMembership
+    public function createOrganisationMembership(int $member_id, string $start, int $organisation_id, int $id = null, string $end = null, string $function = null, bool $may_edit_profile = null, bool $may_manage_memberships = null, bool $may_manage_storage_objects = null, bool $is_self_enroll = null, string $order_type = null, int $order = null, object|array $organisation = null): Model\OrganisationMembership
     {
         $request = new Request("POST", "/v30/organisations/memberships", get_defined_vars());
         $request->enablePathParameters();
@@ -2037,7 +2037,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function updateOrganisationMembership(int $obj_id, int $member_id, string $start, int $organisation_id, int $id = null, string $end = null, string $function = null, bool $may_edit_profile = null, bool $may_manage_memberships = null, bool $may_manage_storage_objects = null, bool $is_self_enroll = null, string $order_type = null, int $order = null, object $organisation = null): Model\OrganisationMembership
+    public function updateOrganisationMembership(int $obj_id, int $member_id, string $start, int $organisation_id, int $id = null, string $end = null, string $function = null, bool $may_edit_profile = null, bool $may_manage_memberships = null, bool $may_manage_storage_objects = null, bool $is_self_enroll = null, string $order_type = null, int $order = null, object|array $organisation = null): Model\OrganisationMembership
     {
         $request = new Request("PUT", "/v30/organisations/memberships/{obj_id}", get_defined_vars());
         $request->enablePathParameters("obj_id");
@@ -2192,7 +2192,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function createProduct(int $id = null, int $product_offer_id = null, object $folder = null, string $name = null, string $description = null, array $media = null, bool $published = null, float $price = null, object $vat_category = null, float $vat_percentage = null, string $type = null, bool $is_archived = null, string $created = null, string $modified = null, string $memo = null): Model\Product
+    public function createProduct(int $id = null, int $product_offer_id = null, object|array $folder = null, string $name = null, string $description = null, array $media = null, bool $published = null, float $price = null, object|array $vat_category = null, float $vat_percentage = null, string $type = null, bool $is_archived = null, string $created = null, string $modified = null, string $memo = null): Model\Product
     {
         $request = new Request("POST", "/v30/products", get_defined_vars());
         $request->enablePathParameters();
@@ -2216,7 +2216,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function updateProduct(int $obj_id, int $id = null, int $product_offer_id = null, object $folder = null, string $name = null, string $description = null, array $media = null, bool $published = null, float $price = null, object $vat_category = null, float $vat_percentage = null, string $type = null, bool $is_archived = null, string $created = null, string $modified = null, string $memo = null): Model\Product
+    public function updateProduct(int $obj_id, int $id = null, int $product_offer_id = null, object|array $folder = null, string $name = null, string $description = null, array $media = null, bool $published = null, float $price = null, object|array $vat_category = null, float $vat_percentage = null, string $type = null, bool $is_archived = null, string $created = null, string $modified = null, string $memo = null): Model\Product
     {
         $request = new Request("PUT", "/v30/products/{obj_id}", get_defined_vars());
         $request->enablePathParameters("obj_id");
@@ -2469,7 +2469,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function createStorageObject(int $id = null, object $url = null, object $url_sm = null, object $url_md = null, object $url_lg = null, object $is_image = null, object $type = null): Model\StorageObject
+    public function createStorageObject(int $id = null, object|array $url = null, object|array $url_sm = null, object|array $url_md = null, object|array $url_lg = null, object|array $is_image = null, object|array $type = null): Model\StorageObject
     {
         $request = new Request("POST", "/v30/storage", get_defined_vars());
         $request->enablePathParameters();
@@ -2493,7 +2493,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function updateStorageObject(int $obj_id, int $id = null, object $url = null, object $url_sm = null, object $url_md = null, object $url_lg = null, object $is_image = null, object $type = null): Model\StorageObject
+    public function updateStorageObject(int $obj_id, int $id = null, object|array $url = null, object|array $url_sm = null, object|array $url_md = null, object|array $url_lg = null, object|array $is_image = null, object|array $type = null): Model\StorageObject
     {
         $request = new Request("PUT", "/v30/storage/{obj_id}", get_defined_vars());
         $request->enablePathParameters("obj_id");
@@ -2558,7 +2558,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function createWebhook(int $id = null, string $url = null, object $headers = null, string $version = null, string $signal = null, string $technical_contact_email = null, string $http_basic_auth_key = null, bool $http_basic_auth_enabled = null): Model\Webhook
+    public function createWebhook(int $id = null, string $url = null, object|array $headers = null, string $version = null, string $signal = null, string $technical_contact_email = null, string $http_basic_auth_key = null, bool $http_basic_auth_enabled = null): Model\Webhook
     {
         $request = new Request("POST", "/v30/webhooks", get_defined_vars());
         $request->enablePathParameters();
@@ -2582,7 +2582,7 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function updateWebhook(int $obj_id, int $id = null, string $url = null, object $headers = null, string $version = null, string $signal = null, string $technical_contact_email = null, string $http_basic_auth_key = null, bool $http_basic_auth_enabled = null): Model\Webhook
+    public function updateWebhook(int $obj_id, int $id = null, string $url = null, object|array $headers = null, string $version = null, string $signal = null, string $technical_contact_email = null, string $http_basic_auth_key = null, bool $http_basic_auth_enabled = null): Model\Webhook
     {
         $request = new Request("PUT", "/v30/webhooks/{obj_id}", get_defined_vars());
         $request->enablePathParameters("obj_id");
