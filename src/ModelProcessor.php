@@ -3,6 +3,7 @@
 namespace Compucie\Congressus;
 
 use Compucie\Congressus\Model\ModelInterface;
+use Compucie\Congressus\Model\StorageObject;
 
 class ModelProcessor
 {
@@ -41,4 +42,24 @@ class ModelProcessor
     {
         return ObjectSerializer::deserialize($json, $type);
     }
+
+    /**
+     * Return the first image object in the given media array.
+     * @param   Model\StorageObject[]   $media  The media array to search in.
+     * @return  Model\StorageObject
+     * @throws  NoImageFoundException
+     */
+    public static function getFirstImage(array $media): StorageObject
+    {
+        foreach ($media as $entry) {
+            if ($entry->getIsImage()) {
+                return $entry;
+            }
+        }
+        throw new NoImageFoundException;
+    }
+}
+
+class NoImageFoundException extends \Exception
+{
 }
