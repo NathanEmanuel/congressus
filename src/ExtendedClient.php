@@ -22,11 +22,11 @@ class ExtendedClient extends Client
      ***************************************************************/
 
     /**
-     * Retrieve the user by its username. This function performs a search based on
-     * the given username and checks the returned users for the correct username. Throw
-     * a UserNotFoundException when no user with the correct username is found.
+     * Retrieve the member by their username. This function performs a member search based on
+     * the given username and checks the returned members for the correct username. Throw
+     * a UserNotFoundException when no member with the correct username is found.
      * @param   string $username                The username to search for.
-     * @return  Model\MemberWithCustomFields    The user with the given username.
+     * @return  Model\MemberWithCustomFields    The member with the given username.
      * @throws  UserNotFoundException
      */
     public function retrieveMemberByUsername(string $username): Model\MemberWithCustomFields
@@ -47,10 +47,10 @@ class ExtendedClient extends Client
 
     /**
      * Return the upcoming events. The amount of events is limited by the argument.
-     * @param   int|string      $limit      The maximum amount of events to return.
-     * @return  array                       An array containing the upcoming events as Event objects.
+     * @param   ?int            $limit      The maximum amount of events to return.
+     * @return  Model\Event[]               An array containing the upcoming events as Event objects.
      */
-    public function listUpcomingEvents(int|string $limit): array
+    public function listUpcomingEvents(int $limit = null): array
     {
         $events = $this->listEvents(
             $limit,
@@ -84,11 +84,11 @@ class ExtendedClient extends Client
      ***************************************************************/
 
     /**
-     * Return an array of product folder whose slugs match the ones given. The
-     * array is in order as the slugs are given. Watch out for folders with 
+     * Return an array of product folders whose slugs match the ones given. The
+     * array is in order as the slugs are given. Watch out for folders with
      * differing paths but identical slugs.
      * @param   string                  ...$slugs       The slugs of the folders to retrieve.
-     * @return  Model\ProductFolder[]                   Array of the folders with the given slugs.
+     * @return  Model\ProductFolder[]                   An array of folders with the given slugs.
      */
     public function retrieveProductFoldersBySlug(...$slugs): array
     {
@@ -118,6 +118,7 @@ class ExtendedClient extends Client
     }
 
     /**
+     * Return a flattened product folder array based on a given product folder with children object.
      * @param   Model\ProductFolderWithChildren   $folderWithChildren
      * @return  Model\ProductFolder[]
      */
