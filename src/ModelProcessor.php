@@ -8,6 +8,19 @@ use Compucie\Congressus\Model\StorageObject;
 class ModelProcessor
 {
     /**
+     * Recursvily convert an object to an array. This method ensures that any object
+     * contained in the given array are also converted to arrays. This useful because
+     * simply casting the object to an array does not convert contained objects.
+     * 
+     * @param   object  $object     The object to convert.
+     * @return  array
+     */
+    public static function convertObjectToArray(object $object): array
+    {
+        return json_decode(self::json_encode($object), associative: true);
+    }
+
+    /**
      * Typecast a model object.
      *
      * @param  ModelInterface   $model      The object to typecast.
