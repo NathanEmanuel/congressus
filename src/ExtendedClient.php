@@ -22,6 +22,20 @@ class ExtendedClient extends Client
      ***************************************************************/
 
     /**
+     * Retrieve one or multiple members.
+     * @param   int[]   $ids    The IDs of the members to retrieve.
+     * @return  array           Array of members with the given IDs.
+     */
+    public function retrieveMembers(array $ids): array
+    {
+        $members = array();
+        foreach ($ids as $id) {
+            $members[] = $this->retrieveMember($id);
+        }
+        return $members;
+    }
+
+    /**
      * Retrieve the member by their username. This function performs a member search based on
      * the given username and checks the returned members for the correct username. Throw
      * a UserNotFoundException when no member with the correct username is found.
