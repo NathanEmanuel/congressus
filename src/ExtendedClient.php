@@ -11,12 +11,6 @@ use Compucie\Congressus\Model\ProductFolderWithChildren;
 
 class ExtendedClient extends Client
 {
-    public function __construct(string $token)
-    {
-        parent::__construct($token);
-    }
-
-
     /***************************************************************
      * MEMBERS
      ***************************************************************/
