@@ -46,6 +46,20 @@ class ExtendedClient extends Client
      ***************************************************************/
 
     /**
+     * Retrieve one or multiple events.
+     * @param   int[]   $ids    The IDs of the events to retrieve.
+     * @return  array           Array of events with the given IDs.
+     */
+    public function retrieveEvents(array $ids): array
+    {
+        $events = array();
+        foreach ($ids as $id) {
+            $events[] = $this->retrieveEvent($id);
+        }
+        return $events;
+    }
+
+    /**
      * Return the upcoming events. The amount of events is limited by the argument.
      * @param   ?int            $limit      The maximum amount of events to return.
      * @return  Model\Event[]               An array containing the upcoming events as Event objects.
