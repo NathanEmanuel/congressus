@@ -157,6 +157,4 @@ class ExtendedClient extends Client
     }
 }
 
-class UserNotFoundException extends \Exception
-{
-}
+class UserNotFoundException extends \Exception {}
