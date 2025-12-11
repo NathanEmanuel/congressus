@@ -42,16 +42,20 @@ class WebhookEndpoint
             throw new WebhookParsingException();
         }
 
-        $webhookId = (int) ($body['webhook_id'] ?? 0);
-        $webhookEvent = (string) ($body['webhook_event'] ?? '');
-        $webhookEventTrigger = (string) ($body['webhook_event_trigger'] ?? '');
-        $created = new DateTime($body['created'] ?? 'now');
-        $data = $body["data"] ?? null;
-        $member = ObjectSerializer::deserialize($data['member'] ?? null, MemberWithCustomFields::class);
-        $event = ObjectSerializer::deserialize($data['event'] ?? null, Event::class);
-        $saleInvoice = ObjectSerializer::deserialize($data['sale_invoice'] ?? null, SaleInvoice::class);
-
-        return new WebhookCall($webhookId, $webhookEvent, $webhookEventTrigger, $created, $data, $member, $event, $saleInvoice);
+        try {
+            $webhookId = (int) ($body['webhook_id'] ?? 0);
+            $webhookEvent = (string) ($body['webhook_event'] ?? '');
+            $webhookEventTrigger = (string) ($body['webhook_event_trigger'] ?? '');
+            $created = new DateTime($body['created'] ?? 'now');
+            $data = $body["data"] ?? null;
+            $member = ObjectSerializer::deserialize($data['member'] ?? null, MemberWithCustomFields::class);
+            $event = ObjectSerializer::deserialize($data['event'] ?? null, Event::class);
+            $saleInvoice = ObjectSerializer::deserialize($data['sale_invoice'] ?? null, SaleInvoice::class);
+    
+            return new WebhookCall($webhookId, $webhookEvent, $webhookEventTrigger, $created, $data, $member, $event, $saleInvoice);
+        } catch (\Exception) {
+            throw new WebhookParsingException();
+        }
     }
 
     private function isCallAuthenticated(): bool
