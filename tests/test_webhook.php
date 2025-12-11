@@ -6,7 +6,7 @@ use Compucie\Congressus\WebhookParsingException;
 
 require_once "../vendor/autoload.php";
 
-$endpoint = new WebhookEndpoint("meO2j/ZsrD/kwcupUi482ZreiUgT+TXj1L0peJkv498");
+$endpoint = new WebhookEndpoint("password");
 
 try {
     $call = $endpoint->receiveWebhookCall();
