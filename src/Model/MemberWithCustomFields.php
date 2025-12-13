@@ -2019,6 +2019,20 @@ class MemberWithCustomFields implements ModelInterface, ArrayAccess, \JsonSerial
     }
 
     /**
+     * Gets the value of a custom field identified by the fields name.
+     * Custom fields are accompanied by meta information, which is generally not relevant.
+     * This method only returns the value; the interesting part.
+     * 
+     * @param string $custom_field_name Name of the custom field to get the value for.
+     * 
+     * @return mixed|null
+     */
+    public function getCustomFieldValue($custom_field_name): mixed
+    {
+        return $this->getCustomFields()[$custom_field_name]["value"] ?? null;
+    }
+
+    /**
      * Gets custom_fields
      *
      * @return mixed|null
