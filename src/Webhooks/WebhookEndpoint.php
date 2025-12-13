@@ -72,6 +72,7 @@ class WebhookEndpoint
             return false;
         }
 
+        // Decode the Authorization header manually. PHP's $_SERVER['PHP_AUTH_PW'] may not be available on all servers.
         $encoded = substr($_SERVER['HTTP_AUTHORIZATION'], 6);
         $decoded = base64_decode($encoded);
         $password = explode(':', $decoded, 2)[1];
