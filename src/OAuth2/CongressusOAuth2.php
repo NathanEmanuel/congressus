@@ -17,11 +17,12 @@ class CongressusOAuth2 extends AbstractProvider
 
     private string $domain;
     private CongressusAccessToken $accessToken;
+    private array $scope = [];
 
-    public function __construct(string $clientId, string $clientSecret, string $domain, array $options = [], array $collaborators = [])
+    public function __construct(string $clientId, string $clientSecret, string $domain, array $scope = [], array $options = [], array $collaborators = [])
     {
         $this->domain = parse_url($domain, PHP_URL_HOST);
-
+        $this->scope = $scope;
         $defaultOptions = [
             'clientId' => $clientId,
             'clientSecret' => $clientSecret,
@@ -126,9 +127,9 @@ class CongressusOAuth2 extends AbstractProvider
         return "https://{$this->getDomain()}/oauth/userinfo";
     }
 
-    protected function getDefaultScopes()
+    protected function getDefaultScopes(): array
     {
-        return ['openid'];
+        return $this->scope;
     }
 
     protected function checkResponse(ResponseInterface $response, $data)
