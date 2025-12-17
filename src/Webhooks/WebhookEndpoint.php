@@ -10,7 +10,7 @@ use DateTime;
 
 class WebhookEndpoint
 {
-    private string $password;
+    private ?string $password;
 
     public function __construct(?string $password = null) {
         $this->password = $password;
