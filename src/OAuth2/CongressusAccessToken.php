@@ -13,8 +13,8 @@ class CongressusAccessToken extends AccessToken
     protected string $name;
     protected string $idToken;
 
-	public function __construct(array $options = [])
-	{
+    public function __construct(array $options = [])
+    {
         parent::__construct(array_merge([
             'access_token' => $options['access_token'] ?? null,
             'refresh_token' => $options['refresh_token'] ?? null,
@@ -25,5 +25,5 @@ class CongressusAccessToken extends AccessToken
         $this->tokenType = $options['token_type'] ?? '';
         $this->name = $options['name'] ?? '';
         $this->idToken = $options['id_token'] ?? '';
-	}
+    }
 }

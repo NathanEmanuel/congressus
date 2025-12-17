@@ -47,8 +47,6 @@ class CongressusOAuth2 extends AbstractProvider
         } else {
             try {
                 $this->getAccessToken();
-
-                echo json_encode($this->getResourceOwner()->toArray());
             } catch (IdentityProviderException $e) {
                 exit("Request failed: {$e->getMessage()}");
             }
