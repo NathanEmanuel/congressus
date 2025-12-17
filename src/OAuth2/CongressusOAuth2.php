@@ -80,12 +80,12 @@ class CongressusOAuth2 extends AbstractProvider
      * Requests and returns the resource owner of given access token.
      *
      * @param  AccessToken|null $token
-     * @return ResourceOwnerInterface
+     * @return CongressusResourceOwner
      * @throws IdentityProviderException
      * @throws UnexpectedValueException
      * @throws GuzzleException
      */
-    public function getResourceOwner(?AccessToken $token = null)
+    public function getResourceOwner(?AccessToken $token = null): CongressusResourceOwner
     {
         $token = $token ?: $this->getAccessToken();
         $response = $this->fetchResourceOwnerDetails($token);

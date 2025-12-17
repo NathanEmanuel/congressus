@@ -15,9 +15,14 @@ class CongressusResourceOwner implements ResourceOwnerInterface
         $this->response = $response;
     }
 
-    public function getId()
+    public function getId(): ?int
     {
-        return $this->response['sub'] ?? null;
+        return $this->response['user_id'] ?? null;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->response['is_active'] ?? null;
     }
 
     public function toArray()
