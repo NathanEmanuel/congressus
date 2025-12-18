@@ -1,14 +1,22 @@
 {
     "name": "compucie/congressus",
     "description": "Library for the Congressus API.",
-    "version": "2.2.0",
+    "version": "2.3.0",
     "license": "MIT",
     "type": "library",
+    "authors": [
+        {
+            "name": "Nathan Djojomoenawie",
+            "email": "nathan21100@gmail.com"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Compucie\\Congressus\\": "src/"
         }
     },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "require": {
         "guzzlehttp/guzzle": "^7.8",
         "league/oauth2-client": "^2.9"
