@@ -31,6 +31,31 @@ foreach ($upcomingEvents as $event) {
 }
 ```
 
+
+## Webhooks
+
+**Important**: This part of the library is currently in BETA. Method signatures may be changed without notice.
+
+This library supports receiving webhook calls made by Congressus. You can read more about Congressus webhooks in [their API documentation](https://api.congressus.nl/v30/docs#section/Webhooks). You can register webhooks in [Congressus Manager](https://manager.congressus.nl/settings/integrations/webhooks). Currently, the library only support webhook authentication through HTTP Basic Authentication. You get the password from Congressus.
+
+
+### Using the library
+
+Instantiate a webhook endpoint object, providing the HTTP Basic Authentication password that you got from Congressus. You can then receive calls by calling the `receiveWebhookCall()` method. This returns a `\Compucie\Congressus\Webhooks\WebhookCall` object. Note that this is different from `\Compucie\Congressus\Model\WebhookCall`!
+
+The webhook call object contains all call metadata and the payload, which you can retrieve using the object getters. It is advised to use getters `getMember()`, `getEvent()`, or `getSaleInvoice()`. Which one to use depends on the event you selected to trigger the webhook call. The other getters will return `null`. You can retrieve the raw payload using `getData()`, but this should be avoided.
+
+Note that by calling `getMember()`, despite returning a `MemberWithCustomFields` object, the custom fields are not populated. This is due to the a different schema being used in webhooks for member objects. You can access custom fields using `getData()`.
+
+
+### Example
+
+```PHP
+$endpoint = new WebhookEndpoint(getenv['WEBHOOK_HTTP_BASIC_AUTH']);
+if (($call = $endpoint->receiveWebhookCall()) === null) exit;
+$birthdayPreference = $call->getData()["member"]["custom_field_data"]["field_preference_birthday"] ?? false;
+```
+
 ## OAuth2
 
 This library supports authentication via Congressus using OAuth2. The library handles all of the auth flow. All you need to do is registering your OAuth2 application with Congressus, which you can do [here](https://manager.congressus.nl/settings/integrations/apps).
