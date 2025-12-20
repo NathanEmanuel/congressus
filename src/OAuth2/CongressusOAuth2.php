@@ -9,8 +9,6 @@ use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Tool\BearerAuthorizationTrait;
 use Psr\Http\Message\ResponseInterface;
 
-require_once __DIR__ . '/../../vendor/autoload.php';
-
 class CongressusOAuth2 extends AbstractProvider
 {
     use BearerAuthorizationTrait;

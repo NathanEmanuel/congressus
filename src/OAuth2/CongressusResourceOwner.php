@@ -4,8 +4,6 @@ namespace Compucie\Congressus\OAuth2;
 
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 
-require_once __DIR__ . '/../../vendor/autoload.php';
-
 class CongressusResourceOwner implements ResourceOwnerInterface
 {
     private array $response;

@@ -6,8 +6,6 @@ use DateTime;
 use DateTimeZone;
 use League\OAuth2\Client\Token\AccessToken;
 
-require_once __DIR__ . '/../../vendor/autoload.php';
-
 class CongressusAccessToken extends AccessToken
 {
     protected string $tokenType;
