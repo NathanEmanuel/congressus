@@ -49,6 +49,34 @@ class ExtendedClient extends Client
         throw new UserNotFoundException();
     }
 
+    /**
+     * Retrieve the member by their name. This function performs a member search based on
+     * the given name and checks the returned members for the correct name. Throw
+     * a UserNotFoundException when no member with the correct name is found.
+     * @param   string $name                    The name to search for.
+     * @return  array<Model\MemberWithCustomFields>    The member with the given name.
+     */
+    public function retrieveTopMembersByName(string $name, int $count = null): array
+    {
+        $members = $this->searchMembers(limit: null, term: $name);
+        $counter = $count ?? count($members);
+        $returnMembers = array();
+        foreach ($members as $member) {
+            if ($counter > 0) {
+                try {
+                    $resultMember = $this->retrieveMember(obj_id: $member->getId()); // don't return ElasticMember
+                    $returnMembers[] = $resultMember;
+                } catch (RequestException $e) {
+                    error_log($e->getMessage());
+                    continue;
+                }
+                $counter--;
+            }
+        }
+
+        return $returnMembers;
+    }
+
 
     /***************************************************************
      * EVENTS

@@ -13,12 +13,13 @@ use function PHPUnit\Framework\assertTrue;
 class ExtendedClientTest extends TestCase
 {
     private ExtendedClient $client;
+    private array $env;
 
     protected function setUp(): void
     {
-        $env = parse_ini_file(".env", true);
-        if ($env) {
-            $this->client = new ExtendedClient($env["congressus"]);
+        $this->env = parse_ini_file(".env", true);
+        if ($this->env) {
+            $this->client = new ExtendedClient($this->env["congressus"]);
         }
     }
 
@@ -29,6 +30,19 @@ class ExtendedClientTest extends TestCase
     {
         $member = $this->getClient()->retrieveMemberByUsername("s2191229");
         assertSame("s2191229", $member->getUsername());
+    }
+
+    function testRetrieveTopMembersByName(): void
+    {
+        $name = $this->env["RetrieveTopMembersByName_name"];
+        $members = $this->getClient()->retrieveTopMembersByName($name);
+        assertGreaterThan(0, count($members));
+
+        $members = $this->getClient()->retrieveTopMembersByName($name, 1);
+        assertSame(1, count($members));
+
+        $members = $this->getClient()->retrieveTopMembersByName($name, 2);
+        assertSame(2, count($members));
     }
 
     function testListUpcomingEventsList()
