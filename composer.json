@@ -22,6 +22,15 @@
         "league/oauth2-client": "^2.9"
     },
     "require-dev": {
-        "phpunit/phpunit": "11"
+        "phpunit/phpunit": "11.5.46",
+        "phpstan/phpstan": "2.1.33"
+    },
+    "scripts": {
+        "phpstan-base" : "vendor/bin/phpstan analyse src tests -b -l 8 --allow-empty-baseline",
+        "phpstan-check" : "vendor/bin/phpstan analyse -c phpstan.neon",
+        "test": [
+            "Composer\\Config::disableProcessTimeout",
+            "vendor/bin/phpunit --teamcity"
+        ]
     }
 }
