@@ -2,12 +2,13 @@
 
 namespace Compucie\Congressus;
 
-use Compucie\Congressus\Client;
-use Compucie\Congressus\Model;
+use Compucie\Congressus\Exceptions\UserNotFoundException;
 use Compucie\Congressus\Model\Event;
 use Compucie\Congressus\Model\Member;
 use Compucie\Congressus\Model\MemberWithCustomFields;
+use Compucie\Congressus\Model\ProductFolder;
 use Compucie\Congressus\Model\ProductFolderWithChildren;
+use GuzzleHttp\Exception\RequestException;
 
 class ExtendedClient extends Client
 {
@@ -76,8 +77,8 @@ class ExtendedClient extends Client
     {
         $events = $this->listEvents(
             $limit,
-            published: true,
             period_filter: self::formatPeriod(time()),
+            published: true,
             order: "start:asc",
         );
         return array_slice($events, 0, $limit);
@@ -85,8 +86,8 @@ class ExtendedClient extends Client
 
     /**
      * Return whether the given member is a participant of the given event.
-     * @param   Member      $member     The member to check for.
-     * @param   Event       $event      The event to check for.
+     * @param Member|MemberWithCustomFields $member The member to check for.
+     * @param Event $event The event to check for.
      * @return  bool                    Whether the member is a participant in the event.
      */
     public function isMemberEventParticipant(Member|MemberWithCustomFields $member, Event $event): bool
@@ -94,8 +95,8 @@ class ExtendedClient extends Client
         $participations = $this->listEventParticipations(
             limit: null,
             obj_id: $event->getId(),
-            member_id: $member->getId(),
             status: ["approved", "waiting list", "payment pending"],
+            member_id: $member->getId(),
         );
         return count($participations) > 0;
     }
@@ -117,13 +118,14 @@ class ExtendedClient extends Client
         $allProductFolders = $this->listProductFoldersRecursive(null);
 
         // Flatten
-        /** @var ProductFolder[] */
+        /** @var ProductFolder[] $allProductFoldersFlattened */
         $allProductFoldersFlattened = array();
         foreach ($allProductFolders as $folder) {
             $allProductFoldersFlattened = array_merge($allProductFoldersFlattened, self::flattenProductFolderWithChildren($folder));
         }
 
         // Filter on argument slugs
+        $productFoldersAlphabetical = array();
         foreach ($allProductFoldersFlattened as $folder) {
             if (in_array($folder->getSlug(), $slugs)) {
                 $productFoldersAlphabetical[$folder->getSlug()] = $folder;
@@ -146,7 +148,7 @@ class ExtendedClient extends Client
      */
     protected static function flattenProductFolderWithChildren(ProductFolderWithChildren $folderWithChildren): array
     {
-        /** @var ProductFolder[] */
+        /** @var ProductFolder[] $flattenedChildren */
         $flattenedChildren = array();
         foreach ($folderWithChildren->getChildren() as $child) {
             $flattenedChildren = array_merge($flattenedChildren, self::flattenProductFolderWithChildren($child));
@@ -157,4 +159,3 @@ class ExtendedClient extends Client
     }
 }
 
-class UserNotFoundException extends \Exception {}
