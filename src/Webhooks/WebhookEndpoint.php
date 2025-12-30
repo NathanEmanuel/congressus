@@ -6,6 +6,8 @@ use Compucie\Congressus\Model\Event;
 use Compucie\Congressus\Model\MemberWithCustomFields;
 use Compucie\Congressus\Model\SaleInvoice;
 use Compucie\Congressus\ObjectSerializer;
+use Compucie\Congressus\Webhooks\Exceptions\WebhookAuthenticationException;
+use Compucie\Congressus\Webhooks\Exceptions\WebhookParsingException;
 use DateTime;
 
 class WebhookEndpoint
@@ -89,6 +91,3 @@ class WebhookEndpoint
         $this->password = $password;
     }
 }
-
-class WebhookAuthenticationException extends \Exception {}
-class WebhookParsingException extends \Exception {}
