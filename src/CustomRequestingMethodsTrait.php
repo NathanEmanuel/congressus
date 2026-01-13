@@ -2,9 +2,6 @@
 
 namespace Compucie\Congressus;
 
-use Compucie\Congressus\Model;
-use Compucie\Congressus\Request;
-
 trait CustomRequestingMethodsTrait
 {
     /**
@@ -279,5 +276,35 @@ trait CustomRequestingMethodsTrait
             $pageNumber++;
         }
         return array_slice($result, 0, $limit);
+    }
+
+    // Product
+
+    /**
+     * Mistake in Congressus's OpenAPI spec.
+     * @generated
+     * @modified
+     */
+    public function createProduct(int $product_offer_id = null, int $folder_id = null, string $name = null, string $description = null, bool $published = null, float $price = null, object|array $vat_category = null, float $vat_percentage = null, bool $is_archived = null, string $created = null, string $modified = null, string $memo = null): Model\Product
+    {
+        $request = new Request("POST", "/v30/products", get_defined_vars());
+        $request->enablePathParameters();
+        $request->enableQueryParameters();
+        $request->enableBodyFields("product_offer_id", "folder_id", "name", "description", "published", "price", "vat_category", "vat_percentage", "is_archived", "created", "modified", "memo");
+        return $this->submit($request, Model\Product::class);
+    }
+
+    /**
+     * Mistake in Congressus's OpenAPI spec.
+     * @generated
+     * @modified
+     */
+    public function updateProduct(int $obj_id, int $product_offer_id = null, int $folder_id = null, string $name = null, string $description = null, bool $published = null, float $price = null, object|array $vat_category = null, float $vat_percentage = null, bool $is_archived = null, string $created = null, string $modified = null, string $memo = null): Model\Product
+    {
+        $request = new Request("PUT", "/v30/products/{obj_id}", get_defined_vars());
+        $request->enablePathParameters("obj_id");
+        $request->enableQueryParameters();
+        $request->enableBodyFields("product_offer_id", "folder_id", "name", "description", "published", "price", "vat_category", "vat_percentage", "is_archived", "created", "modified", "memo");
+        return $this->submit($request, Model\Product::class);
     }
 }
