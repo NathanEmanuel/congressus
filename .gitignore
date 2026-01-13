@@ -2,3 +2,5 @@
 vendor/
 target/
 beun.php
+tests/.env
+/var/
