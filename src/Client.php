@@ -2,8 +2,9 @@
 
 namespace Compucie\Congressus;
 
-use Compucie\Congressus\Request;
 use GuzzleHttp;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Psr7\Utils;
 
 class Client extends GuzzleHttp\Client
 {
@@ -22,9 +23,10 @@ class Client extends GuzzleHttp\Client
 
     /**
      * Submit a request to the Congressus API and return the response as an (array of) data model object(s) or as a page.
-     * @param   Request     $request    Request to submit.
-     * @param   string      $type       Data type of the response.
+     * @param Request $request Request to submit.
+     * @param string|null $type Data type of the response.
      * @return  mixed                   Response as a data model object, data model object array, or page.
+     * @throws GuzzleException
      */
     private function submit(Request $request, string $type = null): mixed
     {
@@ -41,13 +43,14 @@ class Client extends GuzzleHttp\Client
 
     /**
      * Download a file to the given file system location.
-     * @param   Request $request    The request to submit.
-     * @param   string  $filePath   The location where to save the file.
+     * @param Request $request The request to submit.
+     * @param string $filePath The location where to save the file.
+     * @throws GuzzleException
      */
     private function download(Request $request, string $filePath): void
     {
-        $resource = \GuzzleHttp\Psr7\Utils::tryFopen($filePath, 'w');
-        $stream = \GuzzleHttp\Psr7\Utils::streamFor($resource);
+        $resource = Utils::tryFopen($filePath, 'w');
+        $stream = Utils::streamFor($resource);
         $this->request($request->getMethod(), $request->getPath(), ["sink" => $stream]); // send() does not seem to work
     }
 
@@ -74,8 +77,8 @@ class Client extends GuzzleHttp\Client
 
     /**
      * Return a formatted period suitable for the API based on a start and/or end timestamp.
-     * @param   int     $period_start   Start of filter period in Unix time
-     * @param   int     $period_end     End of filter period in Unix time
+     * @param int|null $period_start Start of filter period in Unix time
+     * @param int|null $period_end End of filter period in Unix time
      * @return  string                  Period string representation suitable for the API
      */
     public static function formatPeriod(int $period_start = null, int $period_end = null,): string

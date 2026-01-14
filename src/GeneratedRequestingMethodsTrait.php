@@ -2192,36 +2192,12 @@ trait GeneratedRequestingMethodsTrait
     /**
      * @generated
      */
-    public function createProduct(int $id = null, int $product_offer_id = null, object|array $folder = null, string $name = null, string $description = null, array $media = null, bool $published = null, float $price = null, object|array $vat_category = null, float $vat_percentage = null, string $type = null, bool $is_archived = null, string $created = null, string $modified = null, string $memo = null): Model\Product
-    {
-        $request = new Request("POST", "/v30/products", get_defined_vars());
-        $request->enablePathParameters();
-        $request->enableQueryParameters();
-        $request->enableBodyFields("id", "product_offer_id", "folder", "name", "description", "media", "published", "price", "vat_category", "vat_percentage", "type", "is_archived", "created", "modified", "memo");
-        return $this->submit($request, Model\Product::class);
-    }
-
-    /**
-     * @generated
-     */
     public function retrieveProduct(int $obj_id): Model\Product
     {
         $request = new Request("GET", "/v30/products/{obj_id}", get_defined_vars());
         $request->enablePathParameters("obj_id");
         $request->enableQueryParameters();
         $request->enableBodyFields();
-        return $this->submit($request, Model\Product::class);
-    }
-
-    /**
-     * @generated
-     */
-    public function updateProduct(int $obj_id, int $id = null, int $product_offer_id = null, object|array $folder = null, string $name = null, string $description = null, array $media = null, bool $published = null, float $price = null, object|array $vat_category = null, float $vat_percentage = null, string $type = null, bool $is_archived = null, string $created = null, string $modified = null, string $memo = null): Model\Product
-    {
-        $request = new Request("PUT", "/v30/products/{obj_id}", get_defined_vars());
-        $request->enablePathParameters("obj_id");
-        $request->enableQueryParameters();
-        $request->enableBodyFields("id", "product_offer_id", "folder", "name", "description", "media", "published", "price", "vat_category", "vat_percentage", "type", "is_archived", "created", "modified", "memo");
         return $this->submit($request, Model\Product::class);
     }
 

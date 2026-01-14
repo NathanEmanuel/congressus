@@ -25,7 +25,11 @@ class Request extends Psr7Request
 
     private static function sanitizeObject(object $object): object
     {
-        $object = (object) array_filter((array) ObjectSerializer::sanitizeForSerialization($object));
+        $arr = (array) ObjectSerializer::sanitizeForSerialization($object);
+
+        $arr = array_filter($arr, static fn($v) => $v !== null);
+
+        $object = (object) $arr;
         foreach ($object as $key => $value) {
             if (is_object($value)) {
                 $object->$key = self::sanitizeObject($value);
@@ -38,7 +42,7 @@ class Request extends Psr7Request
 
     private static function sanitizeArray(array $array): array
     {
-        $array = array_filter($array);
+        $array = array_filter($array, static fn($v) => $v !== null);
         foreach ($array as $key =>  $value) {
             if (is_object($value)) {
                 $array[$key] = self::sanitizeObject($value);
@@ -93,11 +97,16 @@ class Request extends Psr7Request
         $query = array();
 
         foreach ($parameters as $param) {
-            try {
-                $query[$param] = $this->getArg($param);
-            } catch (\TypeError) {
+            $val = $this->getArg($param);
+            if ($val === null) {
                 continue;
             }
+
+            if (is_bool($val)) {
+                $val = $val ? 'true' : 'false';
+            }
+
+            $query[$param] = $val;
         }
 
         $this->setOption("query", self::buildQueryString($query));
@@ -122,11 +131,13 @@ class Request extends Psr7Request
     {
         $body = array();
         foreach ($bodyFields as $field) {
-            try {
-                $body[$field] = $this->getArg($field);
-            } catch (\TypeError) {
+            $val = $this->getArg($field);
+
+            if ($val === null) {
                 continue;
             }
+
+            $body[$field] = $val;
         }
         $this->setOption("json", $body);
     }
@@ -156,8 +167,8 @@ class Request extends Psr7Request
         $this->args = $args;
     }
 
-    private function getArg(string $key): string|array
+    private function getArg(string $key): mixed
     {
-        return $this->getArgs()[$key];
+        return $this->getArgs()[$key] ?? null;
     }
 }

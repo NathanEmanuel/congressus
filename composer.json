@@ -1,7 +1,7 @@
 {
     "name": "compucie/congressus",
     "description": "Library for the Congressus API.",
-    "version": "2.3.1",
+    "version": "2.5.0",
     "license": "MIT",
     "type": "library",
     "authors": [

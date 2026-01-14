@@ -83,6 +83,189 @@ class ExtendedClientTest extends TestCase
         }
     }
 
+    function testCreateProductPublished()
+    {
+        $folderId = 6669;
+        $productName = "test";
+        $price = 0.00;
+
+        $product = $this->getClient()->createProduct(
+            folder_id: $folderId,
+            name: $productName,
+            published: true,
+            price: $price,
+            is_archived: false
+        );
+        assertTrue($product->getPublished());
+        assertFalse($product->getIsArchived());
+        assertSame($folderId, $product->getFolder()->getId());
+        assertSame($productName, $product->getName());
+        assertSame($price, $product->getPrice());
+        echo $product;
+
+        $this->getClient()->deleteProduct($product->getId());
+    }
+
+    function testCreateProductArchived()
+    {
+        $folderId = 6669;
+        $productName = "test";
+        $price = 0.00;
+
+        $product = $this->getClient()->createProduct(
+            folder_id: $folderId,
+            name: $productName,
+            published: false,
+            price: $price,
+            is_archived: true
+        );
+        assertFalse($product->getPublished());
+        assertTrue($product->getIsArchived());
+        assertSame($folderId, $product->getFolder()->getId());
+        assertSame($productName, $product->getName());
+        assertSame($price, $product->getPrice());
+        echo $product;
+
+        $this->getClient()->deleteProduct($product->getId());
+    }
+
+    function testCreateProductConcept()
+    {
+        $folderId = 6669;
+        $productName = "test";
+        $price = 0.00;
+
+        $product = $this->getClient()->createProduct(
+            folder_id: $folderId,
+            name: $productName,
+            published: false,
+            price: $price,
+            is_archived: false
+        );
+        assertFalse($product->getPublished());
+        assertFalse($product->getIsArchived());
+        assertSame($folderId, $product->getFolder()->getId());
+        assertSame($productName, $product->getName());
+        assertSame($price, $product->getPrice());
+        echo $product;
+
+        $this->getClient()->deleteProduct($product->getId());
+    }
+
+    function testCreateProductUpdatePublishedToArchived()
+    {
+        $folderId = 6669;
+        $productName = "test";
+        $price = 0.00;
+
+        $product = $this->getClient()->createProduct(
+            folder_id: $folderId,
+            name: $productName,
+            published: true,
+            price: $price,
+            is_archived: false
+        );
+        assertTrue($product->getPublished());
+        assertFalse($product->getIsArchived());
+        assertSame($folderId, $product->getFolder()->getId());
+        assertSame($productName, $product->getName());
+        assertSame($price, $product->getPrice());
+
+        $productId = $product->getId();
+        echo $product;
+
+        //update to archived
+        $productUpdated = $this->getClient()->updateProduct(
+            obj_id: $productId,
+            published: false,
+            is_archived: true
+        );
+        assertFalse($productUpdated->getPublished());
+        assertTrue($productUpdated->getIsArchived());
+        assertSame($folderId, $productUpdated->getFolder()->getId());
+        assertSame($productName, $productUpdated->getName());
+        assertSame($price, $productUpdated->getPrice());
+        echo $productUpdated;
+
+        $this->getClient()->deleteProduct($productId);
+    }
+
+    function testCreateProductUpdateArchivedToPublished()
+    {
+        $folderId = 6669;
+        $productName = "test";
+        $price = 0.00;
+
+        $product = $this->getClient()->createProduct(
+            folder_id: $folderId,
+            name: $productName,
+            published: false,
+            price: $price,
+            is_archived: true
+        );
+        assertFalse($product->getPublished());
+        assertTrue($product->getIsArchived());
+        assertSame($folderId, $product->getFolder()->getId());
+        assertSame($productName, $product->getName());
+        assertSame($price, $product->getPrice());
+
+        $productId = $product->getId();
+        echo $product;
+
+        //update to published
+        $productUpdated = $this->getClient()->updateProduct(
+            obj_id: $productId,
+            published: true,
+            is_archived: false
+        );
+        assertTrue($productUpdated->getPublished());
+        assertFalse($productUpdated->getIsArchived());
+        assertSame($folderId, $productUpdated->getFolder()->getId());
+        assertSame($productName, $productUpdated->getName());
+        assertSame($price, $productUpdated->getPrice());
+        echo $productUpdated;
+
+        $this->getClient()->deleteProduct($productId);
+    }
+
+    function testCreateProductUpdateArchivedToConcept()
+    {
+        $folderId = 6669;
+        $productName = "test";
+        $price = 0.00;
+
+        $product = $this->getClient()->createProduct(
+            folder_id: $folderId,
+            name: $productName,
+            published: true,
+            price: $price,
+            is_archived: true
+        );
+        assertTrue($product->getPublished());
+        assertTrue($product->getIsArchived());
+        assertSame($folderId, $product->getFolder()->getId());
+        assertSame($productName, $product->getName());
+        assertSame($price, $product->getPrice());
+
+        $productId = $product->getId();
+        echo $product;
+
+        //update to concept
+        $productUpdated = $this->getClient()->updateProduct(
+            obj_id: $productId,
+            published: false,
+            is_archived: false
+        );
+        assertFalse($productUpdated->getPublished());
+        assertFalse($productUpdated->getIsArchived());
+        assertSame($folderId, $productUpdated->getFolder()->getId());
+        assertSame($productName, $productUpdated->getName());
+        assertSame($price, $productUpdated->getPrice());
+        echo $productUpdated;
+
+        $this->getClient()->deleteProduct($productId);
+    }
+
     private function getClient(): ExtendedClient
     {
         return $this->client;

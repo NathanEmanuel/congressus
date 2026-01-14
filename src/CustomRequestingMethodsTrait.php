@@ -2,12 +2,14 @@
 
 namespace Compucie\Congressus;
 
+use GuzzleHttp\Exception\GuzzleException;
+
 trait CustomRequestingMethodsTrait
 {
     /**
      * Submit a request to the Congressus API and return the response as an (array of) data model object(s) or as a page.
-     * @param   Request     $request    Request to submit.
-     * @param   string      $type       Data type of the response.
+     * @param Request $request Request to submit.
+     * @param string|null $type Data type of the response.
      * @return  mixed                   Response as a data model object, data model object array, or page.
      */
     abstract private function submit(Request $request, string $type = null): mixed;
@@ -22,6 +24,9 @@ trait CustomRequestingMethodsTrait
 
     // LogEntry
 
+    /**
+     * @throws GuzzleException
+     */
     public function createMemberNote(
         int $member_id,
         ?string $text = null,
@@ -34,6 +39,9 @@ trait CustomRequestingMethodsTrait
         return $this->submit($request, Model\CreateNote::class);
     }
 
+    /**
+     * @throws GuzzleException
+     */
     public function createSaleInvoiceNote(
         int $obj_id,
         ?string $text = null,
@@ -46,6 +54,9 @@ trait CustomRequestingMethodsTrait
         return $this->submit($request, Model\CreateNote::class);
     }
 
+    /**
+     * @throws GuzzleException
+     */
     public function createMemberTask(
         int $member_id,
         ?string $text = null,
@@ -60,6 +71,9 @@ trait CustomRequestingMethodsTrait
         return $this->submit($request, Model\CreateTask::class);
     }
 
+    /**
+     * @throws GuzzleException
+     */
     public function createSaleInvoiceTask(
         int $obj_id,
         ?string $text = null,
@@ -74,6 +88,9 @@ trait CustomRequestingMethodsTrait
         return $this->submit($request, Model\CreateTask::class);
     }
 
+    /**
+     * @throws GuzzleException
+     */
     public function updateMemberNote(
         int $member_id,
         int $log_entry_id,
@@ -87,6 +104,9 @@ trait CustomRequestingMethodsTrait
         return $this->submit($request, Model\UpdateNote::class);
     }
 
+    /**
+     * @throws GuzzleException
+     */
     public function updateSaleInvoiceNote(
         int $obj_id,
         int $log_entry_id,
@@ -100,6 +120,9 @@ trait CustomRequestingMethodsTrait
         return $this->submit($request, Model\UpdateNote::class);
     }
 
+    /**
+     * @throws GuzzleException
+     */
     public function updateMemberTask(
         int $member_id,
         int $log_entry_id,
@@ -116,6 +139,9 @@ trait CustomRequestingMethodsTrait
         return $this->submit($request, Model\UpdateTask::class);
     }
 
+    /**
+     * @throws GuzzleException
+     */
     public function updateSaleInvoiceTask(
         int $obj_id,
         int $log_entry_id,
@@ -135,6 +161,9 @@ trait CustomRequestingMethodsTrait
 
     // EventParticipation
 
+    /**
+     * @throws GuzzleException
+     */
     public function updateEventParticipation(int $obj_id, int $event_id, ?string $remarks = null, ?int $participation_certificates_credits_override = null, ?string $participation_certificates_date_override = null): void
     {
         $request = new Request("PUT", "/v30/events/{event_id}/participations/{obj_id}", get_defined_vars());
@@ -143,6 +172,9 @@ trait CustomRequestingMethodsTrait
         $this->submit($request);
     }
 
+    /**
+     * @throws GuzzleException
+     */
     public function approveParticipation(int $event_id, int $obj_id, bool $check_conditions = true): void
     {
         $request = new Request("POST", "/v30/events/{event_id}/participations/{obj_id}/approve", get_defined_vars());
@@ -151,6 +183,9 @@ trait CustomRequestingMethodsTrait
         $this->submit($request);
     }
 
+    /**
+     * @throws GuzzleException
+     */
     public function moveParticipationToWaitingList(int $event_id, int $obj_id, bool $check_conditions = true): void
     {
         $request = new Request("POST", "/v30/events/{event_id}/participations/{obj_id}/wait", get_defined_vars());
@@ -159,6 +194,9 @@ trait CustomRequestingMethodsTrait
         $this->submit($request);
     }
 
+    /**
+     * @throws GuzzleException
+     */
     public function unsubscribeParticipation(int $event_id, int $obj_id, int $fine_percentage = 0): void
     {
         $request = new Request("POST", "/v30/events/{event_id}/participations/{obj_id}/unsubscribe", get_defined_vars());
@@ -167,6 +205,9 @@ trait CustomRequestingMethodsTrait
         $this->submit($request);
     }
 
+    /**
+     * @throws GuzzleException
+     */
     public function declineParticipation(int $event_id, int $obj_id, int $fine_percentage = 0): void
     {
         $request = new Request("POST", "/v30/events/{event_id}/participations/{obj_id}/decline", get_defined_vars());
@@ -178,6 +219,9 @@ trait CustomRequestingMethodsTrait
 
     // TicketType
 
+    /**
+     * @throws GuzzleException
+     */
     public function updateTicketType(int $obj_id, int $event_id, string $availability_status = null, string $available_from = null, string $available_to = null, string $cancel_to = null, string $confirmation_email_text = null, bool $confirmation_email_text_enabled = null, string $description = null, int $filter_id = null, int $id = null, string $modified = null, string $name, int $num_tickets = null, object $num_tickets_available = null, int $num_tickets_max = null, string $num_tickets_max_per = null, int $num_tickets_sold = null, float $price = null, bool $pricing_enabled = null, object $vat_category = null, int $vat_category_id, string $visibility_level = null, bool $waiting_list_enabled = null, float $participation_certificate_credits = null): void
     {
         $request = new Request("PUT", "/v30/events/{event_id}/ticket-types/{obj_id}", get_defined_vars());
@@ -193,6 +237,7 @@ trait CustomRequestingMethodsTrait
      * Mistake in Congressus's OpenAPI spec.
      * @generated
      * @modified
+     * @throws GuzzleException
      */
     public function createSaleInvoice(array $items, int $entity_id = null, string $invoice_date = null, string $invoice_reference = null, int $member_id = null, int $collection_id = null, string $contribution_start = null, string $contribution_end = null, bool $use_direct_debit = null, int $invoice_workflow_id = null, string $addressee = null, string $addressee_attention = null, string $email = null, object $address = null): Model\SaleInvoice
     {
@@ -207,6 +252,7 @@ trait CustomRequestingMethodsTrait
      * Mistake in Congressus's OpenAPI spec.
      * @generated
      * @modified
+     * @throws GuzzleException
      */
     public function updateSaleInvoice(int $obj_id, array $items, int $entity_id = null, string $invoice_date = null, string $invoice_reference = null, int $member_id = null, int $collection_id = null, string $contribution_start = null, string $contribution_end = null, bool $use_direct_debit = null, int $invoice_workflow_id = null, string $addressee = null, string $addressee_attention = null, string $email = null, object $address = null): Model\SaleInvoice
     {
@@ -218,8 +264,9 @@ trait CustomRequestingMethodsTrait
     }
 
     /**
-     * @param   int     $obj_id         ID of the invoice to download.
-     * @param   int     $filePath       File system location where to save the file.
+     * @param int $obj_id ID of the invoice to download.
+     * @param string $filePath File system location where to save the file.
+     * @throws GuzzleException
      */
     public function downloadASaleInvoiceAsPdfFile(int $obj_id, string $filePath): void
     {
@@ -233,6 +280,7 @@ trait CustomRequestingMethodsTrait
      * I "fixed" this by always setting a delivery method, with the API's default value as this method's default value.
      * @generated
      * @modified
+     * @throws GuzzleException
      */
     public function sendASaleInvoice(int $obj_id, string $delivery_method = "according_workflow", string $email_subject = null, string $email_text = null): void
     {
@@ -247,6 +295,7 @@ trait CustomRequestingMethodsTrait
      * Mistake in Congressus's OpenAPI spec.
      * @generated
      * @modified
+     * @throws GuzzleException
      */
     public function createSaleInvoiceItem(int $obj_id, int $product_offer_id, int $quantity = null, float $price = null, object $sort_order = null): Model\SaleInvoiceItem
     {
@@ -284,6 +333,7 @@ trait CustomRequestingMethodsTrait
      * Mistake in Congressus's OpenAPI spec.
      * @generated
      * @modified
+     * @throws GuzzleException
      */
     public function createProduct(int $product_offer_id = null, int $folder_id = null, string $name = null, string $description = null, bool $published = null, float $price = null, object|array $vat_category = null, float $vat_percentage = null, bool $is_archived = null, string $created = null, string $modified = null, string $memo = null): Model\Product
     {
@@ -298,6 +348,7 @@ trait CustomRequestingMethodsTrait
      * Mistake in Congressus's OpenAPI spec.
      * @generated
      * @modified
+     * @throws GuzzleException
      */
     public function updateProduct(int $obj_id, int $product_offer_id = null, int $folder_id = null, string $name = null, string $description = null, bool $published = null, float $price = null, object|array $vat_category = null, float $vat_percentage = null, bool $is_archived = null, string $created = null, string $modified = null, string $memo = null): Model\Product
     {
